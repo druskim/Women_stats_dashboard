@@ -88,6 +88,14 @@ export default function App() {
     setFilters(f => ({ ...f, shotLocation: f.shotLocation === loc ? 'All' : loc }))
   }
 
+  function handleStatCardClick(outcomes) {
+    setFilters(f => {
+      const alreadyActive = outcomes.length === f.outcome.length &&
+        outcomes.every(o => f.outcome.includes(o))
+      return { ...f, outcome: alreadyActive ? [] : outcomes }
+    })
+  }
+
   if (loading) {
     return (
       <div className="loading">
@@ -121,7 +129,7 @@ export default function App() {
         )}
       </div>
 
-      <StatCards offense={offenseStats} defense={defenseStats} />
+      <StatCards offense={offenseStats} defense={defenseStats} onCardClick={handleStatCardClick} activeOutcomes={filters.outcome} />
 
       <div className="tab-nav">
         {TABS.map(tab => (
