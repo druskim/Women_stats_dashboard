@@ -41,10 +41,24 @@ const OUTPUT_FIELDS = [
   'shotOutcome', 'shotLocation', 'defendingPlayer',
 ]
 
-// Extract opponent and tournament label from filename
-// Expects patterns like: Canada_vs_Korea_Scrimmage_1_April_29_2026.xlsx
+// Extract opponent and tournament label from filename.
+// Standard format: Canada_OPPONENT_G#_TOURNAMENT_YEAR.xlsx
+// e.g. Canada_Korea_G1_IBSA_Americas_2026.xlsx
+//   → opponent: Korea, tournament: IBSA Americas G1 2026
 function extractGameInfo(filename) {
   const base = filename.replace(/\.(xlsx|xls)$/i, '').replace(/^~\$/, '')
+  const parts = base.split('_')
+
+  if (parts.length >= 4 && parts[0].toLowerCase() === 'canada') {
+    const opponent = parts[1]
+    const gameNum = parts[2]                          // e.g. G1, G2
+    const year = parts[parts.length - 1]             // last segment
+    const tournamentParts = parts.slice(3, parts.length - 1)
+    const tournament = [...tournamentParts, gameNum, year].join(' ')
+    return { opponent, tournament }
+  }
+
+  // Fallback for legacy Canada_vs_Opponent format
   const vsMatch = base.match(/[Vv][Ss][_ ]([^_]+)/i)
   const opponent = vsMatch ? vsMatch[1] : 'Unknown'
   const afterOpponent = vsMatch
