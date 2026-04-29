@@ -6,12 +6,14 @@ const H = 160
 const MARGIN = { left: 40, right: 40, top: 20, bottom: 20 }
 const GOAL_W = W - MARGIN.left - MARGIN.right
 const GOAL_H = H - MARGIN.top - MARGIN.bottom
-const SEC_W = GOAL_W / 5
 
-// Map shot location 1-5 → x center inside goal
+const LOCATIONS = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]
+const SEC_W = GOAL_W / LOCATIONS.length
+
 function locationToX(loc) {
-  if (loc < 1 || loc > 5) return null
-  return MARGIN.left + (loc - 1) * SEC_W + SEC_W / 2
+  const idx = LOCATIONS.indexOf(loc)
+  if (idx === -1) return null
+  return MARGIN.left + idx * SEC_W + SEC_W / 2
 }
 
 export default function GoalFaceMap({ shots, title, activeLocation, onLocationClick }) {
@@ -21,8 +23,7 @@ export default function GoalFaceMap({ shots, title, activeLocation, onLocationCl
   const outLeft = shots.filter(s => s.shotLocation === 0)
   const outRight = shots.filter(s => s.shotLocation === 6)
 
-  // Aggregate section stats
-  const sectionStats = [1, 2, 3, 4, 5].map(sec => {
+  const sectionStats = LOCATIONS.map(sec => {
     const secShots = shots.filter(s => s.shotLocation === sec)
     const goals = secShots.filter(s =>
       s.shotOutcome === 'Goal Canada' || s.shotOutcome === 'Goal Opponent'
@@ -66,9 +67,9 @@ export default function GoalFaceMap({ shots, title, activeLocation, onLocationCl
           style={{ pointerEvents: 'none' }}>OUT</text>
 
         {/* Goal sections */}
-        {[1, 2, 3, 4, 5].map(sec => {
-          const x = MARGIN.left + (sec - 1) * SEC_W
-          const stat = sectionStats[sec - 1]
+        {LOCATIONS.map((sec, idx) => {
+          const x = MARGIN.left + idx * SEC_W
+          const stat = sectionStats[idx]
           const intensity = stat.total / maxTotal
           const isActive = activeLocation === sec
           return (
@@ -81,14 +82,14 @@ export default function GoalFaceMap({ shots, title, activeLocation, onLocationCl
               <text x={x + SEC_W / 2} y={MARGIN.top + GOAL_H + 14}
                 textAnchor="middle"
                 fill={isActive ? '#f59e0b' : '#9ca3af'}
-                fontSize={11} fontWeight={isActive ? 700 : 500}>
+                fontSize={10} fontWeight={isActive ? 700 : 500}>
                 {sec}
               </text>
               <text x={x + SEC_W / 2} y={MARGIN.top + GOAL_H + 28}
                 textAnchor="middle"
                 fill={isActive ? '#fcd34d' : '#d1d5db'}
-                fontSize={10}>
-                {stat.total} shots
+                fontSize={9}>
+                {stat.total}
               </text>
             </g>
           )

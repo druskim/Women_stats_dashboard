@@ -446,10 +446,10 @@ function PlayersTab({ offenseShots, defenseShots, allShots, offensePenalties, de
 }
 
 function GoalLocationChart({ shots, isOffense }) {
-  const data = [0, 1, 2, 3, 4, 5, 6].map(loc => {
+  const data = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6].map(loc => {
     const locShots = shots.filter(s => s.shotLocation === loc)
     const goals = locShots.filter(s => s.shotOutcome === 'Goal Canada' || s.shotOutcome === 'Goal Opponent').length
-    const label = loc === 0 ? 'Out L' : loc === 6 ? 'Out R' : `Sec ${loc}`
+    const label = loc === 0 ? 'Out L' : loc === 6 ? 'Out R' : String(loc)
     return { label, total: locShots.length, goals }
   })
   return (

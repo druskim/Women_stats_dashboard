@@ -51,7 +51,7 @@ export function parseRows(text) {
     if (!isShotRow || !opponent) continue
 
     const shotOrigin = shotOriginRaw !== '' ? parseInt(shotOriginRaw) : null
-    const shotLocation = shotLocationRaw !== '' ? parseInt(shotLocationRaw) : null
+    const shotLocation = shotLocationRaw !== '' ? parseFloat(shotLocationRaw) : null
 
     // Determine attack direction
     let isCanadaAttack
