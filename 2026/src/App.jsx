@@ -31,7 +31,7 @@ export default function App() {
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
 
   useEffect(() => {
-    fetch('/data.tsv')
+    fetch(import.meta.env.BASE_URL + 'data.tsv')
       .then(r => r.text())
       .then(text => {
         setRawRows(parseRows(text))
