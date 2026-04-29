@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'fs'
+import { writeFileSync, readdirSync, existsSync, mkdirSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import XLSX from 'xlsx'
@@ -9,15 +9,87 @@ const outputPath = join(__dirname, '../public/data.tsv')
 
 const HEADER = 'Opponent/Game\tCategory\tStart\tClick\tEnd\tXY\tAttacking Player\tShot Origin\tShot Outcome\tShot Location\tDefending Player'
 
-// Find the header row by looking for the "Opponent/Game" column
+const HEADER_ALIASES = {
+  'n#':               'shotNum',
+  'opponent/game':    'opponent',
+  'category':         'category',
+  'start':            'start',
+  'click':            'click',
+  'end':              'end',
+  'xy':               'tournament',
+  'des 1':            'attackingPlayer',
+  'attacking player': 'attackingPlayer',
+  'des 2':            'shotOrigin',
+  'shot origin':      'shotOrigin',
+  'des 3':            'shotOutcome',
+  'shot outcome':     'shotOutcome',
+  'des 4':            'shotLocation',
+  'shot location':    'shotLocation',
+  'des 5':            'defendingPlayer',
+  'defending player': 'defendingPlayer',
+}
+
+// Normalise category values from the new format to the original parser format
+const CATEGORY_MAP = {
+  'canada':   'Shot Canada',
+  'opponent': 'Shot Opponent',
+}
+
+const OUTPUT_FIELDS = [
+  'opponent', 'category', 'start', 'click', 'end',
+  'tournament', 'attackingPlayer', 'shotOrigin',
+  'shotOutcome', 'shotLocation', 'defendingPlayer',
+]
+
+// Extract opponent and tournament label from filename
+// Expects patterns like: Canada_vs_Korea_Scrimmage_1_April_29_2026.xlsx
+function extractGameInfo(filename) {
+  const base = filename.replace(/\.(xlsx|xls)$/i, '').replace(/^~\$/, '')
+  const vsMatch = base.match(/[Vv][Ss][_ ]([^_]+)/i)
+  const opponent = vsMatch ? vsMatch[1] : 'Unknown'
+  const afterOpponent = vsMatch
+    ? base.slice(base.indexOf(vsMatch[0]) + vsMatch[0].length).replace(/^[_ ]/, '')
+    : base
+  const tournament = afterOpponent.replace(/_/g, ' ').trim() || base.replace(/_/g, ' ')
+  return { opponent, tournament }
+}
+
 function findHeaderRowIndex(rows) {
   for (let i = 0; i < Math.min(rows.length, 10); i++) {
     const row = rows[i]
-    if (row && row.length > 0 && String(row[0] ?? '').toLowerCase().includes('opponent')) {
-      return i
-    }
+    if (!row) continue
+    const first = String(row[0] ?? '').toLowerCase().trim()
+    if (first.includes('opponent') || first === 'n#') return i
   }
   return 0
+}
+
+function buildColumnMap(headerRow) {
+  const map = {}
+  headerRow.forEach((cell, idx) => {
+    const key = String(cell ?? '').toLowerCase().trim()
+    const field = HEADER_ALIASES[key]
+    if (field) map[field] = idx
+  })
+  return map
+}
+
+function rowToTsv(row, colMap, opponent, tournament) {
+  return OUTPUT_FIELDS.map(field => {
+    if (field === 'opponent') return opponent
+    if (field === 'tournament') {
+      const raw = colMap.tournament !== undefined ? String(row[colMap.tournament] ?? '').trim() : ''
+      return raw || tournament
+    }
+    if (field === 'category') {
+      const raw = String(row[colMap.category] ?? '').trim()
+      return CATEGORY_MAP[raw.toLowerCase()] || raw
+    }
+    const idx = colMap[field]
+    if (idx === undefined) return ''
+    const val = row[idx]
+    return (val === null || val === undefined) ? '' : String(val).trim()
+  }).join('\t')
 }
 
 if (!existsSync(gamesDir)) {
@@ -28,7 +100,7 @@ if (!existsSync(gamesDir)) {
 }
 
 const files = readdirSync(gamesDir)
-  .filter(f => f.match(/\.(xlsx|xls)$/i))
+  .filter(f => f.match(/\.(xlsx|xls)$/i) && !f.startsWith('~$'))
   .sort()
 
 if (files.length === 0) {
@@ -41,18 +113,21 @@ const allLines = [HEADER]
 
 for (const file of files) {
   console.log(`Processing ${file}...`)
+  const { opponent, tournament } = extractGameInfo(file)
+  console.log(`  Opponent: ${opponent} | Tournament: ${tournament}`)
   try {
     const workbook = XLSX.readFile(join(gamesDir, file))
     const sheet = workbook.Sheets[workbook.SheetNames[0]]
     const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' })
 
     const headerIdx = findHeaderRowIndex(rows)
+    const colMap = buildColumnMap(rows[headerIdx])
     const dataRows = rows.slice(headerIdx + 1)
 
     let count = 0
     for (const row of dataRows) {
       if (!row || row.length < 2) continue
-      const line = row.slice(0, 11).map(v => (v === null || v === undefined) ? '' : String(v).trim()).join('\t')
+      const line = rowToTsv(row, colMap, opponent, tournament)
       if (line.replace(/\t/g, '').trim() === '') continue
       allLines.push(line)
       count++
