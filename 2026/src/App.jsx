@@ -12,7 +12,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts'
 
-const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Top Teams', 'Players']
+const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Top Teams', 'Players', 'By Period']
 
 const DEFAULT_FILTERS = {
   tournament: [],
@@ -52,6 +52,22 @@ export default function App() {
       if (filters.tournament.length > 0 && !filters.tournament.includes(row.tournament)) return false
       if (filters.opponent.length > 0 && !filters.opponent.includes(row.opponent)) return false
       if (filters.period.length > 0 && !filters.period.includes(String(row.period))) return false
+      if (filters.player.length > 0) {
+        const involved = filters.player.some(p => row.attackingPlayer === p || row.defendingPlayer === p)
+        if (!involved) return false
+      }
+      if (filters.outcome.length > 0 && !filters.outcome.includes(row.shotOutcome)) return false
+      if (filters.shotOrigin !== 'All' && row.shotOrigin !== filters.shotOrigin) return false
+      if (filters.shotLocation !== 'All' && row.shotLocation !== filters.shotLocation) return false
+      return true
+    })
+  }, [rawRows, filters])
+
+  // Period-filter-free rows for the By Period tab so both halves always show
+  const filteredNoPeriod = useMemo(() => {
+    return rawRows.filter(row => {
+      if (filters.tournament.length > 0 && !filters.tournament.includes(row.tournament)) return false
+      if (filters.opponent.length > 0 && !filters.opponent.includes(row.opponent)) return false
       if (filters.player.length > 0) {
         const involved = filters.player.some(p => row.attackingPlayer === p || row.defendingPlayer === p)
         if (!involved) return false
@@ -159,6 +175,9 @@ export default function App() {
             offensePenalties={offensePenalties}
             defensePenalties={defensePenalties}
           />
+        )}
+        {activeTab === 'By Period' && (
+          <ByPeriodTab allRows={filteredNoPeriod} />
         )}
       </main>
     </div>
@@ -470,6 +489,182 @@ function GoalLocationChart({ shots, isOffense }) {
         </BarChart>
       </ResponsiveContainer>
     </div>
+  )
+}
+
+function ByPeriodTab({ allRows }) {
+  const offenseShots = allRows.filter(r => r.isCanadaAttack && !r.isPenalty)
+  const defenseShots = allRows.filter(r => !r.isCanadaAttack && !r.isPenalty)
+
+  const p1Off = offenseShots.filter(r => r.period === 1)
+  const p2Off = offenseShots.filter(r => r.period === 2)
+  const p1Def = defenseShots.filter(r => r.period === 1)
+  const p2Def = defenseShots.filter(r => r.period === 2)
+
+  const p1OffStats = computeOffensiveStats(p1Off)
+  const p2OffStats = computeOffensiveStats(p2Off)
+  const p1DefStats = computeDefensiveStats(p1Def)
+  const p2DefStats = computeDefensiveStats(p2Def)
+
+  const volumeData = [
+    { metric: 'CA Shots', P1: p1OffStats.total, P2: p2OffStats.total },
+    { metric: 'CA Goals', P1: p1OffStats.goals, P2: p2OffStats.goals },
+    { metric: 'Opp Shots', P1: p1DefStats.total, P2: p2DefStats.total },
+    { metric: 'Goals Ag.', P1: p1DefStats.goalsAgainst, P2: p2DefStats.goalsAgainst },
+    { metric: 'Saves', P1: p1DefStats.saves, P2: p2DefStats.saves },
+  ]
+
+  const gamesMap = {}
+  for (const row of [...offenseShots, ...defenseShots]) {
+    const key = `${row.opponent}__${row.tournament}`
+    if (!gamesMap[key]) gamesMap[key] = {
+      opponent: row.opponent, tournament: row.tournament,
+      p1: { caGoals: 0, oppGoals: 0, caShots: 0, oppShots: 0 },
+      p2: { caGoals: 0, oppGoals: 0, caShots: 0, oppShots: 0 },
+    }
+    const pd = row.period === 2 ? 'p2' : 'p1'
+    const g = gamesMap[key][pd]
+    if (row.isCanadaAttack) {
+      g.caShots++
+      if (row.shotOutcome === 'Goal Canada') g.caGoals++
+    } else {
+      g.oppShots++
+      if (row.shotOutcome === 'Goal Opponent') g.oppGoals++
+    }
+  }
+  const gameList = Object.values(gamesMap).sort((a, b) =>
+    a.tournament.localeCompare(b.tournament) || a.opponent.localeCompare(b.opponent)
+  )
+
+  return (
+    <div>
+      <div className="grid-2">
+        <div className="card">
+          <h3 className="card-title">Offense — 1st Half vs 2nd Half</h3>
+          <PeriodStatTable rows={[
+            { label: 'Shots', p1: p1OffStats.total, p2: p2OffStats.total, higher: null },
+            { label: 'Goals', p1: p1OffStats.goals, p2: p2OffStats.goals, higher: true },
+            { label: 'Saved', p1: p1OffStats.saved, p2: p2OffStats.saved, higher: false },
+            { label: 'Out', p1: p1OffStats.out, p2: p2OffStats.out, higher: false },
+            { label: 'Conv%', p1: `${p1OffStats.conversionRate}%`, p2: `${p2OffStats.conversionRate}%`, higher: true, raw1: parseFloat(p1OffStats.conversionRate), raw2: parseFloat(p2OffStats.conversionRate) },
+          ]} />
+        </div>
+        <div className="card">
+          <h3 className="card-title">Defense — 1st Half vs 2nd Half</h3>
+          <PeriodStatTable rows={[
+            { label: 'Shots Faced', p1: p1DefStats.total, p2: p2DefStats.total, higher: null },
+            { label: 'Goals Against', p1: p1DefStats.goalsAgainst, p2: p2DefStats.goalsAgainst, higher: false },
+            { label: 'Saves', p1: p1DefStats.saves, p2: p2DefStats.saves, higher: true },
+            { label: 'BC Saves', p1: p1DefStats.ballControlSaves, p2: p2DefStats.ballControlSaves, higher: true },
+            { label: 'BC%', p1: `${p1DefStats.ballControlRate}%`, p2: `${p2DefStats.ballControlRate}%`, higher: true, raw1: parseFloat(p1DefStats.ballControlRate), raw2: parseFloat(p2DefStats.ballControlRate) },
+            { label: 'Stop%', p1: `${p1DefStats.saveRate}%`, p2: `${p2DefStats.saveRate}%`, higher: true, raw1: parseFloat(p1DefStats.saveRate), raw2: parseFloat(p2DefStats.saveRate) },
+          ]} />
+        </div>
+      </div>
+
+      <div className="card">
+        <h3 className="card-title">Volume Comparison — 1st Half vs 2nd Half</h3>
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart data={volumeData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
+            <XAxis dataKey="metric" tick={{ fill: '#9ca3af', fontSize: 12 }} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} />
+            <Tooltip
+              contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }}
+              labelStyle={{ color: '#f1f5f9' }}
+              itemStyle={{ color: '#94a3b8' }}
+            />
+            <Bar dataKey="P1" name="1st Half" fill="#3b82f6" radius={[3, 3, 0, 0]} />
+            <Bar dataKey="P2" name="2nd Half" fill="#a78bfa" radius={[3, 3, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="card">
+        <h3 className="card-title">Per-Game Period Breakdown</h3>
+        {gameList.length === 0 ? (
+          <p style={{ color: '#6b7280', textAlign: 'center', padding: '24px 0' }}>No data matches current filters.</p>
+        ) : (
+          <div className="table-wrapper">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Opponent</th>
+                  <th>Tournament</th>
+                  <th style={{ color: '#3b82f6' }}>P1 Score</th>
+                  <th style={{ color: '#a78bfa' }}>P2 Score</th>
+                  <th>Final</th>
+                  <th>Result</th>
+                  <th style={{ color: '#3b82f6' }}>P1 CA Shots</th>
+                  <th style={{ color: '#a78bfa' }}>P2 CA Shots</th>
+                  <th style={{ color: '#3b82f6' }}>P1 Opp Shots</th>
+                  <th style={{ color: '#a78bfa' }}>P2 Opp Shots</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gameList.map((g, i) => {
+                  const totalCA = g.p1.caGoals + g.p2.caGoals
+                  const totalOpp = g.p1.oppGoals + g.p2.oppGoals
+                  const result = totalCA > totalOpp ? 'W' : totalCA < totalOpp ? 'L' : 'D'
+                  const resultColor = result === 'W' ? '#22c55e' : result === 'L' ? '#ef4444' : '#f59e0b'
+                  return (
+                    <tr key={i}>
+                      <td>{g.opponent}</td>
+                      <td className="cell-muted">{g.tournament}</td>
+                      <td className="cell-score" style={{ color: '#3b82f6' }}>{g.p1.caGoals} – {g.p1.oppGoals}</td>
+                      <td className="cell-score" style={{ color: '#a78bfa' }}>{g.p2.caGoals} – {g.p2.oppGoals}</td>
+                      <td className="cell-score">{totalCA} – {totalOpp}</td>
+                      <td><span className="badge" style={{ color: resultColor, borderColor: resultColor }}>{result}</span></td>
+                      <td className="cell-muted">{g.p1.caShots}</td>
+                      <td className="cell-muted">{g.p2.caShots}</td>
+                      <td className="cell-muted">{g.p1.oppShots}</td>
+                      <td className="cell-muted">{g.p2.oppShots}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function PeriodStatTable({ rows }) {
+  return (
+    <table className="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th style={{ color: '#3b82f6' }}>1st Half</th>
+          <th style={{ color: '#a78bfa' }}>2nd Half</th>
+          <th>Δ P2</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(({ label, p1, p2, higher, raw1, raw2 }) => {
+          const v1 = raw1 !== undefined ? raw1 : (typeof p1 === 'number' ? p1 : parseFloat(p1))
+          const v2 = raw2 !== undefined ? raw2 : (typeof p2 === 'number' ? p2 : parseFloat(p2))
+          const diff = v2 - v1
+          let deltaText = '—'
+          let deltaColor = '#6b7280'
+          if (!isNaN(diff) && diff !== 0 && higher !== null) {
+            const improved = higher ? diff > 0 : diff < 0
+            deltaColor = improved ? '#22c55e' : '#ef4444'
+            deltaText = `${diff > 0 ? '+' : ''}${Number.isInteger(v1) && Number.isInteger(v2) ? Math.round(diff) : diff.toFixed(1)}`
+          }
+          return (
+            <tr key={label}>
+              <td className="cell-muted">{label}</td>
+              <td style={{ color: '#3b82f6' }}>{p1}</td>
+              <td style={{ color: '#a78bfa' }}>{p2}</td>
+              <td style={{ fontWeight: 600, color: deltaColor }}>{deltaText}</td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
   )
 }
 
