@@ -61,7 +61,7 @@ export function playerDisplayName(prefixedName) {
 }
 
 export function getUniqueTeams(rows) {
-  return [...new Set(rows.map(r => r.team).filter(Boolean))].sort()
+  return [...new Set(rows.map(r => r.team).filter(t => t && t !== 'Canada'))].sort()
 }
 
 // Returns unique attacking players for a given team, sorted by shot count descending.
@@ -85,7 +85,8 @@ export function computeStats(shots) {
   const goalRate   = total > 0 ? ((goals / total) * 100).toFixed(1) : '0.0'
   const outRate    = total > 0 ? ((out   / total) * 100).toFixed(1) : '0.0'
   const stopRate   = total > 0 ? (((saves + bcSaves + out) / total) * 100).toFixed(1) : '0.0'
-  return { total, goals, saves, bcSaves, out, goalRate, outRate, stopRate }
+  const saveRate   = total > 0 ? (((saves + bcSaves) / total) * 100).toFixed(1) : '0.0'
+  return { total, goals, saves, bcSaves, out, goalRate, outRate, stopRate, saveRate }
 }
 
 export function getOutcomeColor(outcome) {

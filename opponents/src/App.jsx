@@ -173,6 +173,8 @@ export default function App() {
               onPositionClick={pos => setActiveOrigin(o => o === pos ? 'All' : pos)}
               activeLocation={activeLocation}
               onLocationClick={loc => setActiveLocation(l => l === loc ? 'All' : loc)}
+              selectedPlayer={selectedPlayer}
+              onSelectPlayer={p => { setSelectedPlayer(p); setActiveOrigin('All'); setActiveLocation('All') }}
             />
           ) : (
             <PlayerView
@@ -197,27 +199,43 @@ export default function App() {
 
 // ── Team View ─────────────────────────────────────────────────────────────────
 
-function TeamView({ shots, penalties, stats, teamName, players, teamRows, activeOrigin, onPositionClick, activeLocation, onLocationClick }) {
+function TeamView({ shots, penalties, stats, teamName, players, teamRows, activeOrigin, onPositionClick, activeLocation, onLocationClick, selectedPlayer, onSelectPlayer }) {
+  const mapShots    = useMemo(() =>
+    selectedPlayer ? shots.filter(r => r.attackingPlayer === selectedPlayer) : shots,
+    [shots, selectedPlayer]
+  )
+  const displayStats = useMemo(() => selectedPlayer ? computeStats(mapShots) : stats, [mapShots, selectedPlayer, stats])
+  const prefOrigin   = useMemo(() => selectedPlayer ? preferredOrigin(mapShots) : null, [mapShots, selectedPlayer])
+
+  const mapTitle = label => selectedPlayer
+    ? `${playerDisplayName(selectedPlayer)} — ${label}`
+    : `${teamName} — ${label}`
+
   return (
     <div>
-      <StatGrid cards={[
-        { label: 'Total Shots',  value: stats.total,    color: '#3b82f6', sub: 'regular play' },
-        { label: 'Goals',        value: stats.goals,    color: '#22c55e', sub: `${stats.goalRate}% conversion` },
-        { label: 'Goal Rate',    value: `${stats.goalRate}%`, color: '#22c55e', sub: `${stats.goals} of ${stats.total}` },
-        { label: 'Out Rate',     value: `${stats.outRate}%`, color: '#6b7280', sub: `${stats.out} shots wide` },
+      <StatGrid cards={selectedPlayer ? [
+        { label: 'Shots',               value: displayStats.total,             color: '#3b82f6', sub: playerDisplayName(selectedPlayer) },
+        { label: 'Goals',               value: displayStats.goals,             color: '#22c55e', sub: `${displayStats.goalRate}% conversion` },
+        { label: 'Off. Efficiency',     value: `${displayStats.goalRate}%`,    color: '#22c55e', sub: `${displayStats.goals} of ${displayStats.total}` },
+        { label: 'Pref. Origin',        value: prefOrigin ?? '—',              color: '#f59e0b', sub: 'most used position' },
+      ] : [
+        { label: 'Total Shots',         value: stats.total,          color: '#3b82f6', sub: 'regular play' },
+        { label: 'Goals',               value: stats.goals,          color: '#22c55e', sub: `${stats.goalRate}% conversion` },
+        { label: 'Off. Efficiency',     value: `${stats.goalRate}%`, color: '#22c55e', sub: `${stats.goals} of ${stats.total}` },
+        { label: 'Def. Efficiency',     value: `${stats.saveRate}%`, color: '#3b82f6', sub: `Canada save rate` },
       ]} />
 
       <div className="grid-2">
         <CourtMap
-          shots={shots}
-          title={`${teamName} — Shot Origin Map`}
+          shots={mapShots}
+          title={mapTitle('Shot Origin Map')}
           teamName={teamName}
           activeOrigin={activeOrigin}
           onPositionClick={onPositionClick}
         />
         <GoalFaceMap
-          shots={shots}
-          title={`${teamName} — Shot Location Map`}
+          shots={mapShots}
+          title={mapTitle('Shot Location Map')}
           activeLocation={activeLocation}
           onLocationClick={onLocationClick}
         />
@@ -229,6 +247,8 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
         players={players}
         shots={shots}
         teamName={teamName}
+        selectedPlayer={selectedPlayer}
+        onSelectPlayer={onSelectPlayer}
       />
 
       {penalties.length > 0 && (
@@ -356,7 +376,7 @@ function TrendChart({ shots, teamName }) {
 
 // ── Player Summary Table (Team View) ─────────────────────────────────────────
 
-function PlayerSummaryTable({ players, shots, teamName }) {
+function PlayerSummaryTable({ players, shots, teamName, selectedPlayer, onSelectPlayer }) {
   const rows = useMemo(() => players.map(player => {
     const ps      = shots.filter(s => s.attackingPlayer === player)
     const stats   = computeStats(ps)
@@ -368,7 +388,19 @@ function PlayerSummaryTable({ players, shots, teamName }) {
 
   return (
     <div className="card">
-      <h3 className="card-title">{teamName} — Player Breakdown</h3>
+      <h3 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        {teamName} — Player Breakdown
+        {selectedPlayer && (
+          <span style={{ fontSize: 12, fontWeight: 400, color: '#f59e0b' }}>
+            filtering: {playerDisplayName(selectedPlayer)}
+            <button
+              onClick={() => onSelectPlayer('')}
+              style={{ marginLeft: 6, background: 'none', border: 'none', color: '#6b7280', cursor: 'pointer', fontSize: 13, lineHeight: 1 }}
+              title="Clear player filter"
+            >×</button>
+          </span>
+        )}
+      </h3>
       <div className="table-wrapper">
         <table className="data-table">
           <thead>
@@ -376,30 +408,43 @@ function PlayerSummaryTable({ players, shots, teamName }) {
               <th>Player</th>
               <th>Shots</th>
               <th>Goals</th>
-              <th>Goal %</th>
+              <th>Off. Eff.</th>
+              <th>Def. Eff.</th>
               <th>Saves vs</th>
               <th>BC Saves vs</th>
               <th>Out</th>
-              <th>Out %</th>
               <th>Pref. Origin</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ player, stats, origin }) => (
-              <tr key={player}>
-                <td className="player-name">{playerDisplayName(player)}</td>
-                <td>{stats.total}</td>
-                <td style={{ color: '#22c55e' }}>{stats.goals}</td>
-                <td style={{ color: stats.goals > 0 ? '#22c55e' : '#9ca3af' }}>{stats.goalRate}%</td>
-                <td style={{ color: '#60a5fa' }}>{stats.saves}</td>
-                <td style={{ color: '#3b82f6' }}>{stats.bcSaves}</td>
-                <td className="cell-muted">{stats.out}</td>
-                <td className="cell-muted">{stats.outRate}%</td>
-                <td style={{ color: origin ? '#f59e0b' : '#374151', fontWeight: origin ? 600 : 400 }}>
-                  {origin ?? '—'}
-                </td>
-              </tr>
-            ))}
+            {rows.map(({ player, stats, origin }) => {
+              const isActive = player === selectedPlayer
+              return (
+                <tr
+                  key={player}
+                  onClick={() => onSelectPlayer(isActive ? '' : player)}
+                  style={{
+                    cursor: 'pointer',
+                    background: isActive ? 'rgba(245,158,11,0.1)' : undefined,
+                    outline: isActive ? '1px solid rgba(245,158,11,0.4)' : undefined,
+                  }}
+                >
+                  <td className="player-name" style={{ color: isActive ? '#f59e0b' : undefined }}>
+                    {playerDisplayName(player)}
+                  </td>
+                  <td>{stats.total}</td>
+                  <td style={{ color: '#22c55e' }}>{stats.goals}</td>
+                  <td style={{ color: stats.goals > 0 ? '#22c55e' : '#9ca3af' }}>{stats.goalRate}%</td>
+                  <td style={{ color: '#3b82f6' }}>{stats.saveRate}%</td>
+                  <td style={{ color: '#60a5fa' }}>{stats.saves}</td>
+                  <td style={{ color: '#3b82f6' }}>{stats.bcSaves}</td>
+                  <td className="cell-muted">{stats.out}</td>
+                  <td style={{ color: origin ? '#f59e0b' : '#374151', fontWeight: origin ? 600 : 400 }}>
+                    {origin ?? '—'}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

@@ -9,10 +9,10 @@ import {
   OriginEfficiencyChart, OutcomePieChart, GameScoreTable
 } from './components/Charts.jsx'
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts'
 
-const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Top Teams', 'Players', 'By Period']
+const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Top Teams', 'Players', 'By Period', 'Accuracy']
 
 const DEFAULT_FILTERS = {
   tournament: [],
@@ -186,6 +186,9 @@ export default function App() {
         )}
         {activeTab === 'By Period' && (
           <ByPeriodTab allRows={filteredNoPeriod} />
+        )}
+        {activeTab === 'Accuracy' && (
+          <AccuracyTab shots={offenseShots} />
         )}
       </main>
     </div>
@@ -673,6 +676,202 @@ function PeriodStatTable({ rows }) {
         })}
       </tbody>
     </table>
+  )
+}
+
+// ── Accuracy helpers ──────────────────────────────────────────────────────────
+
+const ACC_ALWAYS_M1 = new Set([1, 2, 4, 5])
+const ACC_GOAL_M1   = new Set([3])
+const ACC_ALWAYS_M2 = new Set([1, 2, 2.5, 3.5, 4, 5])
+const ACC_GOAL_M2   = new Set([1.5, 3, 4.5])
+
+function isAccurateShot(shot, method) {
+  const loc = shot.shotLocation
+  if (loc === null || loc === undefined) return null
+  const isGoal = shot.shotOutcome === 'Goal Canada'
+  if (method === 1) {
+    if (ACC_ALWAYS_M1.has(loc)) return true
+    if (ACC_GOAL_M1.has(loc))   return isGoal
+    return false
+  }
+  if (ACC_ALWAYS_M2.has(loc)) return true
+  if (ACC_GOAL_M2.has(loc))   return isGoal
+  return false
+}
+
+function accStats(shots, method) {
+  const withLoc   = shots.filter(s => s.shotLocation !== null && s.shotLocation !== undefined)
+  const accurate  = withLoc.filter(s => isAccurateShot(s, method)).length
+  const pct       = withLoc.length > 0 ? ((accurate / withLoc.length) * 100).toFixed(1) : '0.0'
+  return { total: withLoc.length, accurate, inaccurate: withLoc.length - accurate, pct, untracked: shots.length - withLoc.length }
+}
+
+const ALL_LOCS  = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6]
+const locLabel  = loc => loc === 0 ? 'Out L' : loc === 6 ? 'Out R' : String(loc)
+
+function locClass(loc, method) {
+  if (method === 1) {
+    if (ACC_ALWAYS_M1.has(loc)) return 'accurate'
+    if (ACC_GOAL_M1.has(loc))   return 'goal-only'
+    return 'inaccurate'
+  }
+  if (ACC_ALWAYS_M2.has(loc)) return 'accurate'
+  if (ACC_GOAL_M2.has(loc))   return 'goal-only'
+  return 'inaccurate'
+}
+
+const CLS_COLOR = { accurate: '#22c55e', 'goal-only': '#f59e0b', inaccurate: '#ef4444' }
+const CLS_LABEL = { accurate: 'Always Accurate', 'goal-only': 'Accurate if Goal', inaccurate: 'Inaccurate' }
+
+const METHOD_DESC = {
+  1: 'Spots 1, 2, 4, 5 always accurate · Spot 3 accurate if scored · 0 & 6 inaccurate',
+  2: 'Spots 1, 2, 2.5, 3.5, 4, 5 always accurate · Spots 1.5, 3, 4.5 accurate if scored · 0 & 6 inaccurate',
+}
+
+// ── Accuracy Tab ──────────────────────────────────────────────────────────────
+
+function AccuracyTab({ shots }) {
+  const [method, setMethod] = useState(1)
+
+  const stats = useMemo(() => accStats(shots, method), [shots, method])
+
+  const locationRows = useMemo(() =>
+    ALL_LOCS.map(loc => {
+      const ls = shots.filter(s => s.shotLocation === loc)
+      if (ls.length === 0) return null
+      const accurate = ls.filter(s => isAccurateShot(s, method) === true).length
+      const cls = locClass(loc, method)
+      return { loc, label: locLabel(loc), total: ls.length, accurate, inaccurate: ls.length - accurate, cls }
+    }).filter(Boolean),
+    [shots, method]
+  )
+
+  const playerRows = useMemo(() =>
+    CANADA_PLAYERS.map(player => {
+      const ps = shots.filter(s => s.attackingPlayer === player && s.shotLocation !== null && s.shotLocation !== undefined)
+      if (ps.length === 0) return null
+      const accurate = ps.filter(s => isAccurateShot(s, method) === true).length
+      const pct = ((accurate / ps.length) * 100).toFixed(1)
+      return { player, total: ps.length, accurate, inaccurate: ps.length - accurate, pct }
+    }).filter(Boolean),
+    [shots, method]
+  )
+
+  const chartData = locationRows.map(r => ({ label: r.label, Accurate: r.accurate, Inaccurate: r.inaccurate }))
+
+  return (
+    <div>
+      {/* Method toggle */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
+        <button className={`tab-btn ${method === 1 ? 'active' : ''}`} onClick={() => setMethod(1)}>Classic</button>
+        <button className={`tab-btn ${method === 2 ? 'active' : ''}`} onClick={() => setMethod(2)}>Advanced</button>
+        <span style={{ fontSize: 12, color: '#6b7280', marginLeft: 4 }}>{METHOD_DESC[method]}</span>
+      </div>
+
+      {/* Stat cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 16 }}>
+        <StatItem label="Shots (located)" value={stats.total} />
+        <StatItem label="Accurate"        value={stats.accurate}   color="#22c55e" />
+        <StatItem label="Accuracy %"      value={`${stats.pct}%`}  color="#22c55e" />
+        <StatItem label="Inaccurate"      value={stats.inaccurate} color="#ef4444" />
+      </div>
+
+      {stats.untracked > 0 && (
+        <p style={{ fontSize: 12, color: '#6b7280', marginBottom: 12 }}>
+          {stats.untracked} shot{stats.untracked !== 1 ? 's' : ''} excluded — no location recorded.
+        </p>
+      )}
+
+      <div className="grid-2">
+        {/* Stacked bar chart by location */}
+        <div className="card">
+          <h3 className="card-title">Accurate vs Inaccurate by Location</h3>
+          <ResponsiveContainer width="100%" height={230}>
+            <BarChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
+              <XAxis dataKey="label" tick={{ fill: '#9ca3af', fontSize: 11 }} />
+              <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} allowDecimals={false} />
+              <Tooltip
+                contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }}
+                labelStyle={{ color: '#f1f5f9' }}
+                itemStyle={{ color: '#94a3b8' }}
+              />
+              <Legend wrapperStyle={{ color: '#9ca3af', fontSize: 12 }} />
+              <Bar dataKey="Accurate"   stackId="a" fill="#22c55e" />
+              <Bar dataKey="Inaccurate" stackId="a" fill="#ef4444" radius={[3, 3, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Player table */}
+        <div className="card">
+          <h3 className="card-title">Accuracy by Player</h3>
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Shots</th>
+                <th>Accurate</th>
+                <th>Inaccurate</th>
+                <th>Accuracy %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {playerRows.map(({ player, total, accurate, inaccurate, pct }) => {
+                const p = parseFloat(pct)
+                const color = p >= 70 ? '#22c55e' : p >= 50 ? '#f59e0b' : '#ef4444'
+                return (
+                  <tr key={player}>
+                    <td className="player-name">{player}</td>
+                    <td>{total}</td>
+                    <td style={{ color: '#22c55e' }}>{accurate}</td>
+                    <td style={{ color: '#ef4444' }}>{inaccurate}</td>
+                    <td style={{ color, fontWeight: 600 }}>{pct}%</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Location detail table */}
+      <div className="card">
+        <h3 className="card-title">Location Breakdown</h3>
+        <div className="table-wrapper">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Classification</th>
+                <th>Total Shots</th>
+                <th>Accurate</th>
+                <th>Inaccurate</th>
+                <th>Accuracy %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {locationRows.map(({ loc, label, total, accurate, inaccurate, cls }) => {
+                const pct = total > 0 ? ((accurate / total) * 100).toFixed(0) : '0'
+                return (
+                  <tr key={loc}>
+                    <td style={{ fontWeight: 600 }}>{label}</td>
+                    <td style={{ color: CLS_COLOR[cls], fontSize: 12 }}>{CLS_LABEL[cls]}</td>
+                    <td>{total}</td>
+                    <td style={{ color: '#22c55e' }}>{accurate}</td>
+                    <td style={{ color: '#ef4444' }}>{inaccurate}</td>
+                    <td style={{ color: cls === 'inaccurate' ? '#6b7280' : CLS_COLOR[cls], fontWeight: 600 }}>
+                      {pct}%
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   )
 }
 
