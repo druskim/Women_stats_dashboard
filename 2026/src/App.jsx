@@ -13,7 +13,7 @@ import {
   PieChart, Pie, Cell,
 } from 'recharts'
 
-const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Top Teams', 'Players', 'By Period', 'Accuracy']
+const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Players', 'By Period', 'Accuracy']
 
 const DEFAULT_FILTERS = {
   tournament: [],
@@ -173,10 +173,7 @@ export default function App() {
         {activeTab === 'Penalties' && (
           <PenaltiesTab offensePenalties={offensePenalties} defensePenalties={defensePenalties} activeLocation={filters.shotLocation} onLocationClick={handleLocationClick} />
         )}
-        {activeTab === 'Top Teams' && (
-          <TopTeamsTab allRows={filtered} />
-        )}
-        {activeTab === 'Players' && (
+{activeTab === 'Players' && (
           <PlayersTab
             offenseShots={offenseShots}
             defenseShots={defenseShots}
@@ -331,132 +328,6 @@ function outcomeColor(outcome) {
   if (outcome === 'Canada Save' || outcome === 'Canada Ball Control Save') return '#3b82f6'
   if (outcome === 'Opponent Save') return '#f59e0b'
   return '#9ca3af'
-}
-
-const TOP_TEAMS = [
-  { name: 'Brazil', color: '#22c55e' },
-  { name: 'USA',    color: '#3b82f6' },
-  { name: 'Japan',  color: '#ef4444' },
-]
-
-function TopTeamsTab({ allRows }) {
-  return (
-    <div>
-      {TOP_TEAMS.map(({ name, color }) => {
-        const teamRows = allRows.filter(r => r.opponent === name)
-        if (teamRows.length === 0) {
-          return (
-            <div key={name} className="card" style={{ marginBottom: 24 }}>
-              <h3 className="card-title" style={{ color }}>{name}</h3>
-              <p style={{ color: '#6b7280' }}>No data matches current filters.</p>
-            </div>
-          )
-        }
-
-        const offShots = teamRows.filter(r => r.isCanadaAttack && !r.isPenalty)
-        const defShots = teamRows.filter(r => !r.isCanadaAttack && !r.isPenalty)
-        const offStats = computeOffensiveStats(offShots)
-        const defStats = computeDefensiveStats(defShots)
-
-        // Build per-game records
-        const gamesMap = {}
-        for (const row of teamRows) {
-          const key = row.tournament
-          if (!gamesMap[key]) gamesMap[key] = { tournament: row.tournament, canadaGoals: 0, oppGoals: 0, shots: 0, oppShots: 0 }
-          const g = gamesMap[key]
-          if (row.isCanadaAttack) {
-            g.shots++
-            if (row.shotOutcome === 'Goal Canada') g.canadaGoals++
-          } else {
-            g.oppShots++
-            if (row.shotOutcome === 'Goal Opponent') g.oppGoals++
-          }
-        }
-        const gameList = Object.values(gamesMap).sort((a, b) => a.tournament.localeCompare(b.tournament))
-        const wins   = gameList.filter(g => g.canadaGoals > g.oppGoals).length
-        const losses = gameList.filter(g => g.canadaGoals < g.oppGoals).length
-        const draws  = gameList.filter(g => g.canadaGoals === g.oppGoals).length
-        const totalFor     = gameList.reduce((s, g) => s + g.canadaGoals, 0)
-        const totalAgainst = gameList.reduce((s, g) => s + g.oppGoals, 0)
-
-        return (
-          <div key={name} style={{ marginBottom: 32 }}>
-            {/* Team header */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 16 }}>
-              <h2 style={{ fontSize: 20, fontWeight: 700, color }}>{name}</h2>
-              <span style={{ fontSize: 15, fontWeight: 600, color: '#f1f5f9' }}>
-                {wins}W – {losses}L – {draws}D
-              </span>
-              <span style={{ fontSize: 13, color: '#9ca3af' }}>
-                Goals: {totalFor} – {totalAgainst}
-              </span>
-            </div>
-
-            {/* Key stats row */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gap: 12, marginBottom: 16 }}>
-              <StatItem label="CA Shots" value={offStats.total} />
-              <StatItem label="CA Goals" value={offStats.goals} color="#22c55e" />
-              <StatItem label="Conv%" value={`${offStats.conversionRate}%`} color="#22c55e" />
-              <StatItem label="Opp Shots" value={defStats.total} />
-              <StatItem label="Saves" value={defStats.saves} color="#3b82f6" />
-              <StatItem label="BC Saves" value={defStats.ballControlSaves} color="#60a5fa" />
-              <StatItem label="BC%" value={`${defStats.ballControlRate}%`} color="#60a5fa" />
-              <StatItem label="Goals Against" value={defStats.goalsAgainst} color="#ef4444" />
-            </div>
-
-            {/* Game results table */}
-            <div className="card">
-              <h3 className="card-title">Game Results vs {name}</h3>
-              <div className="table-wrapper">
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Tournament</th>
-                      <th>Score</th>
-                      <th>Result</th>
-                      <th>CA Shots</th>
-                      <th>CA Goals</th>
-                      <th>Conv%</th>
-                      <th>Opp Shots</th>
-                      <th>Saves</th>
-                      <th>BC Saves</th>
-                      <th>BC%</th>
-                      <th>Goals Against</th>
-                      <th>Stop%</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {gameList.map((g, i) => {
-                      const result = g.canadaGoals > g.oppGoals ? 'W' : g.canadaGoals < g.oppGoals ? 'L' : 'D'
-                      const resultColor = result === 'W' ? '#22c55e' : result === 'L' ? '#ef4444' : '#f59e0b'
-                      const gOff = computeOffensiveStats(offShots.filter(r => r.tournament === g.tournament))
-                      const gDef = computeDefensiveStats(defShots.filter(r => r.tournament === g.tournament))
-                      return (
-                        <tr key={i}>
-                          <td>{g.tournament}</td>
-                          <td className="cell-score">{g.canadaGoals} – {g.oppGoals}</td>
-                          <td><span className="badge" style={{ color: resultColor, borderColor: resultColor }}>{result}</span></td>
-                          <td className="cell-muted">{gOff.total}</td>
-                          <td style={{ color: '#22c55e' }}>{gOff.goals}</td>
-                          <td>{gOff.conversionRate}%</td>
-                          <td className="cell-muted">{gDef.total}</td>
-                          <td style={{ color: '#3b82f6' }}>{gDef.saves}</td>
-                          <td style={{ color: '#60a5fa' }}>{gDef.ballControlSaves}</td>
-                          <td style={{ color: '#60a5fa' }}>{gDef.ballControlRate}%</td>
-                          <td style={{ color: '#ef4444' }}>{gDef.goalsAgainst}</td>
-                          <td>{gDef.saveRate}%</td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )
-      })}
-    </div>
-  )
 }
 
 function PlayersTab({ offenseShots, defenseShots, allShots, offensePenalties, defensePenalties }) {
