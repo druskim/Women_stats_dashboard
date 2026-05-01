@@ -9,7 +9,8 @@ import {
   OriginEfficiencyChart, OutcomePieChart, GameScoreTable
 } from './components/Charts.jsx'
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+  PieChart, Pie, Cell,
 } from 'recharts'
 
 const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Top Teams', 'Players', 'By Period', 'Accuracy']
@@ -707,23 +708,6 @@ function accStats(shots, method) {
   return { total: withLoc.length, accurate, inaccurate: withLoc.length - accurate, pct, untracked: shots.length - withLoc.length }
 }
 
-const ALL_LOCS  = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6]
-const locLabel  = loc => loc === 0 ? 'Out L' : loc === 6 ? 'Out R' : String(loc)
-
-function locClass(loc, method) {
-  if (method === 1) {
-    if (ACC_ALWAYS_M1.has(loc)) return 'accurate'
-    if (ACC_GOAL_M1.has(loc))   return 'goal-only'
-    return 'inaccurate'
-  }
-  if (ACC_ALWAYS_M2.has(loc)) return 'accurate'
-  if (ACC_GOAL_M2.has(loc))   return 'goal-only'
-  return 'inaccurate'
-}
-
-const CLS_COLOR = { accurate: '#22c55e', 'goal-only': '#f59e0b', inaccurate: '#ef4444' }
-const CLS_LABEL = { accurate: 'Always Accurate', 'goal-only': 'Accurate if Goal', inaccurate: 'Inaccurate' }
-
 const METHOD_DESC = {
   1: 'Spots 1–2 & 4–5 (inc. half-positions) always accurate · Spot 3 accurate if scored · 0 & 6 inaccurate',
   2: 'Spots 1, 2, 2.5, 3.5, 4, 5 always accurate · Spots 1.5, 3, 4.5 accurate if scored · 0 & 6 inaccurate',
@@ -736,17 +720,6 @@ function AccuracyTab({ shots }) {
 
   const stats = useMemo(() => accStats(shots, method), [shots, method])
 
-  const locationRows = useMemo(() =>
-    ALL_LOCS.map(loc => {
-      const ls = shots.filter(s => s.shotLocation === loc)
-      if (ls.length === 0) return null
-      const accurate = ls.filter(s => isAccurateShot(s, method) === true).length
-      const cls = locClass(loc, method)
-      return { loc, label: locLabel(loc), total: ls.length, accurate, inaccurate: ls.length - accurate, cls }
-    }).filter(Boolean),
-    [shots, method]
-  )
-
   const playerRows = useMemo(() =>
     CANADA_PLAYERS.map(player => {
       const ps = shots.filter(s => s.attackingPlayer === player && s.shotLocation !== null && s.shotLocation !== undefined)
@@ -758,7 +731,10 @@ function AccuracyTab({ shots }) {
     [shots, method]
   )
 
-  const chartData = locationRows.map(r => ({ label: r.label, Accurate: r.accurate, Inaccurate: r.inaccurate }))
+  const pieData = [
+    { name: 'Accurate',   value: stats.accurate,   color: '#22c55e' },
+    { name: 'Inaccurate', value: stats.inaccurate, color: '#ef4444' },
+  ]
 
   return (
     <div>
@@ -784,24 +760,27 @@ function AccuracyTab({ shots }) {
       )}
 
       <div className="grid-2">
-        {/* Stacked bar chart by location */}
-        <div className="card">
-          <h3 className="card-title">Accurate vs Inaccurate by Location</h3>
-          <ResponsiveContainer width="100%" height={230}>
-            <BarChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-              <XAxis dataKey="label" tick={{ fill: '#9ca3af', fontSize: 11 }} />
-              <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} allowDecimals={false} />
-              <Tooltip
-                contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }}
-                labelStyle={{ color: '#f1f5f9' }}
-                itemStyle={{ color: '#94a3b8' }}
-              />
-              <Legend wrapperStyle={{ color: '#9ca3af', fontSize: 12 }} />
-              <Bar dataKey="Accurate"   stackId="a" fill="#22c55e" />
-              <Bar dataKey="Inaccurate" stackId="a" fill="#ef4444" radius={[3, 3, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+        {/* Pie chart */}
+        <div className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <h3 className="card-title" style={{ alignSelf: 'flex-start' }}>Shot Accuracy</h3>
+          <PieChart width={260} height={260}>
+            <Pie
+              data={pieData}
+              cx={125} cy={115}
+              innerRadius={65}
+              outerRadius={105}
+              dataKey="value"
+              paddingAngle={2}
+              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
+              labelLine={{ stroke: '#6b7280' }}
+            >
+              {pieData.map(entry => <Cell key={entry.name} fill={entry.color} />)}
+            </Pie>
+            <Tooltip
+              contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }}
+              itemStyle={{ color: '#94a3b8' }}
+            />
+          </PieChart>
         </div>
 
         {/* Player table */}
@@ -828,42 +807,6 @@ function AccuracyTab({ shots }) {
                     <td style={{ color: '#22c55e' }}>{accurate}</td>
                     <td style={{ color: '#ef4444' }}>{inaccurate}</td>
                     <td style={{ color, fontWeight: 600 }}>{pct}%</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Location detail table */}
-      <div className="card">
-        <h3 className="card-title">Location Breakdown</h3>
-        <div className="table-wrapper">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Location</th>
-                <th>Classification</th>
-                <th>Total Shots</th>
-                <th>Accurate</th>
-                <th>Inaccurate</th>
-                <th>Accuracy %</th>
-              </tr>
-            </thead>
-            <tbody>
-              {locationRows.map(({ loc, label, total, accurate, inaccurate, cls }) => {
-                const pct = total > 0 ? ((accurate / total) * 100).toFixed(0) : '0'
-                return (
-                  <tr key={loc}>
-                    <td style={{ fontWeight: 600 }}>{label}</td>
-                    <td style={{ color: CLS_COLOR[cls], fontSize: 12 }}>{CLS_LABEL[cls]}</td>
-                    <td>{total}</td>
-                    <td style={{ color: '#22c55e' }}>{accurate}</td>
-                    <td style={{ color: '#ef4444' }}>{inaccurate}</td>
-                    <td style={{ color: cls === 'inaccurate' ? '#6b7280' : CLS_COLOR[cls], fontWeight: 600 }}>
-                      {pct}%
-                    </td>
                   </tr>
                 )
               })}
