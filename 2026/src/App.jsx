@@ -681,7 +681,7 @@ function PeriodStatTable({ rows }) {
 
 // ── Accuracy helpers ──────────────────────────────────────────────────────────
 
-const ACC_ALWAYS_M1 = new Set([1, 2, 4, 5])
+const ACC_ALWAYS_M1 = new Set([1, 1.5, 2, 2.5, 3.5, 4, 4.5, 5])
 const ACC_GOAL_M1   = new Set([3])
 const ACC_ALWAYS_M2 = new Set([1, 2, 2.5, 3.5, 4, 5])
 const ACC_GOAL_M2   = new Set([1.5, 3, 4.5])
@@ -725,7 +725,7 @@ const CLS_COLOR = { accurate: '#22c55e', 'goal-only': '#f59e0b', inaccurate: '#e
 const CLS_LABEL = { accurate: 'Always Accurate', 'goal-only': 'Accurate if Goal', inaccurate: 'Inaccurate' }
 
 const METHOD_DESC = {
-  1: 'Spots 1, 2, 4, 5 always accurate · Spot 3 accurate if scored · 0 & 6 inaccurate',
+  1: 'Spots 1–2 & 4–5 (inc. half-positions) always accurate · Spot 3 accurate if scored · 0 & 6 inaccurate',
   2: 'Spots 1, 2, 2.5, 3.5, 4, 5 always accurate · Spots 1.5, 3, 4.5 accurate if scored · 0 & 6 inaccurate',
 }
 
