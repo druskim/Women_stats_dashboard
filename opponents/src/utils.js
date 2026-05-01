@@ -85,7 +85,7 @@ export function computeStats(shots) {
   const goalRate   = total > 0 ? ((goals / total) * 100).toFixed(1) : '0.0'
   const outRate    = total > 0 ? ((out   / total) * 100).toFixed(1) : '0.0'
   const stopRate   = total > 0 ? (((saves + bcSaves + out) / total) * 100).toFixed(1) : '0.0'
-  const saveRate   = total > 0 ? (((saves + bcSaves) / total) * 100).toFixed(1) : '0.0'
+  const saveRate   = total > 0 ? (((total - goals) / total) * 100).toFixed(1) : '0.0'
   return { total, goals, saves, bcSaves, out, goalRate, outRate, stopRate, saveRate }
 }
 

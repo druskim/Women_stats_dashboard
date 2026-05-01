@@ -117,7 +117,7 @@ export function computeDefensiveStats(shots) {
     s.shotOutcome === 'Canada Save' || s.shotOutcome === 'Canada Ball Control Save'
   ).length
   const opponentOut = shots.filter(s => s.shotOutcome === 'Opponent Out').length
-  const saveRate = total > 0 ? (((saves + opponentOut) / total) * 100).toFixed(1) : '0.0'
+  const saveRate = total > 0 ? (((total - goalsAgainst) / total) * 100).toFixed(1) : '0.0'
   const ballControlRate = saves > 0 ? ((ballControlSaves / saves) * 100).toFixed(1) : '0.0'
 
   return { total, goalsAgainst, saves, ballControlSaves, ballControlRate, opponentOut, saveRate }
