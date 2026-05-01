@@ -1,4 +1,4 @@
-export const CANADA_PLAYERS = ['Amy', 'Emma', 'Meghan', 'Maryam', 'Gen', 'Cassandra']
+export const CANADA_PLAYERS = ['Amy', 'Emma', 'Meghan', 'Maryam', 'Gen', 'Cassandra', 'Elena', 'Florinda']
 
 export const OUTCOME_GROUPS = {
   CANADA_GOAL: ['Goal Canada'],
