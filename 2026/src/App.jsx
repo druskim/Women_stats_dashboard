@@ -763,20 +763,33 @@ function AccuracyTab({ shots }) {
         {/* Pie chart */}
         <div className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h3 className="card-title" style={{ alignSelf: 'flex-start' }}>Shot Accuracy</h3>
-          <PieChart width={260} height={260}>
+          <PieChart width={280} height={280}>
             <Pie
               data={pieData}
-              cx={125} cy={115}
-              innerRadius={65}
-              outerRadius={105}
+              cx={135} cy={125}
+              innerRadius={70}
+              outerRadius={110}
               dataKey="value"
               paddingAngle={2}
-              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
-              labelLine={{ stroke: '#6b7280' }}
+              labelLine={{ stroke: '#4b5563' }}
+              label={({ cx, cy, midAngle, outerRadius, name, percent }) => {
+                const RADIAN = Math.PI / 180
+                const r = outerRadius + 28
+                const x = cx + r * Math.cos(-midAngle * RADIAN)
+                const y = cy + r * Math.sin(-midAngle * RADIAN)
+                const anchor = x > cx ? 'start' : 'end'
+                return (
+                  <text x={x} y={y} textAnchor={anchor} dominantBaseline="central" fontSize={12} fill="#9ca3af">
+                    <tspan x={x} dy="-0.6em">{name}</tspan>
+                    <tspan x={x} dy="1.3em" fill="white" fontWeight="600">{(percent * 100).toFixed(1)}%</tspan>
+                  </text>
+                )
+              }}
             >
               {pieData.map(entry => <Cell key={entry.name} fill={entry.color} />)}
             </Pie>
             <Tooltip
+              formatter={(value, name) => [`${value} shots`, name]}
               contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }}
               itemStyle={{ color: '#94a3b8' }}
             />
