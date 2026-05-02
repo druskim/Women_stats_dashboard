@@ -193,13 +193,24 @@ export default function App() {
 }
 
 function OverviewTab({ offenseShots, defenseShots, allRows }) {
+  const offenseStats = useMemo(() => computeOffensiveStats(offenseShots), [offenseShots])
+  const defenseStats = useMemo(() => computeDefensiveStats(defenseShots), [defenseShots])
+
   return (
-    <div className="grid-2">
-      <GameScoreTable allRows={allRows} />
-      <div>
-        <OutcomePieChart shots={offenseShots} isOffense={true} />
-        <OutcomePieChart shots={defenseShots} isOffense={false} />
+    <div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Offensive Efficiency</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#22c55e', lineHeight: 1 }}>{offenseStats.conversionRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{offenseStats.goals} goals / {offenseStats.total} shots</div>
+        </div>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Defensive Efficiency</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#3b82f6', lineHeight: 1 }}>{defenseStats.saveRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{defenseStats.saves} saves / {defenseStats.total} shots faced</div>
+        </div>
       </div>
+      <GameScoreTable allRows={allRows} />
     </div>
   )
 }

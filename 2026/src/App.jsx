@@ -198,127 +198,20 @@ function OverviewTab({ offenseShots, defenseShots, allRows }) {
   const defenseStats = useMemo(() => computeDefensiveStats(defenseShots), [defenseShots])
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start' }}>
-      <GameScoreTable allRows={allRows} />
-      <div>
-        <OverviewEfficiencyPanel shots={defenseShots} stats={defenseStats} isOffense={false} />
-        <OverviewEfficiencyPanel shots={offenseShots} stats={offenseStats} isOffense={true} />
-      </div>
-    </div>
-  )
-}
-
-function OverviewEfficiencyPanel({ shots, stats, isOffense }) {
-  const games = {}
-  for (const shot of shots) {
-    const key = `${shot.opponent}__${shot.tournament}`
-    if (!games[key]) games[key] = { opponent: shot.opponent, tournament: shot.tournament, shots: [] }
-    games[key].shots.push(shot)
-  }
-  const rows = Object.values(games).sort((a, b) =>
-    a.tournament.localeCompare(b.tournament) || a.opponent.localeCompare(b.opponent)
-  )
-
-  if (isOffense) {
-    return (
-      <div>
-        <div className="card" style={{ textAlign: 'center', padding: '40px 24px 32px' }}>
-          <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Offensive Efficiency</div>
-          <div style={{ fontSize: 80, fontWeight: 800, color: '#22c55e', lineHeight: 1 }}>{stats.conversionRate}%</div>
-          <div style={{ fontSize: 14, color: '#6b7280', marginTop: 8 }}>Conversion Rate</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, maxWidth: 420, margin: '28px auto 0' }}>
-            <StatItem label="Total Shots" value={stats.total} />
-            <StatItem label="Goals" value={stats.goals} color="#22c55e" />
-            <StatItem label="Saved" value={stats.saved} />
-          </div>
-        </div>
-        <div className="card">
-          <h3 className="card-title">Offensive Efficiency by Game</h3>
-          {rows.length === 0 ? (
-            <p style={{ color: '#6b7280', textAlign: 'center', padding: '24px 0' }}>No data matches current filters.</p>
-          ) : (
-            <div className="table-wrapper">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>Opponent</th><th>Tournament</th>
-                    <th>Shots</th><th>Goals</th><th>Saved</th><th>Out</th><th>Conv%</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.map(({ opponent, tournament, shots: gs }, i) => {
-                    const s = computeOffensiveStats(gs)
-                    const pct = parseFloat(s.conversionRate)
-                    const color = pct >= 25 ? '#22c55e' : pct >= 12 ? '#f59e0b' : '#ef4444'
-                    return (
-                      <tr key={i}>
-                        <td>{opponent}</td>
-                        <td className="cell-muted">{tournament}</td>
-                        <td>{s.total}</td>
-                        <td style={{ color: '#22c55e' }}>{s.goals}</td>
-                        <td className="cell-muted">{s.saved}</td>
-                        <td className="cell-muted">{s.out}</td>
-                        <td style={{ color, fontWeight: 600 }}>{s.conversionRate}%</td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </div>
-    )
-  }
-
-  return (
     <div>
-      <div className="card" style={{ textAlign: 'center', padding: '40px 24px 32px' }}>
-        <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 8, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Defensive Efficiency</div>
-        <div style={{ fontSize: 80, fontWeight: 800, color: '#3b82f6', lineHeight: 1 }}>{stats.saveRate}%</div>
-        <div style={{ fontSize: 14, color: '#6b7280', marginTop: 8 }}>Stop Rate</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, maxWidth: 520, margin: '28px auto 0' }}>
-          <StatItem label="Shots Faced" value={stats.total} />
-          <StatItem label="Saves" value={stats.saves} color="#3b82f6" />
-          <StatItem label="Goals Against" value={stats.goalsAgainst} color="#ef4444" />
-          <StatItem label="BC%" value={`${stats.ballControlRate}%`} color="#60a5fa" />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Offensive Efficiency</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#22c55e', lineHeight: 1 }}>{offenseStats.conversionRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{offenseStats.goals} goals / {offenseStats.total} shots</div>
+        </div>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Defensive Efficiency</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#3b82f6', lineHeight: 1 }}>{defenseStats.saveRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{defenseStats.saves} saves / {defenseStats.total} shots faced</div>
         </div>
       </div>
-      <div className="card">
-        <h3 className="card-title">Defensive Efficiency by Game</h3>
-        {rows.length === 0 ? (
-          <p style={{ color: '#6b7280', textAlign: 'center', padding: '24px 0' }}>No data matches current filters.</p>
-        ) : (
-          <div className="table-wrapper">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Opponent</th><th>Tournament</th>
-                  <th>Shots Faced</th><th>Goals Against</th><th>Saves</th><th>BC%</th><th>Stop%</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map(({ opponent, tournament, shots: gs }, i) => {
-                  const s = computeDefensiveStats(gs)
-                  const pct = parseFloat(s.saveRate)
-                  const color = pct >= 85 ? '#22c55e' : pct >= 70 ? '#f59e0b' : '#ef4444'
-                  return (
-                    <tr key={i}>
-                      <td>{opponent}</td>
-                      <td className="cell-muted">{tournament}</td>
-                      <td>{s.total}</td>
-                      <td style={{ color: '#ef4444' }}>{s.goalsAgainst}</td>
-                      <td style={{ color: '#3b82f6' }}>{s.saves}</td>
-                      <td style={{ color: '#60a5fa' }}>{s.ballControlRate}%</td>
-                      <td style={{ color, fontWeight: 600 }}>{s.saveRate}%</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      <GameScoreTable allRows={allRows} />
     </div>
   )
 }

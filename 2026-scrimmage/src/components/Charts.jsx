@@ -152,18 +152,20 @@ export function OutcomePieChart({ shots, isOffense }) {
 }
 
 export function GameScoreTable({ allRows }) {
-  // Build game-by-game score
   const games = {}
   for (const row of allRows) {
     const key = `${row.opponent}__${row.tournament}`
-    if (!games[key]) games[key] = { opponent: row.opponent, tournament: row.tournament, canadaGoals: 0, oppGoals: 0, shots: 0, oppShots: 0 }
+    if (!games[key]) games[key] = {
+      opponent: row.opponent, tournament: row.tournament,
+      canadaGoals: 0, oppGoals: 0, offShots: [], defShots: []
+    }
     const g = games[key]
     if (row.isCanadaAttack) {
-      g.shots++
       if (row.shotOutcome === 'Goal Canada') g.canadaGoals++
+      if (!row.isPenalty) g.offShots.push(row)
     } else {
-      g.oppShots++
       if (row.shotOutcome === 'Goal Opponent') g.oppGoals++
+      if (!row.isPenalty) g.defShots.push(row)
     }
   }
 
@@ -179,23 +181,33 @@ export function GameScoreTable({ allRows }) {
               <th>Opponent</th>
               <th>Tournament</th>
               <th>Score</th>
+              <th>Result</th>
+              <th style={{ color: '#22c55e' }}>Off Eff%</th>
+              <th style={{ color: '#3b82f6' }}>Def Eff%</th>
               <th>CA Shots</th>
               <th>Opp Shots</th>
-              <th>Result</th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((g, i) => {
-              const result = g.canadaGoals > g.oppGoals ? 'W' : g.canadaGoals < g.oppGoals ? 'L' : 'D'
+            {rows.map(({ opponent, tournament, canadaGoals, oppGoals, offShots, defShots }, i) => {
+              const off = computeOffensiveStats(offShots)
+              const def = computeDefensiveStats(defShots)
+              const result = canadaGoals > oppGoals ? 'W' : canadaGoals < oppGoals ? 'L' : 'D'
               const resultColor = result === 'W' ? '#22c55e' : result === 'L' ? '#ef4444' : '#f59e0b'
+              const offPct = parseFloat(off.conversionRate)
+              const defPct = parseFloat(def.saveRate)
+              const offColor = offPct >= 25 ? '#22c55e' : offPct >= 12 ? '#f59e0b' : '#ef4444'
+              const defColor = defPct >= 85 ? '#22c55e' : defPct >= 70 ? '#f59e0b' : '#ef4444'
               return (
                 <tr key={i}>
-                  <td>{g.opponent}</td>
-                  <td className="cell-muted">{g.tournament}</td>
-                  <td className="cell-score">{g.canadaGoals} – {g.oppGoals}</td>
-                  <td className="cell-muted">{g.shots}</td>
-                  <td className="cell-muted">{g.oppShots}</td>
+                  <td>{opponent}</td>
+                  <td className="cell-muted">{tournament}</td>
+                  <td className="cell-score">{canadaGoals} – {oppGoals}</td>
                   <td><span className="badge" style={{ color: resultColor, borderColor: resultColor }}>{result}</span></td>
+                  <td style={{ color: offColor, fontWeight: 600 }}>{off.conversionRate}%</td>
+                  <td style={{ color: defColor, fontWeight: 600 }}>{def.saveRate}%</td>
+                  <td className="cell-muted">{off.total}</td>
+                  <td className="cell-muted">{def.total}</td>
                 </tr>
               )
             })}
