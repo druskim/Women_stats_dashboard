@@ -65,13 +65,8 @@ export function parseRows(text) {
       isCanadaAttack = isCanadaPlayer(attackingPlayer)
     }
 
-    // Detect own goal: player name or 'Goal Opponent' in the descriptor column,
-    // or (legacy) a Canada player name written directly into the outcome field
-    const isOwnGoal = !isCanadaAttack && (
-      isCanadaPlayer(shotOutcome) ||
-      isCanadaPlayer(descriptor) ||
-      descriptor === 'Goal Opponent'
-    )
+    // Detect own goal: only when 'Goal Opponent' is explicitly set in the descriptor column
+    const isOwnGoal = !isCanadaAttack && descriptor === 'Goal Opponent'
 
     // Infer empty outcomes from location
     let outcome = isOwnGoal ? 'Goal Opponent' : shotOutcome
