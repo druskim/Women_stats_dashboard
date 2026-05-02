@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const gamesDir = join(__dirname, '../public/games')
 const outputPath = join(__dirname, '../public/data.tsv')
 
-const HEADER = 'Opponent/Game\tCategory\tStart\tClick\tEnd\tXY\tAttacking Player\tShot Origin\tShot Outcome\tShot Location\tDefending Player'
+const HEADER = 'Opponent/Game\tCategory\tStart\tClick\tEnd\tXY\tAttacking Player\tShot Origin\tShot Outcome\tShot Location\tDefending Player\tDescriptor'
 
 const HEADER_ALIASES = {
   'n#':               'shotNum',
@@ -27,6 +27,7 @@ const HEADER_ALIASES = {
   'shot location':    'shotLocation',
   'des 5':            'defendingPlayer',
   'defending player': 'defendingPlayer',
+  'des 6':            'descriptor',
 }
 
 // Normalise category values from the new format to the original parser format
@@ -38,7 +39,7 @@ const CATEGORY_MAP = {
 const OUTPUT_FIELDS = [
   'opponent', 'category', 'start', 'click', 'end',
   'tournament', 'attackingPlayer', 'shotOrigin',
-  'shotOutcome', 'shotLocation', 'defendingPlayer',
+  'shotOutcome', 'shotLocation', 'defendingPlayer', 'descriptor',
 ]
 
 // Extract opponent and tournament label from filename.

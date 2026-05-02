@@ -50,6 +50,7 @@ export function parseRows(text) {
 
     if (!isShotRow || !opponent) continue
 
+    const descriptor = cols[11] || ''
     const shotOrigin = shotOriginRaw !== '' ? parseInt(shotOriginRaw) : null
     const shotLocation = shotLocationRaw !== '' ? parseFloat(shotLocationRaw) : null
 
@@ -64,8 +65,13 @@ export function parseRows(text) {
       isCanadaAttack = isCanadaPlayer(attackingPlayer)
     }
 
-    // Detect own goal: Shot Opponent row where a Canada player's name is in the outcome field
-    const isOwnGoal = !isCanadaAttack && isCanadaPlayer(shotOutcome)
+    // Detect own goal: player name or 'Goal Opponent' in the descriptor column,
+    // or (legacy) a Canada player name written directly into the outcome field
+    const isOwnGoal = !isCanadaAttack && (
+      isCanadaPlayer(shotOutcome) ||
+      isCanadaPlayer(descriptor) ||
+      descriptor === 'Goal Opponent'
+    )
 
     // Infer empty outcomes from location
     let outcome = isOwnGoal ? 'Goal Opponent' : shotOutcome

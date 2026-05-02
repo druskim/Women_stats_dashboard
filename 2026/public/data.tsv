@@ -1,192 +1,582 @@
-Opponent/Game	Category	Start	Click	End	XY	Attacking Player	Shot Origin	Shot Outcome	Shot Location	Defending Player
-FIFH	@@@P1	00:00	00:00	00:00	Malmo 2026					
-FIFH	T-START	00:00	00:00	00:00	Malmo 2026					
-FIFH	Shot Opponent	00:23	00:28	00:37	Malmo 2026	Player 8	5	Canada Ball Control Save	4	Emma
-FIFH	Shot Canada	00:32	00:37	00:46	Malmo 2026	Emma	5	Opponent Save	1	Player 1
-FIFH	Shot Opponent	00:41	00:46	00:56	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Meghan
-FIFH	Shot Canada	00:52	00:57	01:10	Malmo 2026	Emma	5	Opponent Save	5	Player 8
-FIFH	Shot Opponent	01:07	01:12	01:24	Malmo 2026	Player 8	4	Canada Save	4	Emma
-FIFH	Shot Canada	01:19	01:24	01:38	Malmo 2026	Amy	1	Opponent Save	4	Player 8
-FIFH	Shot Opponent	01:35	01:40	01:52	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Meghan
-FIFH	Shot Canada	01:47	01:52	02:04	Malmo 2026	Amy	2	Opponent Save	2	Player 1
-FIFH	Shot Opponent	01:59	02:04	02:13	Malmo 2026	Player 1	2	Canada Ball Control Save	1.5	Amy
-FIFH	Shot Canada	02:08	02:13	02:20	Malmo 2026	Amy	2	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	02:20	02:25	02:33	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy
-FIFH	Shot Canada	02:29	02:34	02:53	Malmo 2026	Emma	4	Opponent Save	2.5	Player 3
-FIFH	Shot Opponent	02:50	02:55	03:00	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Emma
-FIFH	Shot Canada	02:56	03:01	03:08	Malmo 2026	Emma	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	03:03	03:08	03:18	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Meghan
-FIFH	Shot Canada	03:13	03:18	03:24	Malmo 2026	Meghan	2	Opponent Save	3	Player 3
-FIFH	Shot Opponent	03:20	03:25	03:35	Malmo 2026	Player 8	5	Canada Save	2	Amy
-FIFH	Shot Canada	03:30	03:35	03:47	Malmo 2026	Amy	1	Opponent Save	4	Player 8
-FIFH	Shot Opponent	03:48	03:53	04:00	Malmo 2026	Player 1	2	Canada Save	2.5	Meghan
-FIFH	Shot Canada	04:00	04:05	04:13	Malmo 2026	Amy	3	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	04:17	04:22	04:29	Malmo 2026	Player 1	2	Canada Ball Control Save	3	Meghan
-FIFH	Shot Canada	04:25	04:30	04:35	Malmo 2026	Emma	4	Opponent Save	3	Player 3
-FIFH	Shot Opponent	04:31	04:36	04:44	Malmo 2026	Player 8	4	Canada Ball Control Save	4.5	Emma
-FIFH	Shot Canada	04:40	04:45	04:54	Malmo 2026	Emma	4	Opponent Save	4	Player 8
-FIFH	Shot Opponent	04:54	04:59	05:16	Malmo 2026	Player 8	5	Canada Ball Control Save	1	Amy
-FIFH	Shot Canada	05:11	05:16	05:25	Malmo 2026	Amy	2	Opponent Save	1	Player 1
-FIFH	Shot Opponent	05:20	05:25	05:33	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Meghan
-FIFH	Shot Canada	05:29	05:34	05:43	Malmo 2026	Meghan	3	Opponent Save	1	Player 8
-FIFH	Shot Opponent	05:38	05:43	05:48	Malmo 2026	Player 8	5	Canada Ball Control Save	4	Emma
-FIFH	Shot Canada	05:43	05:48	05:58	Malmo 2026	Emma	2	Opponent Save	2	Player 8
-FIFH	Shot Opponent	05:53	05:58	06:06	Malmo 2026	Player 8	5	Canada Ball Control Save	5	Emma
-FIFH	Shot Canada	06:02	06:07	06:19	Malmo 2026	Amy	4	Opponent Save	2	Player 1
-FIFH	Shot Opponent	06:19	06:24	06:35	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy
-FIFH	Shot Canada	06:31	06:36	06:43	Malmo 2026	Amy	1	Opponent Save	2	Player 3
-FIFH	Shot Opponent	06:39	06:44	06:49	Malmo 2026	Player 3	3	Canada Ball Control Save	3	Meghan
-FIFH	Shot Canada	06:44	06:49	06:59	Malmo 2026	Emma	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	06:55	07:00	07:07	Malmo 2026	Player 1	1	Canada Ball Control Save	5	Emma
-FIFH	Shot Canada	07:03	07:08	07:15	Malmo 2026	Amy	3	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	07:10	07:15	07:23	Malmo 2026	Player 1	2	Canada Ball Control Save	3.5	Meghan
-FIFH	Shot Canada	07:19	07:24	07:32	Malmo 2026	Meghan	3	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	07:51	07:56	08:04	Malmo 2026	Player 8	4	Canada Ball Control Save	5	Emma
-FIFH	Shot Canada	08:00	08:05	08:16	Malmo 2026	Emma	4	Opponent Save	2	Player 8
-FIFH	Shot Opponent	08:12	08:17	08:29	Malmo 2026	Player 8	5	Canada Ball Control Save	2.5	Meghan
-FIFH	Shot Canada	08:25	08:30	08:38	Malmo 2026	Amy	1	Opponent Save	2	Player 1
-FIFH	Shot Opponent	08:33	08:38	08:45	Malmo 2026	Player 3	3	Canada Ball Control Save	5	Emma
-FIFH	Shot Canada	08:40	08:45	08:57	Malmo 2026	Emma	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	08:53	08:58	09:06	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Amy
-FIFH	Shot Canada	09:02	09:07	09:19	Malmo 2026	Amy	1	Goal Canada	4	Player 8
-FIFH	Shot Opponent	09:28	09:33	09:43	Malmo 2026	Player 8	4	Canada Save	4	Emma
-FIFH	Shot Canada	09:39	09:44	09:54	Malmo 2026	Emma	4	Opponent Save	4	Player 8
-FIFH	Shot Opponent	09:50	09:55	10:07	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Emma
-FIFH	Shot Canada	10:02	10:07	10:16	Malmo 2026	Amy	2	Opponent Save	2	Player 1
-FIFH	Shot Opponent	10:12	10:17	10:24	Malmo 2026	Player 1	2	Canada Ball Control Save	1	Amy
-FIFH	Shot Canada	10:20	10:25	10:38	Malmo 2026	Amy	1	Goal Canada	2	Player 3
-FIFH	Shot Opponent	10:39	10:44	10:54	Malmo 2026	Player 8	4	Canada Ball Control Save	4	Emma
-FIFH	Shot Canada	10:49	10:54	11:06	Malmo 2026	Emma	4	Opponent Save	4.5	Player 8
-FIFH	Shot Canada	11:12	11:17	11:26	Malmo 2026	Amy	1	Opponent Save	4	Player 3
-FIFH	Shot Opponent	11:24	11:29	11:39	Malmo 2026	Player 8	4	Canada Ball Control Save	1.5	Amy
-FIFH	Shot Canada	11:35	11:40	11:53	Malmo 2026	Emma	2	Opponent Save	3.5	Player 3
-FIFH	Shot Opponent	12:40	12:45	12:55	Malmo 2026	Player 8	2	Canada Save	4	Emma
-FIFH	Shot Canada	12:51	12:56	13:03	Malmo 2026	Meghan	1	Canada Out	6	
-FIFH	Shot Opponent	13:11	13:16	13:22	Malmo 2026	Player 1	3	Opponent Out	0	
-FIFH	Shot Canada	13:18	13:23	13:33	Malmo 2026	Amy	1	Opponent Save	3	Player 1
-FIFH	Shot Opponent	13:36	13:41	13:46	Malmo 2026	Player 3	3	Opponent Out	6	
-FIFH	Shot Canada	13:41	13:46	14:14	Malmo 2026	Emma	1	Opponent Save	5	Player 8
-FIFH	Shot Opponent	14:20	14:25	14:30	Malmo 2026	Player 8	5	Canada Ball Control Save	1.5	Amy
-FIFH	Shot Canada	14:24	14:29	14:34	Malmo 2026	Amy	2	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	14:30	14:35	14:41	Malmo 2026	Player 1	3	Canada Ball Control Save	3	Meghan
-FIFH	Shot Canada	14:37	14:42	14:50	Malmo 2026	Emma	3	Opponent Save	3.5	Player 3
-FIFH	Shot Opponent	14:46	14:51	14:58	Malmo 2026	Player 3	3	Canada Ball Control Save	4	Emma
-FIFH	Shot Canada	14:53	14:58	15:07	Malmo 2026	Amy	2	Opponent Save	1.5	Player 1
-Greece	Shot Opponent	15:02	15:07	15:25	Malmo 2026	Player 1	2	Amy	2	Ball Over
-FIFH	Shot Opponent	15:21	15:26	15:40	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy
-FIFH	Shot Canada	15:35	15:40	15:47	Malmo 2026	Amy	1	Goal Canada	4	Player 8
-FIFH	Shot Opponent	15:57	16:02	16:07	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Meghan
-FIFH	Shot Canada	16:02	16:07	16:12	Malmo 2026	Emma	4	Opponent Save	3	Player 3
-FIFH	Shot Opponent	16:07	16:12	16:20	Malmo 2026	Player 1	2	Canada Save	4	Emma
-FIFH	Shot Canada	16:16	16:21	16:27	Malmo 2026	Amy	3	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	16:29	16:34	16:47	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy
-FIFH	Shot Canada	16:43	16:48	16:57	Malmo 2026	Emma	2	Opponent Save	2	Player 1
-FIFH	Shot Opponent	16:53	16:58	17:05	Malmo 2026	Player 1	2	Opponent Out	0	
-FIFH	Shot Canada	17:08	17:13	17:18	Malmo 2026	Amy	3	Opponent Save	2	Player 1
-FIFH	Shot Opponent	17:16	17:21	17:28	Malmo 2026	Player 8	4	Canada Ball Control Save	2.5	Meghan
-FIFH	Shot Canada	17:23	17:28	17:39	Malmo 2026	Meghan	1	Opponent Save	5	Player 8
-FIFH	Shot Opponent	17:35	17:40	17:53	Malmo 2026	Player 8	4	Canada Ball Control Save	1.5	Amy
-FIFH	Shot Canada	17:48	17:53	18:00	Malmo 2026	Amy	1	Opponent Save	2	Player 1
-FIFH	Shot Opponent	18:04	18:09	18:19	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Meghan
-FIFH	Shot Canada	18:15	18:20	18:27	Malmo 2026	Emma	2	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	18:32	18:37	18:42	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Emma
-FIFH	Shot Canada	18:38	18:43	18:55	Malmo 2026	Emma	3	Opponent Save	2	Player 1
-FIFH	Shot Opponent	18:50	18:55	19:02	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy
-FIFH	Shot Canada	19:51	19:56	20:01	Malmo 2026	Amy	2	Goal Canada	4	Player 3
-FIFH	T-END	24:22	24:22	24:22	Malmo 2026					
-FIFH	@@@P2	27:02	27:02	27:02	Malmo 2026					
-FIFH	T-START	27:02	27:02	27:02	Malmo 2026					
-FIFH	Shot Canada	26:59	27:04	27:11	Malmo 2026	Amy	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	27:07	27:12	27:25	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Meghan
-FIFH	Shot Canada	27:21	27:26	27:31	Malmo 2026	Meghan	3	Opponent Save	3	Player 3
-FIFH	Shot Opponent	27:25	27:30	27:39	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Elena
-FIFH	Shot Canada	27:34	27:39	27:47	Malmo 2026	Meghan	5	Opponent Save	3	Player 3
-FIFH	Shot Opponent	27:43	27:48	27:58	Malmo 2026	Player 1	2	Canada Save	2	Amy
-FIFH	Shot Canada	27:54	27:59	28:04	Malmo 2026					
-FIFH	Shot Opponent	27:59	28:04	28:16	Malmo 2026	Player 8	3	Opponent Out	0	
-FIFH	Shot Canada	28:14	28:19	28:31	Malmo 2026	Amy	1	Opponent Save	3	Player 3
-FIFH	Shot Opponent	28:26	28:31	28:37	Malmo 2026	Player 3	3	Canada Ball Control Save	2	Elena
-FIFH	Shot Canada	28:32	28:37	28:45	Malmo 2026	Amy	1	Opponent Save	3.5	Player 3
-FIFH	Shot Opponent	28:43	28:48	29:01	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Meghan
-FIFH	Shot Canada	28:57	29:02	29:09	Malmo 2026	Meghan	3	Opponent Save	4	Player 8
-FIFH	Shot Opponent	29:05	29:10	29:28	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy
-FIFH	Shot Canada	29:24	29:29	29:34	Malmo 2026	Amy	2	Opponent Save	2.5	Player 3
-FIFH	Shot Opponent	29:29	29:34	29:48	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Elena
-FIFH	Shot Canada	29:44	29:49	29:54	Malmo 2026	Meghan	4	Opponent Save	5	Player 1
-FIFH	Shot Opponent	29:49	29:54	30:00	Malmo 2026	Player 8	4	Canada Ball Control Save	3	Elena
-FIFH	Shot Canada	29:56	30:01	30:09	Malmo 2026	Amy	1	Opponent Save	3	Player 3
-FIFH	Shot Opponent	30:05	30:10	30:20	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Amy
-FIFH	Shot Canada	30:15	30:20	30:30	Malmo 2026	Meghan	1	Opponent Save	5	Player 8
-FIFH	Shot Opponent	30:26	30:31	30:42	Malmo 2026	Player 8	4	Opponent Out	0	
-FIFH	Shot Canada	30:40	30:45	30:58	Malmo 2026	Amy	4	Opponent Save	2	Player 1
-FIFH	Shot Opponent	30:54	30:59	31:04	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Elena
-FIFH	Shot Canada	31:00	31:05	31:13	Malmo 2026	Meghan	3	Opponent Save	4.5	Player 8
-FIFH	Shot Opponent	31:09	31:14	31:31	Malmo 2026	Player 1	1	Canada Save	4	Elena
-FIFH	Shot Canada	31:27	31:32	31:40	Malmo 2026	Meghan	5	Opponent Save	2	Player 3
-FIFH	Shot Opponent	31:36	31:41	31:47	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy
-FIFH	Shot Canada	31:43	31:48	32:02	Malmo 2026	Amy	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	32:02	32:07	32:16	Malmo 2026	Player 1	1	Opponent Out	6	
-FIFH	Shot Canada	32:18	32:23	32:32	Malmo 2026	Amy	5	Opponent Save	2	Player 3
-FIFH	Shot Opponent	32:28	32:33	32:44	Malmo 2026	Player 3	3	Canada Save	4	Amy
-FIFH	Shot Canada	32:40	32:45	32:51	Malmo 2026	Meghan	2	Opponent Save	5	Player 8
-FIFH	Shot Opponent	32:46	32:51	33:01	Malmo 2026	Player 8	5	Canada Save	2	Meghan
-FIFH	Shot Canada	32:57	33:02	33:09	Malmo 2026	Meghan	1	Opponent Save	5	Player 8
-FIFH	Shot Opponent	33:05	33:10	33:20	Malmo 2026	Player 8	4	Canada Ball Control Save	3.5	Elena
-FIFH	Shot Canada	33:16	33:21	33:28	Malmo 2026	Amy	5	Opponent Save	3	Player 3
-FIFH	Shot Opponent	33:24	33:29	33:36	Malmo 2026	Player 8	5	Canada Save	3	Elena
-FIFH	Shot Canada	33:32	33:37	33:48	Malmo 2026	Meghan	2	Opponent Save	4.5	Player 8
-FIFH	Shot Opponent	34:39	34:44	34:49	Malmo 2026	Player 1	1	Canada Ball Control Save	5	Amy
-FIFH	Shot Canada	34:48	34:53	35:01	Malmo 2026	Amy	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	34:57	35:02	35:15	Malmo 2026	Player 1	1	Canada Ball Control Save	2	4
-FIFH	Shot Canada	35:10	35:15	35:20	Malmo 2026	Amy	4	Opponent Save	1	Player 1
-FIFH	Shot Opponent	35:14	35:19	35:29	Malmo 2026	Player 8	4	Canada Save	4	Amy
-FIFH	Shot Canada	35:24	35:29	35:39	Malmo 2026	Meghan	1	Opponent Save	4.5	Player 1
-FIFH	Shot Opponent	35:40	35:45	35:54	Malmo 2026	Player 3	3	Canada Ball Control Save	5	Amy
-FIFH	Shot Canada	35:53	35:58	36:08	Malmo 2026	Amy	5	Opponent Save	3	Player 3
-FIFH	Shot Opponent	36:04	36:09	36:16	Malmo 2026	Player 1	2	Canada Ball Control Save	5	Amy
-FIFH	Shot Canada	36:11	36:16	36:26	Malmo 2026	Meghan	5	Canada Out	0	
-FIFH	Shot Opponent	36:25	36:30	36:39	Malmo 2026	Player 1	1	Opponent Out	6	
-FIFH	Shot Canada	37:32	37:37	37:43	Malmo 2026	Meghan	3	Opponent Save	3	Player 3
-FIFH	Shot Canada	38:04	38:09	38:18	Malmo 2026	Amy	1	Opponent Save	3.5	Player 3
-FIFH	Shot Opponent	38:14	38:19	38:28	Malmo 2026	Player 3	2	Opponent Out	6	
-FIFH	Shot Canada	38:31	38:36	38:43	Malmo 2026	Meghan	5	Opponent Save	2.5	Player 3
-FIFH	Shot Opponent	38:39	38:44	38:53	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Meghan
-FIFH	Shot Canada	38:49	38:54	39:04	Malmo 2026	Amy	2	Opponent Save	4	Player 8
-FIFH	Shot Opponent	39:06	39:11	39:16	Malmo 2026	Player 3	3	Opponent Out	6	
-FIFH	Shot Canada	39:10	39:15	39:25	Malmo 2026	Meghan	4	Canada Out	0	
-FIFH	Shot Opponent	39:22	39:27	39:39	Malmo 2026	Player 8	4	Canada Ball Control Save	4	Meghan
-FIFH	Shot Canada	39:35	39:40	39:50	Malmo 2026	Amy	4	Opponent Save	2	Player 1
-FIFH	Shot Opponent	39:46	39:51	39:57	Malmo 2026	Player 3	3	Canada Save	4	Meghan
-FIFH	Shot Canada	39:53	39:58	40:06	Malmo 2026	Meghan	5	Opponent Save	1	Player 1
-FIFH	Shot Opponent	40:04	40:09	40:23	Malmo 2026	Player 1	1	Opponent Out	6	
-FIFH	Shot Canada	40:19	40:24	40:34	Malmo 2026	Amy	5	Opponent Save	2.5	Player 3
-FIFH	Shot Opponent	40:30	40:35	40:44	Malmo 2026	Player 1	2	Canada Ball Control Save	4.5	Meghan
-FIFH	Shot Canada	40:39	40:44	40:53	Malmo 2026	Meghan	3	Opponent Save	2	Player 1
-FIFH	Shot Opponent	40:50	40:55	41:00	Malmo 2026	Player 3	3	Opponent Out	6	
-FIFH	Shot Canada	41:01	41:06	41:14	Malmo 2026	Meghan	5	Opponent Save	1.5	Player 1
-FIFH	Shot Opponent	41:10	41:15	41:23	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Meghan
-FIFH	Shot Canada	41:19	41:24	41:32	Malmo 2026	Amy	1	Opponent Save	3	Player 3
-FIFH	Shot Opponent	41:27	41:32	42:36	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy
-FIFH	Shot Canada	43:20	43:25	43:31	Malmo 2026	Amy	1	Opponent Save	4	Player 8
-FIFH	Shot Opponent	43:31	43:36	43:41	Malmo 2026	Player 3	3	Opponent Out	0	
-FIFH	Shot Canada	43:35	43:40	43:50	Malmo 2026	Amy	1	Opponent Save	3	Player 3
-FIFH	Shot Opponent	43:45	43:50	43:56	Malmo 2026	Player 3	3	Canada Ball Control Save	3	Meghan
-FIFH	Shot Canada	43:51	43:56	44:04	Malmo 2026	Amy	2	Opponent Save	1	Player 1
-FIFH	Shot Opponent	44:00	44:05	44:14	Malmo 2026	Player 1	1	Canada Ball Control Save	5	Florinda
-FIFH	Shot Canada	44:11	44:16	44:22	Malmo 2026	Amy	5	Opponent Save	2	Player 1
-FIFH	Shot Opponent	44:18	44:23	44:34	Malmo 2026	Player 3	3	Canada Ball Control Save	4	Florinda
-FIFH	Shot Canada	44:30	44:35	44:47	Malmo 2026	Amy	2	Opponent Save	4	Player 8
-FIFH	Shot Canada	44:43	44:48	44:56	Malmo 2026	Florinda	5	Opponent Save	3	Player 3
-FIFH	Shot Opponent	44:52	44:57	45:06	Malmo 2026	Player 1	2	Canada Ball Control Save	5	Florinda
-FIFH	Shot Canada	45:02	45:07	45:13	Malmo 2026	Florinda	4	Opponent Save	3	Player 3
-FIFH	Shot Opponent	45:08	45:13	45:21	Malmo 2026	Player 3	3	Canada Ball Control Save	3	Meghan
-FIFH	Shot Canada	45:51	45:56	46:04	Malmo 2026	Meghan	1	Goal Canada	4	Player 8
-FIFH	Shot Opponent	46:12	46:17	46:24	Malmo 2026	Player 1	4	Canada Save	4	Cassandra
-FIFH	Shot Canada	46:20	46:25	46:31	Malmo 2026	Florinda	5	Opponent Save	3.5	Player 3
-FIFH	Shot Opponent	46:27	46:32	46:38	Malmo 2026	Player 3	3	Canada Ball Control Save	4	Florinda
-FIFH	Shot Canada	46:34	46:39	46:45	Malmo 2026	Florinda	5	Opponent Save	2	Player 3
-FIFH	Shot Opponent	46:40	46:45	46:55	Malmo 2026	Player 1	1	Canada Save	4	Florinda
-FIFH	Shot Canada	46:50	46:55	47:03	Malmo 2026	Amy	1	Opponent Save	3	Player 3
-FIFH	Shot Opponent	47:52	47:57	48:03	Malmo 2026	Player 8	4	Canada Ball Control Save	4.5	Florinda
-FIFH	Shot Canada	47:59	48:04	48:09	Malmo 2026	Florinda	5	Opponent Save	3	Player 3
-FIFH	T-END	48:21	48:21	48:21	Malmo 2026					
+Opponent/Game	Category	Start	Click	End	XY	Attacking Player	Shot Origin	Shot Outcome	Shot Location	Defending Player	Descriptor
+FIFH	@@@P1	00:00	00:00	00:00	Malmo 2026						
+FIFH	T-START	00:00	00:00	00:00	Malmo 2026						
+FIFH	Shot Opponent	00:23	00:28	00:37	Malmo 2026	Player 8	5	Canada Ball Control Save	4	Emma	
+FIFH	Shot Canada	00:32	00:37	00:46	Malmo 2026	Emma	5	Opponent Save	1	Player 1	
+FIFH	Shot Opponent	00:41	00:46	00:56	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Meghan	
+FIFH	Shot Canada	00:52	00:57	01:10	Malmo 2026	Emma	5	Opponent Save	5	Player 8	
+FIFH	Shot Opponent	01:07	01:12	01:24	Malmo 2026	Player 8	4	Canada Save	4	Emma	
+FIFH	Shot Canada	01:19	01:24	01:38	Malmo 2026	Amy	1	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	01:35	01:40	01:52	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Meghan	
+FIFH	Shot Canada	01:47	01:52	02:04	Malmo 2026	Amy	2	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	01:59	02:04	02:13	Malmo 2026	Player 1	2	Canada Ball Control Save	1.5	Amy	
+FIFH	Shot Canada	02:08	02:13	02:20	Malmo 2026	Amy	2	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	02:20	02:25	02:33	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy	
+FIFH	Shot Canada	02:29	02:34	02:53	Malmo 2026	Emma	4	Opponent Save	2.5	Player 3	
+FIFH	Shot Opponent	02:50	02:55	03:00	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Emma	
+FIFH	Shot Canada	02:56	03:01	03:08	Malmo 2026	Emma	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	03:03	03:08	03:18	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Meghan	
+FIFH	Shot Canada	03:13	03:18	03:24	Malmo 2026	Meghan	2	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	03:20	03:25	03:35	Malmo 2026	Player 8	5	Canada Save	2	Amy	
+FIFH	Shot Canada	03:30	03:35	03:47	Malmo 2026	Amy	1	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	03:48	03:53	04:00	Malmo 2026	Player 1	2	Canada Save	2.5	Meghan	
+FIFH	Shot Canada	04:00	04:05	04:13	Malmo 2026	Amy	3	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	04:17	04:22	04:29	Malmo 2026	Player 1	2	Canada Ball Control Save	3	Meghan	
+FIFH	Shot Canada	04:25	04:30	04:35	Malmo 2026	Emma	4	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	04:31	04:36	04:44	Malmo 2026	Player 8	4	Canada Ball Control Save	4.5	Emma	
+FIFH	Shot Canada	04:40	04:45	04:54	Malmo 2026	Emma	4	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	04:54	04:59	05:16	Malmo 2026	Player 8	5	Canada Ball Control Save	1	Amy	
+FIFH	Shot Canada	05:11	05:16	05:25	Malmo 2026	Amy	2	Opponent Save	1	Player 1	
+FIFH	Shot Opponent	05:20	05:25	05:33	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Meghan	
+FIFH	Shot Canada	05:29	05:34	05:43	Malmo 2026	Meghan	3	Opponent Save	1	Player 8	
+FIFH	Shot Opponent	05:38	05:43	05:48	Malmo 2026	Player 8	5	Canada Ball Control Save	4	Emma	
+FIFH	Shot Canada	05:43	05:48	05:58	Malmo 2026	Emma	2	Opponent Save	2	Player 8	
+FIFH	Shot Opponent	05:53	05:58	06:06	Malmo 2026	Player 8	5	Canada Ball Control Save	5	Emma	
+FIFH	Shot Canada	06:02	06:07	06:19	Malmo 2026	Amy	4	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	06:19	06:24	06:35	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy	
+FIFH	Shot Canada	06:31	06:36	06:43	Malmo 2026	Amy	1	Opponent Save	2	Player 3	
+FIFH	Shot Opponent	06:39	06:44	06:49	Malmo 2026	Player 3	3	Canada Ball Control Save	3	Meghan	
+FIFH	Shot Canada	06:44	06:49	06:59	Malmo 2026	Emma	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	06:55	07:00	07:07	Malmo 2026	Player 1	1	Canada Ball Control Save	5	Emma	
+FIFH	Shot Canada	07:03	07:08	07:15	Malmo 2026	Amy	3	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	07:10	07:15	07:23	Malmo 2026	Player 1	2	Canada Ball Control Save	3.5	Meghan	
+FIFH	Shot Canada	07:19	07:24	07:32	Malmo 2026	Meghan	3	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	07:51	07:56	08:04	Malmo 2026	Player 8	4	Canada Ball Control Save	5	Emma	
+FIFH	Shot Canada	08:00	08:05	08:16	Malmo 2026	Emma	4	Opponent Save	2	Player 8	
+FIFH	Shot Opponent	08:12	08:17	08:29	Malmo 2026	Player 8	5	Canada Ball Control Save	2.5	Meghan	
+FIFH	Shot Canada	08:25	08:30	08:38	Malmo 2026	Amy	1	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	08:33	08:38	08:45	Malmo 2026	Player 3	3	Canada Ball Control Save	5	Emma	
+FIFH	Shot Canada	08:40	08:45	08:57	Malmo 2026	Emma	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	08:53	08:58	09:06	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Amy	
+FIFH	Shot Canada	09:02	09:07	09:19	Malmo 2026	Amy	1	Goal Canada	4	Player 8	
+FIFH	Shot Opponent	09:28	09:33	09:43	Malmo 2026	Player 8	4	Canada Save	4	Emma	
+FIFH	Shot Canada	09:39	09:44	09:54	Malmo 2026	Emma	4	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	09:50	09:55	10:07	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Emma	
+FIFH	Shot Canada	10:02	10:07	10:16	Malmo 2026	Amy	2	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	10:12	10:17	10:24	Malmo 2026	Player 1	2	Canada Ball Control Save	1	Amy	
+FIFH	Shot Canada	10:20	10:25	10:38	Malmo 2026	Amy	1	Goal Canada	2	Player 3	
+FIFH	Shot Opponent	10:39	10:44	10:54	Malmo 2026	Player 8	4	Canada Ball Control Save	4	Emma	
+FIFH	Shot Canada	10:49	10:54	11:06	Malmo 2026	Emma	4	Opponent Save	4.5	Player 8	
+FIFH	Shot Canada	11:12	11:17	11:26	Malmo 2026	Amy	1	Opponent Save	4	Player 3	
+FIFH	Shot Opponent	11:24	11:29	11:39	Malmo 2026	Player 8	4	Canada Ball Control Save	1.5	Amy	
+FIFH	Shot Canada	11:35	11:40	11:53	Malmo 2026	Emma	2	Opponent Save	3.5	Player 3	
+FIFH	Shot Opponent	12:40	12:45	12:55	Malmo 2026	Player 8	2	Canada Save	4	Emma	
+FIFH	Shot Canada	12:51	12:56	13:03	Malmo 2026	Meghan	1	Canada Out	6		
+FIFH	Shot Opponent	13:11	13:16	13:22	Malmo 2026	Player 1	3	Opponent Out	0		
+FIFH	Shot Canada	13:18	13:23	13:33	Malmo 2026	Amy	1	Opponent Save	3	Player 1	
+FIFH	Shot Opponent	13:36	13:41	13:46	Malmo 2026	Player 3	3	Opponent Out	6		
+FIFH	Shot Canada	13:41	13:46	14:14	Malmo 2026	Emma	1	Opponent Save	5	Player 8	
+FIFH	Shot Opponent	14:20	14:25	14:30	Malmo 2026	Player 8	5	Canada Ball Control Save	1.5	Amy	
+FIFH	Shot Canada	14:24	14:29	14:34	Malmo 2026	Amy	2	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	14:30	14:35	14:41	Malmo 2026	Player 1	3	Canada Ball Control Save	3	Meghan	
+FIFH	Shot Canada	14:37	14:42	14:50	Malmo 2026	Emma	3	Opponent Save	3.5	Player 3	
+FIFH	Shot Opponent	14:46	14:51	14:58	Malmo 2026	Player 3	3	Canada Ball Control Save	4	Emma	
+FIFH	Shot Canada	14:53	14:58	15:07	Malmo 2026	Amy	2	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	15:02	15:07	15:25	Malmo 2026	Player 1	2	Amy	2	Ball Over	
+FIFH	Shot Opponent	15:21	15:26	15:40	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy	
+FIFH	Shot Canada	15:35	15:40	15:47	Malmo 2026	Amy	1	Goal Canada	4	Player 8	
+FIFH	Shot Opponent	15:57	16:02	16:07	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Meghan	
+FIFH	Shot Canada	16:02	16:07	16:12	Malmo 2026	Emma	4	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	16:07	16:12	16:20	Malmo 2026	Player 1	2	Canada Save	4	Emma	
+FIFH	Shot Canada	16:16	16:21	16:27	Malmo 2026	Amy	3	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	16:29	16:34	16:47	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy	
+FIFH	Shot Canada	16:43	16:48	16:57	Malmo 2026	Emma	2	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	16:53	16:58	17:05	Malmo 2026	Player 1	2	Opponent Out	0		
+FIFH	Shot Canada	17:08	17:13	17:18	Malmo 2026	Amy	3	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	17:16	17:21	17:28	Malmo 2026	Player 8	4	Canada Ball Control Save	2.5	Meghan	
+FIFH	Shot Canada	17:23	17:28	17:39	Malmo 2026	Meghan	1	Opponent Save	5	Player 8	
+FIFH	Shot Opponent	17:35	17:40	17:53	Malmo 2026	Player 8	4	Canada Ball Control Save	1.5	Amy	
+FIFH	Shot Canada	17:48	17:53	18:00	Malmo 2026	Amy	1	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	18:04	18:09	18:19	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Meghan	
+FIFH	Shot Canada	18:15	18:20	18:27	Malmo 2026	Emma	2	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	18:32	18:37	18:42	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Emma	
+FIFH	Shot Canada	18:38	18:43	18:55	Malmo 2026	Emma	3	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	18:50	18:55	19:02	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy	
+FIFH	Shot Canada	19:51	19:56	20:01	Malmo 2026	Amy	2	Goal Canada	4	Player 3	
+FIFH	T-END	24:22	24:22	24:22	Malmo 2026						
+FIFH	@@@P2	27:02	27:02	27:02	Malmo 2026						
+FIFH	T-START	27:02	27:02	27:02	Malmo 2026						
+FIFH	Shot Canada	26:59	27:04	27:11	Malmo 2026	Amy	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	27:07	27:12	27:25	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Meghan	
+FIFH	Shot Canada	27:21	27:26	27:31	Malmo 2026	Meghan	3	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	27:25	27:30	27:39	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Elena	
+FIFH	Shot Canada	27:34	27:39	27:47	Malmo 2026	Meghan	5	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	27:43	27:48	27:58	Malmo 2026	Player 1	2	Canada Save	2	Amy	
+FIFH	Shot Canada	27:54	27:59	28:04	Malmo 2026						
+FIFH	Shot Opponent	27:59	28:04	28:16	Malmo 2026	Player 8	3	Opponent Out	0		
+FIFH	Shot Canada	28:14	28:19	28:31	Malmo 2026	Amy	1	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	28:26	28:31	28:37	Malmo 2026	Player 3	3	Canada Ball Control Save	2	Elena	
+FIFH	Shot Canada	28:32	28:37	28:45	Malmo 2026	Amy	1	Opponent Save	3.5	Player 3	
+FIFH	Shot Opponent	28:43	28:48	29:01	Malmo 2026	Player 1	1	Canada Ball Control Save	4	Meghan	
+FIFH	Shot Canada	28:57	29:02	29:09	Malmo 2026	Meghan	3	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	29:05	29:10	29:28	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy	
+FIFH	Shot Canada	29:24	29:29	29:34	Malmo 2026	Amy	2	Opponent Save	2.5	Player 3	
+FIFH	Shot Opponent	29:29	29:34	29:48	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Elena	
+FIFH	Shot Canada	29:44	29:49	29:54	Malmo 2026	Meghan	4	Opponent Save	5	Player 1	
+FIFH	Shot Opponent	29:49	29:54	30:00	Malmo 2026	Player 8	4	Canada Ball Control Save	3	Elena	
+FIFH	Shot Canada	29:56	30:01	30:09	Malmo 2026	Amy	1	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	30:05	30:10	30:20	Malmo 2026	Player 1	2	Canada Ball Control Save	2	Amy	
+FIFH	Shot Canada	30:15	30:20	30:30	Malmo 2026	Meghan	1	Opponent Save	5	Player 8	
+FIFH	Shot Opponent	30:26	30:31	30:42	Malmo 2026	Player 8	4	Opponent Out	0		
+FIFH	Shot Canada	30:40	30:45	30:58	Malmo 2026	Amy	4	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	30:54	30:59	31:04	Malmo 2026	Player 3	3	Canada Ball Control Save	3.5	Elena	
+FIFH	Shot Canada	31:00	31:05	31:13	Malmo 2026	Meghan	3	Opponent Save	4.5	Player 8	
+FIFH	Shot Opponent	31:09	31:14	31:31	Malmo 2026	Player 1	1	Canada Save	4	Elena	
+FIFH	Shot Canada	31:27	31:32	31:40	Malmo 2026	Meghan	5	Opponent Save	2	Player 3	
+FIFH	Shot Opponent	31:36	31:41	31:47	Malmo 2026	Player 8	4	Canada Ball Control Save	1	Amy	
+FIFH	Shot Canada	31:43	31:48	32:02	Malmo 2026	Amy	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	32:02	32:07	32:16	Malmo 2026	Player 1	1	Opponent Out	6		
+FIFH	Shot Canada	32:18	32:23	32:32	Malmo 2026	Amy	5	Opponent Save	2	Player 3	
+FIFH	Shot Opponent	32:28	32:33	32:44	Malmo 2026	Player 3	3	Canada Save	4	Amy	
+FIFH	Shot Canada	32:40	32:45	32:51	Malmo 2026	Meghan	2	Opponent Save	5	Player 8	
+FIFH	Shot Opponent	32:46	32:51	33:01	Malmo 2026	Player 8	5	Canada Save	2	Meghan	
+FIFH	Shot Canada	32:57	33:02	33:09	Malmo 2026	Meghan	1	Opponent Save	5	Player 8	
+FIFH	Shot Opponent	33:05	33:10	33:20	Malmo 2026	Player 8	4	Canada Ball Control Save	3.5	Elena	
+FIFH	Shot Canada	33:16	33:21	33:28	Malmo 2026	Amy	5	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	33:24	33:29	33:36	Malmo 2026	Player 8	5	Canada Save	3	Elena	
+FIFH	Shot Canada	33:32	33:37	33:48	Malmo 2026	Meghan	2	Opponent Save	4.5	Player 8	
+FIFH	Shot Opponent	34:39	34:44	34:49	Malmo 2026	Player 1	1	Canada Ball Control Save	5	Amy	
+FIFH	Shot Canada	34:48	34:53	35:01	Malmo 2026	Amy	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	34:57	35:02	35:15	Malmo 2026	Player 1	1	Canada Ball Control Save	2	4	Amy
+FIFH	Shot Canada	35:10	35:15	35:20	Malmo 2026	Amy	4	Opponent Save	1	Player 1	
+FIFH	Shot Opponent	35:14	35:19	35:29	Malmo 2026	Player 8	4	Canada Save	4	Amy	
+FIFH	Shot Canada	35:24	35:29	35:39	Malmo 2026	Meghan	1	Opponent Save	4.5	Player 1	
+FIFH	Shot Opponent	35:40	35:45	35:54	Malmo 2026	Player 3	3	Canada Ball Control Save	5	Amy	
+FIFH	Shot Canada	35:53	35:58	36:08	Malmo 2026	Amy	5	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	36:04	36:09	36:16	Malmo 2026	Player 1	2	Canada Ball Control Save	5	Amy	
+FIFH	Shot Canada	36:11	36:16	36:26	Malmo 2026	Meghan	5	Canada Out	0		
+FIFH	Shot Opponent	36:25	36:30	36:39	Malmo 2026	Player 1	1	Opponent Out	6		
+FIFH	Shot Canada	37:32	37:37	37:43	Malmo 2026	Meghan	3	Opponent Save	3	Player 3	Ball Over
+FIFH	Shot Canada	38:04	38:09	38:18	Malmo 2026	Amy	1	Opponent Save	3.5	Player 3	
+FIFH	Shot Opponent	38:14	38:19	38:28	Malmo 2026	Player 3	2	Opponent Out	6		
+FIFH	Shot Canada	38:31	38:36	38:43	Malmo 2026	Meghan	5	Opponent Save	2.5	Player 3	
+FIFH	Shot Opponent	38:39	38:44	38:53	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Meghan	
+FIFH	Shot Canada	38:49	38:54	39:04	Malmo 2026	Amy	2	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	39:06	39:11	39:16	Malmo 2026	Player 3	3	Opponent Out	6		
+FIFH	Shot Canada	39:10	39:15	39:25	Malmo 2026	Meghan	4	Canada Out	0		
+FIFH	Shot Opponent	39:22	39:27	39:39	Malmo 2026	Player 8	4	Canada Ball Control Save	4	Meghan	
+FIFH	Shot Canada	39:35	39:40	39:50	Malmo 2026	Amy	4	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	39:46	39:51	39:57	Malmo 2026	Player 3	3	Canada Save	4	Meghan	
+FIFH	Shot Canada	39:53	39:58	40:06	Malmo 2026	Meghan	5	Opponent Save	1	Player 1	
+FIFH	Shot Opponent	40:04	40:09	40:23	Malmo 2026	Player 1	1	Opponent Out	6		
+FIFH	Shot Canada	40:19	40:24	40:34	Malmo 2026	Amy	5	Opponent Save	2.5	Player 3	
+FIFH	Shot Opponent	40:30	40:35	40:44	Malmo 2026	Player 1	2	Canada Ball Control Save	4.5	Meghan	
+FIFH	Shot Canada	40:39	40:44	40:53	Malmo 2026	Meghan	3	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	40:50	40:55	41:00	Malmo 2026	Player 3	3	Opponent Out	6		
+FIFH	Shot Canada	41:01	41:06	41:14	Malmo 2026	Meghan	5	Opponent Save	1.5	Player 1	
+FIFH	Shot Opponent	41:10	41:15	41:23	Malmo 2026	Player 1	1	Canada Ball Control Save	4.5	Meghan	
+FIFH	Shot Canada	41:19	41:24	41:32	Malmo 2026	Amy	1	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	41:27	41:32	42:36	Malmo 2026	Player 8	4	Canada Ball Control Save	2	Amy	
+FIFH	Shot Canada	43:20	43:25	43:31	Malmo 2026	Amy	1	Opponent Save	4	Player 8	
+FIFH	Shot Opponent	43:31	43:36	43:41	Malmo 2026	Player 3	3	Opponent Out	0		
+FIFH	Shot Canada	43:35	43:40	43:50	Malmo 2026	Amy	1	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	43:45	43:50	43:56	Malmo 2026	Player 3	3	Canada Ball Control Save	3	Meghan	
+FIFH	Shot Canada	43:51	43:56	44:04	Malmo 2026	Amy	2	Opponent Save	1	Player 1	
+FIFH	Shot Opponent	44:00	44:05	44:14	Malmo 2026	Player 1	1	Canada Ball Control Save	5	Florinda	
+FIFH	Shot Canada	44:11	44:16	44:22	Malmo 2026	Amy	5	Opponent Save	2	Player 1	
+FIFH	Shot Opponent	44:18	44:23	44:34	Malmo 2026	Player 3	3	Canada Ball Control Save	4	Florinda	
+FIFH	Shot Canada	44:30	44:35	44:47	Malmo 2026	Amy	2	Opponent Save	4	Player 8	Ball Over
+FIFH	Shot Canada	44:43	44:48	44:56	Malmo 2026	Florinda	5	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	44:52	44:57	45:06	Malmo 2026	Player 1	2	Canada Ball Control Save	5	Florinda	
+FIFH	Shot Canada	45:02	45:07	45:13	Malmo 2026	Florinda	4	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	45:08	45:13	45:21	Malmo 2026	Player 3	3	Canada Ball Control Save	3	Meghan	
+FIFH	Shot Canada	45:51	45:56	46:04	Malmo 2026	Amy	1	Goal Canada	4	Player 8	
+FIFH	Shot Opponent	46:12	46:17	46:24	Malmo 2026	Player 1	4	Canada Save	4	Cassandra	
+FIFH	Shot Canada	46:20	46:25	46:31	Malmo 2026	Florinda	5	Opponent Save	3.5	Player 3	
+FIFH	Shot Opponent	46:27	46:32	46:38	Malmo 2026	Player 3	3	Canada Ball Control Save	4	Florinda	
+FIFH	Shot Canada	46:34	46:39	46:45	Malmo 2026	Florinda	5	Opponent Save	2	Player 3	
+FIFH	Shot Opponent	46:40	46:45	46:55	Malmo 2026	Player 1	1	Canada Save	4	Florinda	
+FIFH	Shot Canada	46:50	46:55	47:03	Malmo 2026	Amy	1	Opponent Save	3	Player 3	
+FIFH	Shot Opponent	47:52	47:57	48:03	Malmo 2026	Player 8	4	Canada Ball Control Save	4.5	Florinda	
+FIFH	Shot Canada	47:59	48:04	48:09	Malmo 2026	Florinda	5	Opponent Save	3	Player 3	
+FIFH	T-END	48:21	48:21	48:21	Malmo 2026						
+Greece	@@@P1	00:00	00:00	00:00	Malmo 2026						
+Greece	T-START	00:00	00:00	00:00	Malmo 2026						
+Greece	Shot Canada	00:17	00:22	00:36	Malmo 2026	Emma	5	Opponent Save	3.5	Player 7	
+Greece	Shot Opponent	00:32	00:37	00:51	Malmo 2026	Player 2	5	Canada Save	3.5	Meghan	
+Greece	Shot Canada	00:47	00:52	00:58	Malmo 2026	Emma	5	Opponent Save	1	Player 8	
+Greece	Shot Opponent	00:54	00:59	01:10	Malmo 2026	Player 8	1	Canada Save	4.5	Emma	
+Greece	Shot Canada	01:06	01:11	01:18	Malmo 2026	Meghan	3	Opponent Save	2	Player 8	
+Greece	Shot Opponent	01:14	01:19	01:31	Malmo 2026	Player 8	1	Canada Ball Control Save	4	Meghan	
+Greece	Shot Canada	01:27	01:32	01:38	Malmo 2026	Emma	3	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	01:34	01:39	01:48	Malmo 2026	Player 2	2	Canada Save	4	Emma	
+Greece	Shot Canada	01:44	01:49	02:01	Malmo 2026	Emma	4	Opponent Save	1	Player 8	
+Greece	Shot Opponent	02:00	02:05	02:32	Malmo 2026	Player 8	1	Canada Ball Control Save	4.5	Emma	Goal Opponent
+Greece	Shot Canada	02:31	02:36	02:41	Malmo 2026	Amy	1	Opponent Save	3	Player 7	
+Greece	Shot Opponent	02:37	02:42	02:49	Malmo 2026	Player 2	4	Canada Save	3.5	Meghan	
+Greece	Shot Canada	02:45	02:50	02:59	Malmo 2026	Emma	4	Opponent Save	3	Player 7	
+Greece	Shot Opponent	02:55	03:00	03:07	Malmo 2026	Player 2	4	Canada Ball Control Save	4	Meghan	
+Greece	Shot Canada	03:03	03:08	03:13	Malmo 2026	Meghan	4	Opponent Save	2	Player 7	
+Greece	Shot Opponent	03:09	03:14	03:24	Malmo 2026	Player 8	1	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	03:20	03:25	03:35	Malmo 2026	Emma	4	Opponent Save	3	Player 7	Ball Over
+Greece	Shot Canada	03:31	03:36	03:54	Malmo 2026	Amy	2	Opponent Save	1	Player 8	
+Greece	Shot Opponent	03:54	03:59	04:06	Malmo 2026	Player 2	2	Canada Ball Control Save	3	Meghan	
+Greece	Shot Canada	04:01	04:06	04:15	Malmo 2026	Meghan	3	Opponent Save	4	Player 7	
+Greece	Shot Opponent	04:12	04:17	04:23	Malmo 2026	Player 8	1	Opponent Out	6		
+Greece	Shot Canada	04:19	04:24	04:41	Malmo 2026	Emma	4	Opponent Save	3	Player 7	
+Greece	Shot Opponent	04:36	04:41	04:52	Malmo 2026	Player 8	1	Canada Ball Control Save	4	Emma	
+Greece	Shot Canada	04:47	04:52	05:00	Malmo 2026	Emma	5	Opponent Save	1	Player 8	
+Greece	Shot Opponent	04:56	05:01	05:09	Malmo 2026	Player 2	2	Canada Ball Control Save	4	Emma	
+Greece	Shot Canada	05:05	05:10	05:19	Malmo 2026	Meghan	2	Opponent Save	4	Player 2	
+Greece	Shot Opponent	05:14	05:19	05:27	Malmo 2026	Player 2	3	Canada Save	4	Emma	
+Greece	Shot Canada	05:22	05:27	05:40	Malmo 2026	Meghan	5	Opponent Save	3	Player 7	
+Greece	Shot Opponent	05:36	05:41	05:52	Malmo 2026	Player 2	4	Canada Ball Control Save	3.5	Meghan	
+Greece	Shot Canada	05:47	05:52	36:06	Malmo 2026	Emma	2	Goal Canada	1	Player 8	
+Greece	Shot Opponent	05:59	06:04	06:14	Malmo 2026	Player 8	1	Opponent Out	6		
+Greece	Shot Canada	06:10	06:15	06:29	Malmo 2026	Emma	4	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	06:24	06:29	06:38	Malmo 2026	Player 8	1	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	06:34	06:39	06:49	Malmo 2026	Emma	4	Opponent Save	4	Player 2	
+Greece	Shot Opponent	06:45	06:50	06:55	Malmo 2026	Player 2	3	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	06:51	06:56	07:12	Malmo 2026	Amy	2	Opponent Save	1	Player 8	
+Greece	Shot Opponent	07:08	07:13	07:19	Malmo 2026	Player 8	1	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	07:15	07:20	07:25	Malmo 2026	Emma	5	Opponent Save	2.5	Player 7	
+Greece	Shot Opponent	07:19	07:24	07:33	Malmo 2026	Player 2	3	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	07:29	07:34	07:41	Malmo 2026	Meghan	3	Opponent Save	4	Player 2	
+Greece	Shot Opponent	07:37	07:42	07:50	Malmo 2026	Player 2	2	Canada Save	4	Emma	
+Greece	Shot Canada	07:46	07:51	07:58	Malmo 2026	Emma	4	Opponent Save	3	Player 7	
+Greece	Shot Opponent	07:54	07:59	08:10	Malmo 2026	Player 8	1	Canada Save	3.5	Meghan	
+Greece	Shot Canada	08:06	08:11	08:17	Malmo 2026	Amy	2	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	08:13	08:18	08:29	Malmo 2026	Player 8	1	Canada Save	3.5	Meghan	
+Greece	Shot Canada	08:25	08:30	08:40	Malmo 2026	Emma	5	Goal Canada	2	Player 8	
+Greece	Shot Opponent	08:42	08:47	08:55	Malmo 2026	Player 2	1	Canada Ball Control Save	4	Meghan	
+Greece	Shot Canada	08:51	08:56	09:03	Malmo 2026	Meghan	3	Opponent Save	3	Player 7	
+Greece	Shot Opponent	08:59	09:04	09:11	Malmo 2026	Player 8	1	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	09:07	09:12	09:20	Malmo 2026	Amy	1	Opponent Save	1	Player 8	
+Greece	Shot Opponent	09:16	09:21	09:30	Malmo 2026	Player 8	1	Canada Ball Control Save	3.5	Meghan	
+Greece	Shot Canada	09:25	09:30	09:41	Malmo 2026	Emma	2	Opponent Save	4	Player 2	
+Greece	Shot Opponent	09:37	09:42	09:55	Malmo 2026	Player 2	5	Canada Ball Control Save	3	Meghan	
+Greece	Shot Canada	09:50	09:55	10:05	Malmo 2026	Meghan	5	Opponent Save	2.5	Player 7	
+Greece	Shot Opponent	10:01	10:06	10:16	Malmo 2026	Player 8	2	Canada Save	4	Meghan	
+Greece	Shot Canada	10:11	10:16	10:24	Malmo 2026	Emma	4	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	10:20	10:25	10:32	Malmo 2026	Player 8	1	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	10:28	10:33	10:38	Malmo 2026	Emma	4	Opponent Save	3	Player 7	
+Greece	Shot Opponent	10:34	10:39	10:47	Malmo 2026	Player 2	2	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	10:43	10:48	10:54	Malmo 2026	Emma	5	Opponent Save	1	Player 8	
+Greece	Shot Opponent	10:50	10:55	11:03	Malmo 2026	Player 8	1	Canada Ball Control Save	2.5	Meghan	
+Greece	Shot Canada	10:58	11:03	11:11	Malmo 2026	Amy	2	Opponent Save	2	Player 7	
+Greece	Shot Opponent	11:06	11:11	11:20	Malmo 2026	Player 2	4	Canada Ball Control Save	4	Emma	
+Greece	Shot Canada	11:15	11:20	11:30	Malmo 2026	Meghan	1	Opponent Save	5	Player 2	
+Greece	Shot Opponent	11:26	11:31	11:41	Malmo 2026	Player 2	4	Canada Ball Control Save	4.5	Emma	
+Greece	Shot Canada	11:36	11:41	11:52	Malmo 2026	Emma	4	Goal Canada	2	Player 8	
+Greece	Shot Opponent	12:42	12:47	12:52	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Amy	
+Greece	Shot Canada	12:50	12:55	13:07	Malmo 2026	Meghan	2	Opponent Save	4	Player 7	
+Greece	Shot Opponent	13:03	13:08	13:15	Malmo 2026	Player 2	5	Canada Ball Control Save	4	Meghan	
+Greece	Shot Canada	13:11	13:16	13:24	Malmo 2026	Emma	5	Opponent Save	2	Player 8	
+Greece	Shot Opponent	13:20	13:25	13:33	Malmo 2026	Player 8	1	Canada Ball Control Save	5	Emma	
+Greece	Shot Canada	13:36	13:41	13:59	Malmo 2026	Amy	2	Opponent Save	1.5	Player 8	Ball Over
+Greece	Shot Canada	13:55	14:00	14:15	Malmo 2026	Meghan	3	Opponent Save	2	Player 8	
+Greece	Shot Opponent	14:11	14:16	14:26	Malmo 2026	Player 8	3	Canada Ball Control Save	2	Amy	
+Greece	Shot Canada	14:21	14:26	14:35	Malmo 2026	Amy	2	Opponent Save	1	Player 8	
+Greece	Shot Opponent	14:31	14:36	14:47	Malmo 2026	Player 2	4	Opponent Out	0		
+Greece	Shot Canada	15:04	15:09	15:20	Malmo 2026	Emma	1	Opponent Save	4	Player 7	Ball Over
+Greece	Shot Canada	15:17	15:22	15:35	Malmo 2026	Emma	1	Opponent Save	4	Player 2	
+Greece	Shot Opponent	15:31	15:36	15:43	Malmo 2026	Player 2	5	Canada Ball Control Save	1.5	Amy	
+Greece	Shot Canada	15:38	15:43	15:52	Malmo 2026	Amy	2	Opponent Save	2.5	Player 7	
+Greece	Shot Opponent	15:47	15:52	16:02	Malmo 2026	Player 8	3	Canada Save	2	Amy	
+Greece	Shot Canada	15:58	16:03	16:14	Malmo 2026	Emma	2	Goal Canada	2	Player 7	
+Greece	Shot Opponent	17:03	17:08	17:13	Malmo 2026	Player 2	5	Canada Ball Control Save	2	Amy	
+Greece	Shot Canada	17:08	17:13	17:22	Malmo 2026	Emma	4	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	17:18	17:23	17:30	Malmo 2026	Player 8	3	Canada Ball Control Save	2	Meghan	
+Greece	Shot Canada	17:26	17:31	17:40	Malmo 2026	Emma	3	Opponent Save	2	Player 8	
+Greece	Shot Opponent	17:35	17:40	17:47	Malmo 2026	Player 8	2	Canada Ball Control Save	4	Emma	
+Greece	T-END	18:06	18:06	18:06	Malmo 2026						
+Greece	@@@P2	23:59	23:59	23:59	Malmo 2026						
+Greece	T-START	23:59	23:59	23:59	Malmo 2026						
+Greece	Shot Opponent	23:56	24:01	24:16	Malmo 2026	Player 2	5	Opponent Out	0		
+Greece	Shot Canada	24:11	24:16	24:22	Malmo 2026	Meghan	1	Canada Out	6		
+Greece	Shot Opponent	24:19	24:24	24:37	Malmo 2026	Player 8	2	Canada Ball Control Save	1.5	Meghan	
+Greece	Shot Canada	24:33	24:38	24:48	Malmo 2026	Emma	5	Opponent Save	2.5	Player 9	
+Greece	Shot Opponent	24:43	24:48	24:55	Malmo 2026	Player 8	2	Canada Ball Control Save	3	Elena	
+Greece	Shot Canada	24:50	24:55	25:03	Malmo 2026	Meghan	2	Opponent Save	4.5	Player 2	
+Greece	Shot Opponent	24:58	25:03	25:13	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Meghan	
+Greece	Shot Canada	25:08	25:13	25:23	Malmo 2026	Meghan	1	Opponent Save	5	Player 2	
+Greece	Shot Opponent	25:18	25:23	25:28	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Meghan	
+Greece	Shot Canada	25:22	25:27	25:34	Malmo 2026	Emma	5	Opponent Save	1	Player 8	
+Greece	Shot Opponent	25:36	25:41	25:47	Malmo 2026	Player 8	2	Canada Save	3	Elena	
+Greece	Shot Canada	25:43	25:48	25:56	Malmo 2026	Meghan	1	Opponent Save	4.5	Player 2	
+Greece	Shot Opponent	25:51	25:56	26:05	Malmo 2026	Player 2	5	Canada Ball Control Save	2	Meghan	
+Greece	Shot Canada	26:01	26:06	26:13	Malmo 2026	Emma	1	Opponent Save	3.5	Player 9	
+Greece	Shot Opponent	26:09	26:14	26:23	Malmo 2026	Player 8	3	Canada Ball Control Save	3	Elena	
+Greece	Shot Canada	26:19	26:24	26:31	Malmo 2026	Elena	4	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	26:27	26:32	26:39	Malmo 2026	Player 8	3	Canada Save	3	Elena	
+Greece	Shot Canada	26:35	26:40	26:47	Malmo 2026	Meghan	3	Opponent Save	4	Player 9	
+Greece	Shot Opponent	26:43	26:48	26:57	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Meghan	
+Greece	Shot Canada	26:53	26:58	27:14	Malmo 2026	Emma	5	Opponent Save	1	Player 8	
+Greece	Shot Opponent	27:14	27:19	27:31	Malmo 2026	Player 8	3	Canada Ball Control Save	2.5	Elena	
+Greece	Shot Canada	27:27	27:32	27:43	Malmo 2026	Meghan	1	Canada Out	6		
+Greece	Shot Opponent	27:40	27:45	27:56	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Meghan	
+Greece	Shot Canada	27:52	27:57	28:10	Malmo 2026	Emma	2	Opponent Save	3.5	Player 9	
+Greece	Shot Opponent	28:06	28:11	28:16	Malmo 2026	Player 9	3	Canada Ball Control Save	5	Emma	
+Greece	Shot Canada	28:11	28:16	28:21	Malmo 2026	Emma	5	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	28:16	28:21	28:32	Malmo 2026	Player 8	3	Canada Save	1.5	Meghan	
+Greece	Shot Canada	28:28	28:33	28:44	Malmo 2026	Meghan	2	Opponent Save	4	Player 9	
+Greece	Shot Opponent	28:40	28:45	28:53	Malmo 2026	Player 2	5	Canada Ball Control Save	2	Elena	
+Greece	Shot Canada	28:49	28:54	28:59	Malmo 2026	Elena	3	Opponent Save	3	Player 9	
+Greece	Shot Opponent	28:55	29:00	29:10	Malmo 2026	Player 8	3	Canada Ball Control Save	2	Meghan	
+Greece	Shot Canada	29:06	29:11	29:18	Malmo 2026	Meghan	1	Opponent Save	4	Player 9	
+Greece	Shot Opponent	29:14	29:19	29:27	Malmo 2026	Player 2	4	Canada Save	2	Meghan	
+Greece	Shot Canada	29:23	29:28	29:36	Malmo 2026	Emma	3	Opponent Save	2	Player 9	
+Greece	Shot Opponent	29:32	29:37	29:51	Malmo 2026	Player 8	3	Canada Ball Control Save	2	Meghan	
+Greece	Shot Canada	29:46	29:51	30:03	Malmo 2026	Meghan	2	Opponent Save	4	Player 2	
+Greece	Shot Opponent	29:58	30:03	30:10	Malmo 2026	Player 2	5	Canada Ball Control Save	4	Emma	
+Greece	Shot Canada	30:06	30:11	30:17	Malmo 2026	Emma	5	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	30:13	30:18	30:26	Malmo 2026	Player 8	3	Canada Ball Control Save	2.5	Elena	
+Greece	Shot Canada	30:22	30:27	30:36	Malmo 2026	Meghan	2	Canada Out	6		
+Greece	Shot Opponent	30:34	30:39	30:50	Malmo 2026	Player 8	3	Canada Ball Control Save	1.5	Meghan	
+Greece	Shot Canada	30:46	30:51	30:58	Malmo 2026	Meghan	2	Opponent Save	3	Player 9	
+Greece	Shot Opponent	30:54	30:59	31:07	Malmo 2026	Player 2	4	Canada Ball Control Save	2	Elena	
+Greece	Shot Canada	31:03	31:08	31:15	Malmo 2026	Emma	5	Opponent Save	2	Player 8	
+Greece	Shot Opponent	31:10	31:15	31:24	Malmo 2026	Player 8	3	Canada Save	2.5	Elena	
+Greece	Shot Canada	31:21	31:26	31:32	Malmo 2026	Meghan	1	Opponent Save	3	Player 9	
+Greece	Shot Opponent	31:28	31:33	31:43	Malmo 2026	Player 2	4	Canada Save	2	Meghan	
+Greece	Shot Canada	32:22	32:27	32:35	Malmo 2026	Emma	4	Opponent Save	2.5	Player 9	
+Greece	Shot Opponent	32:30	32:35	32:45	Malmo 2026	Player 8	3	Canada Save	4	Emma	
+Greece	Shot Canada	32:40	32:45	32:52	Malmo 2026	Emma	4	Opponent Save	1	Player 8	
+Greece	Shot Opponent	32:48	32:53	33:07	Malmo 2026	Player 8	3	Opponent Out	0		
+Greece	Shot Canada	33:02	33:07	33:16	Malmo 2026	Meghan	2	Opponent Save	4	Player 2	
+Greece	Shot Opponent	33:11	33:16	33:22	Malmo 2026	Player 2	4	Canada Ball Control Save	2	Meghan	
+Greece	Shot Canada	33:17	33:22	33:34	Malmo 2026	Emma	4	Goal Canada	1	Player 8	
+Greece	Shot Opponent	34:25	34:30	34:43	Malmo 2026	Player 2	3	Canada Save	4	Cassandra	
+Greece	Shot Canada	34:39	34:44	34:50	Malmo 2026	Emma	4	Opponent Save	4	Player 2	
+Greece	Shot Opponent	34:46	34:51	34:59	Malmo 2026	Player 2	4	Canada Save	4	Cassandra	
+Greece	Shot Canada	34:54	34:59	35:05	Malmo 2026	Emma	5	Canada Out	0		
+Greece	Shot Opponent	35:05	35:10	35:20	Malmo 2026	Player 8	3	Canada Ball Control Save	3.5	Meghan	
+Greece	Shot Canada	35:17	35:22	35:29	Malmo 2026	Emma	2	Opponent Save	2.5	Player 9	
+Greece	Shot Opponent	35:25	35:30	35:38	Malmo 2026	Player 8	3	Canada Ball Control Save	1	Meghan	
+Greece	Shot Canada	35:34	35:39	35:48	Malmo 2026	Emma	2	Opponent Save	4	Player 9	
+Greece	Shot Opponent	35:44	35:49	35:54	Malmo 2026	Player 9	3	Opponent Out	0		
+Greece	Shot Canada	36:36	36:41	36:47	Malmo 2026	Emma	5	Opponent Save	2	Player 8	
+Greece	Shot Opponent	36:43	36:48	36:58	Malmo 2026	Player 8	3	Canada Ball Control Save	1.5	Meghan	
+Greece	Shot Canada	37:35	37:40	37:46	Malmo 2026	Meghan	3	Opponent Save	4.5	Player 2	
+Greece	Shot Opponent	37:42	37:47	37:54	Malmo 2026	Player 2	3	Canada Save	3	Cassandra	
+Greece	Shot Canada	37:49	37:54	38:03	Malmo 2026	Florinda	5	Opponent Save	3	Player 7	
+Greece	Shot Opponent	37:58	38:03	38:12	Malmo 2026	Player 8	3	Canada Ball Control Save	2	Cassandra	
+Greece	Shot Canada	38:08	38:13	38:22	Malmo 2026	Meghan	1	Opponent Save	4	Player 7	
+Greece	Shot Opponent	38:18	38:23	38:37	Malmo 2026	Player 2	4	Canada Ball Control Save	4	Cassandra	
+Greece	Shot Canada	38:33	38:38	38:45	Malmo 2026	Florinda	4	Opponent Save	1.5	Player 8	
+Greece	Shot Opponent	38:41	38:46	38:53	Malmo 2026	Player 8	2	Canada Save	4	Cassandra	
+Greece	Shot Canada	38:49	38:54	39:03	Malmo 2026	Meghan	3	Opponent Save	3.5	Player 7	
+Greece	Shot Opponent	38:59	39:04	39:09	Malmo 2026						
+Greece	Shot Canada	39:03	39:08	39:21	Malmo 2026	Meghan	2	Opponent Save	4	Player 7	
+Greece	Shot Opponent	39:19	39:24	39:39	Malmo 2026	Player 8	1	Canada Ball Control Save	3	Cassandra	
+Greece	Shot Canada	39:34	39:39	39:47	Malmo 2026	Meghan	2	Opponent Save	4	Player 2	
+Greece	Shot Opponent	39:43	39:48	39:57	Malmo 2026	Player 2	3	Canada Save	4	Florinda	
+Greece	Shot Canada	39:53	39:58	40:04	Malmo 2026	Meghan	3	Opponent Save	3	Player 7	
+Greece	Shot Opponent	39:59	40:04	40:12	Malmo 2026	Player 8	1	Canada Ball Control Save	3	Cassandra	
+Greece	Shot Canada	40:46	40:51	40:59	Malmo 2026	Cassandra	1	Opponent Save	4	Player 2	
+Greece	Shot Opponent	40:55	41:00	41:06	Malmo 2026	Player 2	4	Canada Ball Control Save	4	Florinda	
+Greece	Shot Canada	41:02	41:07	41:14	Malmo 2026	Florinda	4	Opponent Save	2.5	Player 7	
+Greece	Shot Opponent	41:11	41:16	41:23	Malmo 2026	Player 8	2	Canada Ball Control Save	4.5	Florinda	
+Greece	Shot Canada	41:19	41:24	41:37	Malmo 2026	Florinda	5	Opponent Save	4.5	Player 2	
+Greece	Shot Opponent	42:18	42:23	42:34	Malmo 2026	Player 2	5	Ball Control Save	3.5	Elena	
+Greece	T-END	44:22	44:22	44:22	Malmo 2026						
+Turkey	@@@P1	00:00	00:00	00:00	Malmo 2026						
+Turkey	T-START	00:00	00:00	00:00	Malmo 2026						
+Turkey	Shot Opponent	02:03	02:08	02:17	Malmo 2026	Player 7	3	Canada Ball Control Save	3.5	Meghan	
+Turkey	Shot Canada	02:13	02:18	02:28	Malmo 2026	Emma	5	Opponent Save	1	Player 7	
+Turkey	Shot Opponent	02:24	02:29	02:36	Malmo 2026	Player 2	3	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	02:34	02:39	02:52	Malmo 2026	Emma	4	Opponent Save	4.5	Player 2	
+Turkey	Shot Opponent	02:47	02:52	02:57	Malmo 2026	Player 2	3	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	02:53	02:58	03:09	Malmo 2026	Amy	1	Opponent Save	4	Player 4	
+Turkey	Shot Opponent	03:05	03:10	03:18	Malmo 2026	Player 7	2	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	03:14	03:19	03:26	Malmo 2026	Emma	4	Opponent Save	4	Player 2	
+Turkey	Shot Opponent	03:21	03:26	03:32	Malmo 2026	Player 2	2	Canada Save	4.5	Emma	
+Turkey	Shot Canada	03:27	03:32	03:41	Malmo 2026	Emma	5	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	03:36	03:41	03:49	Malmo 2026	Player 7	1	Canada Save	4	Emma	
+Turkey	Shot Canada	03:45	03:50	04:03	Malmo 2026	Amy	4	Opponent Save	2.5	Player 4	
+Turkey	Shot Opponent	04:01	04:06	04:14	Malmo 2026	Player 2	1	Canada Save	4	Emma	
+Turkey	Shot Canada	04:12	04:17	04:26	Malmo 2026	Emma	2	Opponent Save	4	Player 4	
+Turkey	Shot Opponent	04:22	04:27	04:35	Malmo 2026	Player 2	4	Canada Ball Control Save	1	Amy	
+Turkey	Shot Canada	04:31	04:36	04:52	Malmo 2026	Amy	2	Goal Canada	1.5	Player 7	
+Turkey	Shot Opponent	04:49	04:54	05:07	Malmo 2026	Player 7	1	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	05:03	05:08	05:16	Malmo 2026	Meghan	3	Opponent Save	5	Player 2	
+Turkey	Shot Opponent	05:11	05:16	05:25	Malmo 2026	Player 2	4	Canada Save	4	Emma	
+Turkey	Shot Canada	05:21	05:26	05:35	Malmo 2026	Amy	2	Opponent Save	1	Player 7	
+Turkey	Shot Opponent	05:31	05:36	05:48	Malmo 2026	Player 7	2	Canada Save	4	Emma	
+Turkey	Shot Canada	05:44	05:49	05:58	Malmo 2026	Emma	4	Opponent Save	5	Player 2	
+Turkey	Shot Opponent	05:54	05:59	06:12	Malmo 2026	Player 2	5	Canada Ball Control Save	4.5	Emma	
+Turkey	Shot Canada	06:11	06:16	06:30	Malmo 2026	Amy	1	Opponent Save	3.5	Player 4	
+Turkey	Shot Opponent	06:26	06:31	06:37	Malmo 2026	Player 7	2	Canada Save	4.5	Emma	
+Turkey	Shot Canada	06:33	06:38	06:47	Malmo 2026	Emma	5	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	06:42	06:47	06:54	Malmo 2026	Player 2	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	06:50	06:55	07:02	Malmo 2026	Amy	2	Opponent Save	1.5	Player 7	
+Turkey	Shot Opponent	06:57	07:02	07:13	Malmo 2026	Player 7	2	Canada Save	2	Meghan	
+Turkey	Shot Canada	07:09	07:14	07:23	Malmo 2026	Emma	4	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	07:19	07:24	07:32	Malmo 2026	Player 2	3	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	07:27	07:32	07:40	Malmo 2026	Amy	2	Canada Out	0		
+Turkey	Penalty Shot Opponent	08:07	08:12	08:19	Malmo 2026	Player 2	3	Goal Opponent	4	Amy	
+Turkey	Shot Canada	08:19	08:24	08:29	Malmo 2026	Emma	4	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	08:23	08:28	08:37	Malmo 2026	Player 7	2	Canada Ball Control Save	2.5	Meghan	
+Turkey	Shot Canada	08:32	08:37	08:44	Malmo 2026	Amy	4	Opponent Save	1	Player 2	
+Turkey	Shot Opponent	08:40	08:45	08:56	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Amy	
+Turkey	Shot Canada	08:52	08:57	09:15	Malmo 2026	Amy	1	Opponent Save	2	Player 7	
+Turkey	Shot Opponent	09:11	09:16	09:23	Malmo 2026	Player 7	2	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	09:19	09:24	09:30	Malmo 2026	Emma	4	Opponent Save	4.5	Player 2	
+Turkey	Shot Opponent	09:26	09:31	09:45	Malmo 2026	Player 2	5	Canada Ball Control Save	1	Amy	
+Turkey	Shot Canada	09:44	09:49	10:05	Malmo 2026	Amy	2	Opponent Save	2	Player 7	
+Turkey	Shot Opponent	10:04	10:09	10:16	Malmo 2026	Player 7	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	10:12	10:17	10:26	Malmo 2026	Emma	2	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	10:21	10:26	10:34	Malmo 2026	Player 2	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	10:29	10:34	10:42	Malmo 2026	Amy	1	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	10:38	10:43	10:51	Malmo 2026	Player 7	2	Canada Ball Control Save	2.5	Meghan	
+Turkey	Shot Canada	10:46	10:51	11:00	Malmo 2026	Meghan	3	Opponent Save	1	Player 7	
+Turkey	Shot Opponent	10:56	11:01	11:10	Malmo 2026	Player 2	2	Opponent Out	6		
+Turkey	Shot Canada	11:10	11:15	11:26	Malmo 2026	Amy	5	Opponent Save	1.5	Player 7	
+Turkey	Shot Opponent	11:22	11:27	11:33	Malmo 2026	Player 7	1	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	11:28	11:33	11:43	Malmo 2026	Emma	4	Opponent Save	3.5	Player 4	
+Turkey	Shot Opponent	11:38	11:43	11:52	Malmo 2026	Player 2	4	Canada Ball Control Save	1.5	Amy	
+Turkey	Shot Canada	11:47	11:52	11:57	Malmo 2026	Amy	1	Opponent Save	4.5	Player 7	
+Turkey	Shot Opponent	11:52	11:57	12:04	Malmo 2026	Player 7	4	Canada Ball Control Save	1.5	Amy	
+Turkey	Shot Canada	12:00	12:05	12:14	Malmo 2026	Emma	2	Opponent Save	1	Player 7	
+Turkey	Shot Opponent	12:10	12:15	12:25	Malmo 2026	Player 7	2	Canada Ball Control Save	3.5	Meghan	
+Turkey	Shot Canada	12:20	12:25	12:34	Malmo 2026	Amy	3	Canada Out	0		
+Turkey	Shot Opponent	12:31	12:36	12:46	Malmo 2026	Player 2	5	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	12:41	12:46	12:54	Malmo 2026	Emma	4	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	13:01	13:06	13:12	Malmo 2026	Player 7	1	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	13:07	13:12	13:22	Malmo 2026	Emma	4	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	13:17	13:22	13:28	Malmo 2026	Player 2	3	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	13:24	13:29	13:35	Malmo 2026	Amy	2	Opponent Save	1.5	Player 7	
+Turkey	Shot Opponent	13:31	13:36	13:43	Malmo 2026	Player 7	2	Canada Ball Control Save	1	Amy	
+Turkey	Shot Canada	13:39	13:44	13:51	Malmo 2026	Amy	1	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	13:47	13:52	14:00	Malmo 2026	Player 2	2	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	14:02	14:07	14:18	Malmo 2026	Emma	4	Opponent Save	4	Player 2	
+Turkey	Shot Opponent	14:14	14:19	14:24	Malmo 2026	Player 2	5	Opponent Out	0		
+Turkey	Shot Canada	14:19	14:24	14:34	Malmo 2026	Amy	4	Opponent Save	1.5	Player 7	
+Turkey	Shot Opponent	14:30	14:35	14:45	Malmo 2026	Player 7	2	Goal Opponent	4	Emma	
+Turkey	Shot Canada	14:54	14:59	15:08	Malmo 2026	Amy	5	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	15:03	15:08	15:19	Malmo 2026	Player 2	1	Goal Opponent	4	Meghan	
+Turkey	Shot Canada	16:09	16:14	16:23	Malmo 2026	Emma	5	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	16:19	16:24	16:35	Malmo 2026	Player 2	3	Canada Save	4	Emma	
+Turkey	Shot Canada	16:30	16:35	16:44	Malmo 2026	Emma	4	Canada Out	0	Player 7	
+Turkey	Shot Opponent	16:40	16:45	16:58	Malmo 2026	Player 7	2	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	16:53	16:58	17:09	Malmo 2026	Amy	2	Goal Canada	2	Player 4	
+Turkey	Shot Opponent	17:11	17:16	17:25	Malmo 2026	Player 2	2	Canada Save	4	Emma	
+Turkey	Shot Canada	17:21	17:26	17:35	Malmo 2026	Emma	4	Opponent Save	1	Player 7	
+Turkey	Shot Opponent	17:30	17:35	17:41	Malmo 2026	Player 7	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	17:37	17:42	17:50	Malmo 2026	Amy	1	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	17:46	17:51	18:00	Malmo 2026	Player 2	4	Canada Save	4	Meghan	
+Turkey	Shot Canada	17:55	18:00	18:09	Malmo 2026	Emma	4	Opponent Save	1	Player 7	
+Turkey	Shot Opponent	18:04	18:09	18:15	Malmo 2026	Player 7	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	18:10	18:15	18:22	Malmo 2026	Amy	2	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	18:18	18:23	18:33	Malmo 2026	Player 2	1	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	18:28	18:33	18:42	Malmo 2026	Emma	5	Opponent Save	2	Player 7	
+Turkey	Shot Opponent	18:37	18:42	18:51	Malmo 2026	Player 7	2	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	18:47	18:52	18:58	Malmo 2026	Amy	3	Opponent Save	3.5	Player 4	
+Turkey	Shot Opponent	18:53	18:58	19:13	Malmo 2026	Player 2	5	Long Ball			
+Turkey	Penalty Shot Canada	19:23	19:28	19:36	Malmo 2026	Amy	3	Opponent Save	2	Player 2	
+Turkey	Shot Opponent	20:28	20:33	20:41	Malmo 2026	Player 7	3	Canada Save	3	Meghan	
+Turkey	Shot Canada	20:36	20:41	20:51	Malmo 2026	Amy	2	Opponent Save	4	Player 2	
+Turkey	Shot Opponent	20:47	20:52	20:59	Malmo 2026	Player 2	1	Canada Save	4.5	Emma	
+Turkey	Shot Canada	20:55	21:00	21:07	Malmo 2026	Emma	4	Opponent Save	2.5	Player 4	
+Turkey	Shot Opponent	21:03	21:08	21:15	Malmo 2026	Player 7	2	Canada Save	2	Amy	
+Turkey	Shot Canada	21:11	21:16	21:23	Malmo 2026	Amy	2	Opponent Save	1.5	Player 7	
+Turkey	T-END	21:59	21:59	21:59	Malmo 2026						
+Turkey	@@@P2	26:17	26:17	26:17	Malmo 2026						
+Turkey	T-START	26:17	26:17	26:17	Malmo 2026						
+Turkey	Shot Canada	26:47	26:52	27:07	Malmo 2026	Amy	4	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	27:03	27:08	27:14	Malmo 2026	Player 10	2	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	27:10	27:15	27:21	Malmo 2026	Emma	4	Opponent Save	3.5	Player 4	
+Turkey	Shot Opponent	27:17	27:22	27:29	Malmo 2026	Player 2	2	Canada Ball Control Save	4.5	Emma	
+Turkey	Shot Canada	27:25	27:30	27:46	Malmo 2026	Emma	5	Opponent Save	4	Player 10	
+Turkey	Shot Opponent	27:42	27:47	27:52	Malmo 2026	Player 10	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	27:48	27:53	28:02	Malmo 2026	Amy	1	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	27:57	28:02	28:11	Malmo 2026	Player 2	2	Canada Ball Control Save	4.5	Emma	
+Turkey	Shot Canada	28:08	28:13	28:25	Malmo 2026	Emma	5	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	28:23	28:28	28:42	Malmo 2026	Player 10	2	Goal Opponent	4	Emma	
+Turkey	Shot Canada	28:45	28:50	28:58	Malmo 2026	Amy	1	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	28:54	28:59	29:09	Malmo 2026	Player 2	3	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	29:04	29:09	29:16	Malmo 2026	Emma	4	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	29:12	29:17	29:26	Malmo 2026	Player 10	1	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	29:22	29:27	29:33	Malmo 2026	Amy	2	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	29:28	29:33	29:43	Malmo 2026	Player 10	2	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	29:38	29:43	29:49	Malmo 2026	Amy	2	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	29:45	29:50	29:55	Malmo 2026	Player 2	2	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	29:51	29:56	30:04	Malmo 2026	Meghan	3	Opponent Save	5	Player 2	
+Turkey	Shot Opponent	29:59	30:04	30:13	Malmo 2026	Player 10	4	Canada Save	1.5	Amy	
+Turkey	Shot Canada	30:10	30:15	30:27	Malmo 2026	Amy	1	Opponent Save	4	Player 2	
+Turkey	Shot Opponent	30:23	30:28	30:35	Malmo 2026	Player 2	5	Opponent Out	6		
+Turkey	Shot Canada	30:34	30:39	30:51	Malmo 2026	Emma	4	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	30:47	30:52	31:02	Malmo 2026	Player 10	1	Canada Save	4	Emma	
+Turkey	Shot Canada	30:57	31:02	31:10	Malmo 2026	Emma	5	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	31:06	31:11	31:19	Malmo 2026	Player 2	1	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	31:15	31:20	31:35	Malmo 2026	Amy	4	Opponent Save	2.5	Player 4	
+Turkey	Shot Opponent	31:31	31:36	31:47	Malmo 2026	Player 10	2	Canada Save	1.5	Amy	
+Turkey	Shot Canada	31:43	31:48	31:57	Malmo 2026	Emma	1	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	31:53	31:58	32:06	Malmo 2026	Player 2	4	Canada Save	3	Meghan	
+Turkey	Shot Canada	32:02	32:07	32:12	Malmo 2026	Amy	2	Canada Out	0		
+Turkey	Shot Opponent	32:09	32:14	32:25	Malmo 2026	Player 10	2	Canada Ball Control Save	1	Amy	
+Turkey	Shot Canada	32:20	32:25	32:33	Malmo 2026	Amy	2	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	32:29	32:34	32:51	Malmo 2026	Player 2	3	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	32:47	32:52	33:00	Malmo 2026	Emma	4	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	32:57	33:02	33:13	Malmo 2026	Player 10	1	Long Ball			
+Turkey	Penalty Shot Canada	33:23	33:28	33:43	Malmo 2026	Amy	3	Goal Canada	5	Player 10	
+Turkey	Shot Opponent	33:49	33:54	34:00	Malmo 2026	Player 2	5	Canada Ball Control Save	2	Meghan	
+Turkey	Shot Canada	33:55	34:00	34:07	Malmo 2026	Amy	1	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	34:03	34:08	34:16	Malmo 2026	Player 10	1	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	34:19	34:24	34:30	Malmo 2026	Emma	4	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	34:26	34:31	34:43	Malmo 2026	Player 2	1	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	34:39	34:44	34:54	Malmo 2026	Emma	5	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	34:50	34:55	35:01	Malmo 2026	Player 10	1	Canada Save	4	Meghan	
+Turkey	Shot Canada	34:57	35:02	35:12	Malmo 2026	Amy	3	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	35:08	35:13	35:19	Malmo 2026	Player 2	2	Canada Save	3	Meghan	
+Turkey	Shot Canada	35:15	35:20	35:29	Malmo 2026	Emma	4	Opponent Save	3.5	Player 4	
+Turkey	Shot Opponent	35:30	35:35	35:42	Malmo 2026	Player 2	5	Opponent Out	0		
+Turkey	Shot Canada	35:46	35:51	35:58	Malmo 2026	Amy	1	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	35:54	35:59	36:07	Malmo 2026	Player 10	2	Goal Opponent	1.5	Amy	
+Turkey	Shot Canada	36:13	36:18	36:30	Malmo 2026	Amy	1	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	37:18	37:23	37:33	Malmo 2026	Player 2	5	Goal Opponent	2	Amy	
+Turkey	Shot Canada	38:15	38:20	38:31	Malmo 2026	Emma	5	Canada Out	0		
+Turkey	Shot Opponent	38:27	38:32	38:41	Malmo 2026	Player 10	2	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	38:37	38:42	38:56	Malmo 2026	Emma	5	Goal Canada	2	Player 10	
+Turkey	Shot Opponent	38:54	38:59	39:13	Malmo 2026	Player 2	2	Goal Opponent	3	Meghan	
+Turkey	Shot Canada	39:19	39:24	39:34	Malmo 2026	Amy	1	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	39:30	39:35	39:40	Malmo 2026						
+Turkey	Shot Canada	39:33	39:38	39:45	Malmo 2026	Emma	4	Opponent Save	2.5	Player 4	
+Turkey	Shot Opponent	39:41	39:46	40:00	Malmo 2026	Player 2	4	Canada Save	3.5	Meghan	
+Turkey	Shot Canada	39:55	40:00	40:08	Malmo 2026	Amy	3	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	40:03	40:08	40:15	Malmo 2026	Player 10	1	Canada Save	4	Emma	
+Turkey	Shot Canada	40:10	40:15	40:23	Malmo 2026	Emma	4	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	40:18	40:23	40:28	Malmo 2026	Player 10	1	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	40:24	40:29	40:38	Malmo 2026	Emma	5	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	40:33	40:38	40:51	Malmo 2026	Player 2	2	Canada Ball Control Save	2	Amy	
+Turkey	Shot Canada	40:47	40:52	40:57	Malmo 2026	Meghan	3	Opponent Save	5	Player 2	
+Turkey	Shot Opponent	40:53	40:58	41:05	Malmo 2026	Player 2	5	Canada Ball Control Save	2	Meghan	
+Turkey	Shot Canada	41:00	41:05	41:14	Malmo 2026	Amy	2	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	41:10	41:15	41:22	Malmo 2026	Player 10	2	Canada Save	2	Amy	
+Turkey	Shot Canada	41:18	41:23	41:30	Malmo 2026	Amy	1	Opponent Save	4	Player 4	
+Turkey	Shot Opponent	41:26	41:31	41:38	Malmo 2026	Player 2	5	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	41:33	41:38	41:44	Malmo 2026	Emma	4	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	41:40	41:45	41:53	Malmo 2026	Player 10	2	Canada Ball Control Save	4	Emma	
+Turkey	Shot Canada	42:41	42:46	42:55	Malmo 2026	Amy	1	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	42:52	42:57	43:04	Malmo 2026	Player 2	4	Canada Ball Control Save	2	Amy	
+Turkey	Shot Canada	43:00	43:05	43:12	Malmo 2026	Amy	1	Opponent Save	2.5	Player 4	
+Turkey	Shot Opponent	43:08	43:13	43:21	Malmo 2026	Player 10	1	Canada Ball Control Save	5	Emma	
+Turkey	Shot Canada	43:17	43:22	43:31	Malmo 2026	Emma	5	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	43:26	43:31	43:39	Malmo 2026	Player 2	2	Canada Ball Control Save	3.5	Meghan	
+Turkey	Shot Canada	43:35	43:40	43:48	Malmo 2026	Meghan	3	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	43:44	43:49	43:56	Malmo 2026	Player 10	3	Opponent Out	0		
+Turkey	Shot Canada	43:51	43:56	44:10	Malmo 2026	Emma	2	Goal Canada	1	Player 10	
+Turkey	Shot Opponent	44:14	44:19	44:34	Malmo 2026	Player 2	5	Goal Opponent	4	Emma	
+Turkey	Shot Canada	44:39	44:44	44:52	Malmo 2026	Emma	5	Opponent Save	2	Player 10	
+Turkey	Shot Opponent	44:50	44:55	45:00	Malmo 2026	Player 10	2	Canada Save	4	Emma	
+Turkey	Shot Canada	44:54	44:59	45:05	Malmo 2026	Meghan	3	Opponent Save	2.5	Player 4	
+Turkey	Shot Opponent	45:00	45:05	45:11	Malmo 2026	Player 2	3	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	45:07	45:12	45:18	Malmo 2026	Emma	4	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	45:14	45:19	45:30	Malmo 2026	Player 10	2	Canada Save	1.5	Amy	
+Turkey	Shot Canada	45:26	45:31	45:43	Malmo 2026	Meghan	1	Opponent Save	4	Player 2	
+Turkey	Shot Opponent	45:38	45:43	45:49	Malmo 2026	Player 2	5	Opponent Out	6		
+Turkey	Shot Canada	45:46	45:51	46:06	Malmo 2026	Emma	4	Opponent Save	2	Player 4	
+Turkey	Shot Opponent	46:02	46:07	46:19	Malmo 2026	Player 10	1	Canada Ball Control Save	4.5	Emma	
+Turkey	Shot Canada	46:15	46:20	46:26	Malmo 2026	Emma	5	Opponent Save	1	Player 10	
+Turkey	Shot Opponent	46:24	46:29	46:38	Malmo 2026	Player 2	1	Canada Ball Control Save	2	Meghan	
+Turkey	Shot Canada	46:34	46:39	46:48	Malmo 2026	Meghan	3	Opponent Save	1.5	Player 10	
+Turkey	Shot Opponent	46:43	46:48	46:56	Malmo 2026	Player 10	1	Canada Save	4.5	Emma	
+Turkey	Shot Canada	46:57	47:02	47:10	Malmo 2026	Emma	4	Opponent Save	3	Player 4	
+Turkey	Shot Opponent	47:06	47:11	47:17	Malmo 2026	Player 2	4	Canada Ball Control Save	2.5	Meghan	
+Turkey	Shot Canada	47:13	47:18	47:25	Malmo 2026	Emma	3	Canada Out	0		
+Turkey	Shot Opponent	48:14	48:19	48:32	Malmo 2026	Player 10	3	Canada Save	2.5	Meghan	
+Turkey	Shot Canada	48:27	48:32	48:40	Malmo 2026	Emma	2	Opponent Save	3.5	Player 4	
+Turkey	Shot Opponent	48:35	48:40	48:45	Malmo 2026	Player 2	3	Canada Ball Control Save	3	Meghan	
+Turkey	Shot Canada	48:41	48:46	48:52	Malmo 2026	Emma	4	Canada Out	0		
+Turkey	Shot Opponent	48:50	48:55	49:07	Malmo 2026	Player 10	1	Canada Save	4	Emma	
+Turkey	T-END	50:35	50:35	50:35	Malmo 2026						
