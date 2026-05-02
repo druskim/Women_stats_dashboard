@@ -194,30 +194,16 @@ export default function App() {
 }
 
 function OverviewTab({ offenseShots, defenseShots, allRows }) {
-  const [overviewTab, setOverviewTab] = useState('Game Results')
   const offenseStats = useMemo(() => computeOffensiveStats(offenseShots), [offenseShots])
   const defenseStats = useMemo(() => computeDefensiveStats(defenseShots), [defenseShots])
 
   return (
-    <div>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-        {['Game Results', 'Defensive Efficiency', 'Offensive Efficiency'].map(tab => (
-          <button
-            key={tab}
-            className={`tab-btn ${tab === overviewTab ? 'active' : ''}`}
-            onClick={() => setOverviewTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-      {overviewTab === 'Game Results' && <GameScoreTable allRows={allRows} />}
-      {overviewTab === 'Defensive Efficiency' && (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start' }}>
+      <GameScoreTable allRows={allRows} />
+      <div>
         <OverviewEfficiencyPanel shots={defenseShots} stats={defenseStats} isOffense={false} />
-      )}
-      {overviewTab === 'Offensive Efficiency' && (
         <OverviewEfficiencyPanel shots={offenseShots} stats={offenseStats} isOffense={true} />
-      )}
+      </div>
     </div>
   )
 }
@@ -338,30 +324,61 @@ function OverviewEfficiencyPanel({ shots, stats, isOffense }) {
 }
 
 function OffenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLocationClick }) {
+  const offStats = computeOffensiveStats(shots)
+  const accS = accStats(shots, 1)
+  const goalShots = shots.filter(s => s.shotOutcome === 'Goal Canada')
+
   return (
     <div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Offensive Efficiency</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#22c55e', lineHeight: 1 }}>{offStats.conversionRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{offStats.goals} goals / {offStats.total} shots</div>
+        </div>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Shot Accuracy</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#3b82f6', lineHeight: 1 }}>{accS.pct}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{accS.accurate} accurate / {accS.total} located</div>
+        </div>
+      </div>
       <div className="grid-2">
         <CourtMap shots={shots} title="Shot Origin Map (Canada Attack)" isOffense={true} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
         <GoalFaceMap shots={shots} title="Shot Location Map (Canada Shots)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
       </div>
       <div className="grid-2">
-        <OriginEfficiencyChart shots={shots} isOffense={true} />
-        <GoalLocationChart shots={shots} isOffense={true} />
+        <CourtMap shots={goalShots} title="Goal Origin Map (Canada Goals)" isOffense={true} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
+        <GoalFaceMap shots={goalShots} title="Goal Shot Location Map (Canada Goals)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
       </div>
     </div>
   )
 }
 
 function DefenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLocationClick }) {
+  const defStats = computeDefensiveStats(shots)
+  const goalShots = shots.filter(s => s.shotOutcome === 'Goal Opponent')
+
   return (
     <div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Defensive Efficiency</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#3b82f6', lineHeight: 1 }}>{defStats.saveRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{defStats.saves} saves / {defStats.total} shots faced</div>
+        </div>
+        <div className="card" style={{ textAlign: 'center', padding: '20px 16px' }}>
+          <div style={{ fontSize: 11, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>Ball Control</div>
+          <div style={{ fontSize: 52, fontWeight: 800, color: '#60a5fa', lineHeight: 1 }}>{defStats.ballControlRate}%</div>
+          <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{defStats.ballControlSaves} BC saves / {defStats.saves} saves</div>
+        </div>
+      </div>
       <div className="grid-2">
         <CourtMap shots={shots} title="Opponent Shot Origin Map" isOffense={false} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
         <GoalFaceMap shots={shots} title="Shot Location Map (Shots Faced)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
       </div>
       <div className="grid-2">
-        <OriginEfficiencyChart shots={shots} isOffense={false} />
-        <GoalLocationChart shots={shots} isOffense={false} />
+        <CourtMap shots={goalShots} title="Goal Origin Map (Goals Against)" isOffense={false} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
+        <GoalFaceMap shots={goalShots} title="Goal Shot Location Map (Goals Against)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
       </div>
     </div>
   )
@@ -464,18 +481,12 @@ function outcomeColor(outcome) {
 
 function PlayersTab({ offenseShots, defenseShots, allShots, offensePenalties, defensePenalties }) {
   return (
-    <div>
-      <div className="grid-2">
-        <PlayerOffenseChart shots={offenseShots} />
-        <PlayerDefenseChart shots={allShots} />
-      </div>
-      <PlayerDetailTable
-        offenseShots={offenseShots}
-        defenseShots={defenseShots}
-        offensePenalties={offensePenalties}
-        defensePenalties={defensePenalties}
-      />
-    </div>
+    <PlayerDetailTable
+      offenseShots={offenseShots}
+      defenseShots={defenseShots}
+      offensePenalties={offensePenalties}
+      defensePenalties={defensePenalties}
+    />
   )
 }
 
@@ -520,14 +531,6 @@ function ByPeriodTab({ allRows }) {
   const p2OffStats = computeOffensiveStats(p2Off)
   const p1DefStats = computeDefensiveStats(p1Def)
   const p2DefStats = computeDefensiveStats(p2Def)
-
-  const volumeData = [
-    { metric: 'CA Shots', P1: p1OffStats.total, P2: p2OffStats.total },
-    { metric: 'CA Goals', P1: p1OffStats.goals, P2: p2OffStats.goals },
-    { metric: 'Opp Shots', P1: p1DefStats.total, P2: p2DefStats.total },
-    { metric: 'Goals Ag.', P1: p1DefStats.goalsAgainst, P2: p2DefStats.goalsAgainst },
-    { metric: 'Saves', P1: p1DefStats.saves, P2: p2DefStats.saves },
-  ]
 
   const gamesMap = {}
   for (const row of [...offenseShots, ...defenseShots]) {
@@ -575,24 +578,6 @@ function ByPeriodTab({ allRows }) {
             { label: 'Stop%', p1: `${p1DefStats.saveRate}%`, p2: `${p2DefStats.saveRate}%`, higher: true, raw1: parseFloat(p1DefStats.saveRate), raw2: parseFloat(p2DefStats.saveRate) },
           ]} />
         </div>
-      </div>
-
-      <div className="card">
-        <h3 className="card-title">Volume Comparison — 1st Half vs 2nd Half</h3>
-        <ResponsiveContainer width="100%" height={220}>
-          <BarChart data={volumeData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-            <XAxis dataKey="metric" tick={{ fill: '#9ca3af', fontSize: 12 }} />
-            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} />
-            <Tooltip
-              contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 6 }}
-              labelStyle={{ color: '#f1f5f9' }}
-              itemStyle={{ color: '#94a3b8' }}
-            />
-            <Bar dataKey="P1" name="1st Half" fill="#3b82f6" radius={[3, 3, 0, 0]} />
-            <Bar dataKey="P2" name="2nd Half" fill="#a78bfa" radius={[3, 3, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
       </div>
 
       <div className="card">
