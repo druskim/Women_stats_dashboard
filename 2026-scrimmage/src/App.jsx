@@ -80,7 +80,7 @@ export default function App() {
   }, [rawRows, filters])
 
   const offenseShots = useMemo(() => filtered.filter(r => r.isCanadaAttack && !r.isPenalty), [filtered])
-  const defenseShots = useMemo(() => filtered.filter(r => !r.isCanadaAttack && !r.isPenalty), [filtered])
+  const defenseShots = useMemo(() => filtered.filter(r => !r.isCanadaAttack && !r.isPenalty && !r.isOwnGoal), [filtered])
   const offensePenalties = useMemo(() => filtered.filter(r => r.isCanadaAttack && r.isPenalty), [filtered])
   const defensePenalties = useMemo(() => filtered.filter(r => !r.isCanadaAttack && r.isPenalty), [filtered])
 

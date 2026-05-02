@@ -64,8 +64,11 @@ export function parseRows(text) {
       isCanadaAttack = isCanadaPlayer(attackingPlayer)
     }
 
+    // Detect own goal: Shot Opponent row where a Canada player's name is in the outcome field
+    const isOwnGoal = !isCanadaAttack && isCanadaPlayer(shotOutcome)
+
     // Infer empty outcomes from location
-    let outcome = shotOutcome
+    let outcome = isOwnGoal ? 'Goal Opponent' : shotOutcome
     if (!outcome && shotLocation !== null && shotLocation >= 1 && shotLocation <= 5) {
       outcome = isCanadaAttack ? 'Opponent Save' : 'Canada Save'
     }
@@ -82,6 +85,7 @@ export function parseRows(text) {
       defendingPlayer,
       isCanadaAttack,
       isPenalty,
+      isOwnGoal,
       period: currentPeriod,
     })
   }

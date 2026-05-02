@@ -165,7 +165,7 @@ export function GameScoreTable({ allRows }) {
       if (!row.isPenalty) g.offShots.push(row)
     } else {
       if (row.shotOutcome === 'Goal Opponent') g.oppGoals++
-      if (!row.isPenalty) g.defShots.push(row)
+      if (!row.isPenalty && !row.isOwnGoal) g.defShots.push(row)
     }
   }
 
