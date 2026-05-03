@@ -66,6 +66,19 @@ export default function App() {
   const teamStats   = useMemo(() => computeStats(shots), [shots])
   const playerStats = useMemo(() => computeStats(playerShots), [playerShots])
 
+  // Shots fired against the selected team (they are defending)
+  const defRows = useMemo(() => {
+    if (!selectedTeam) return []
+    return rawRows.filter(r => {
+      if (r.team === selectedTeam) return false
+      if (r.isPenalty) return false
+      if (filters.tournament.length > 0 && !filters.tournament.includes(r.tournament)) return false
+      if (filters.game.length > 0 && !filters.game.includes(r.game)) return false
+      return r.game.split(' vs ').includes(selectedTeam)
+    })
+  }, [rawRows, selectedTeam, filters])
+  const defStats = useMemo(() => computeStats(defRows), [defRows])
+
   const hasSecondaryFilters =
     filters.tournament.length > 0 || filters.game.length > 0 ||
     activeOrigin !== 'All' || activeLocation !== 'All'
@@ -151,6 +164,12 @@ export default function App() {
               Team View
             </button>
             <button
+              className={`tab-btn ${viewMode === 'defense' ? 'active' : ''}`}
+              onClick={() => setViewMode('defense')}
+            >
+              Defense
+            </button>
+            <button
               className={`tab-btn ${viewMode === 'player' ? 'active' : ''}`}
               onClick={() => setViewMode('player')}
             >
@@ -158,7 +177,15 @@ export default function App() {
             </button>
           </div>
 
-          {shots.length === 0 ? (
+          {viewMode === 'defense' ? (
+            defRows.length === 0 ? (
+              <div className="card" style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
+                No defensive data found for <strong style={{ color: '#f1f5f9' }}>{selectedTeam}</strong> with the current filters.
+              </div>
+            ) : (
+              <DefenseView shots={defRows} stats={defStats} teamName={selectedTeam} />
+            )
+          ) : shots.length === 0 ? (
             <div className="card" style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
               No shot data found for <strong style={{ color: '#f1f5f9' }}>{selectedTeam}</strong> with the current filters.
             </div>
@@ -342,6 +369,56 @@ function PlayerView({ shots, teamName, players, selectedPlayer, onSelectPlayer, 
           <PlayerGameTable player={selectedPlayer} shots={shots} />
         </>
       )}
+    </div>
+  )
+}
+
+// ── Defense View ──────────────────────────────────────────────────────────────
+
+function DefenseView({ shots, stats, teamName }) {
+  const [goalsOnly, setGoalsOnly] = useState(false)
+  const goalShots    = useMemo(() => shots.filter(r => r.shotOutcome === 'Goal'), [shots])
+  const displayShots = goalsOnly ? goalShots : shots
+
+  return (
+    <div>
+      <StatGrid cards={[
+        { label: 'Shots Against', value: stats.total,          color: '#3b82f6', sub: 'regular play' },
+        { label: 'Goals Against', value: stats.goals,          color: '#ef4444', sub: `${stats.goalRate}% conversion rate` },
+        { label: 'Stop Rate',     value: `${stats.saveRate}%`, color: '#22c55e', sub: `${stats.total - stats.goals} shots stopped` },
+      ]} />
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
+        <button
+          className={`ms-btn${goalsOnly ? ' ms-btn--active' : ''}`}
+          onClick={() => setGoalsOnly(v => !v)}
+        >
+          {goalsOnly ? 'Goals only' : 'All shots'}
+        </button>
+      </div>
+
+      <ShotFlowMap
+        shots={displayShots}
+        title={`${teamName} — ${goalsOnly ? 'Goals Against Flow' : 'Shots Against Flow'}`}
+      />
+
+      <div className="grid-2">
+        <CourtMap
+          shots={displayShots}
+          title={`${teamName} — ${goalsOnly ? 'Goal' : 'Shot'} Origin Against`}
+          teamName={teamName}
+          activeOrigin="All"
+          onPositionClick={null}
+        />
+        <GoalFaceMap
+          shots={displayShots}
+          title={`${teamName} — ${goalsOnly ? 'Goal' : 'Shot'} Location Against`}
+          activeLocation="All"
+          onLocationClick={null}
+        />
+      </div>
+
+      <TrendChart shots={shots} teamName={teamName} />
     </div>
   )
 }
