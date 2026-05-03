@@ -230,7 +230,7 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
         { label: 'Def. Efficiency',     value: `${stats.saveRate}%`, color: '#3b82f6', sub: `Canada save rate` },
       ]} />
 
-      <ShotFlowMap shots={mapShots} title={mapTitle('Shot Flow — Origin to Landing')} />
+      <ShotFlowMap shots={courtShots} title={mapTitle(goalsOnly ? 'Shot Flow — Goals Only' : 'Shot Flow — Origin to Landing')} />
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
         <button
