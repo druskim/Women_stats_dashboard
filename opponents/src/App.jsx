@@ -275,8 +275,6 @@ function TeamView({ shots, stats, teamName, players, teamRows, activeOrigin, onP
         />
       </div>
 
-      <TrendChart shots={teamRows.filter(r => !r.isPenalty)} teamName={teamName} />
-
       <PlayerSummaryTable
         players={players}
         shots={shots}
