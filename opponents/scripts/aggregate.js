@@ -35,7 +35,7 @@ const OUTPUT_FIELDS = [
   'shotOutcome', 'shotLocation', 'defendingPlayer',
 ]
 
-// Canada_OPPONENT_G#_TOURNAMENT_YEAR.xlsx
+// Canada_OPPONENT_[G#|QF|SF|GMG|BMG|PL]_TOURNAMENT_YEAR.xlsx
 function isCanadaFormat(filename) {
   return filename.split('_')[0].toLowerCase() === 'canada'
 }
@@ -44,7 +44,7 @@ function extractCanadaGameInfo(filename) {
   const base = filename.replace(/\.(xlsx|xls)$/i, '').replace(/^~\$/, '')
   const parts = base.split('_')
   const opponent = parts[1]
-  const hasGameNum = /^G\d+$/i.test(parts[2] || '')
+  const hasGameNum = /^(G\d+|QF|SF|GMG|BMG|PL)$/i.test(parts[2] || '')
   const gameNum = hasGameNum ? parts[2] : 'G1'
   const year = parts[parts.length - 1]
   const tournamentParts = hasGameNum ? parts.slice(3, parts.length - 1) : parts.slice(2, parts.length - 1)
@@ -52,13 +52,13 @@ function extractCanadaGameInfo(filename) {
   return { teamA: 'Canada', teamB: opponent, game: `Canada vs ${opponent}`, tournament }
 }
 
-// TEAMA_TEAMB_[G#_]TOURNAMENT_YEAR.xlsx
+// TEAMA_TEAMB_[G#|QF|SF|GMG|BMG|PL]_TOURNAMENT_YEAR.xlsx
 function extractTeamGameInfo(filename) {
   const base = filename.replace(/\.(xlsx|xls)$/i, '').replace(/^~\$/, '')
   const parts = base.split('_')
   const teamA = parts[0]
   const teamB = parts[1]
-  const hasGameNum = /^G\d+$/i.test(parts[2] || '')
+  const hasGameNum = /^(G\d+|QF|SF|GMG|BMG|PL)$/i.test(parts[2] || '')
   const gameNum = hasGameNum ? parts[2] : 'G1'
   const year = parts[parts.length - 1]
   const tournamentParts = hasGameNum ? parts.slice(3, parts.length - 1) : parts.slice(2, parts.length - 1)
