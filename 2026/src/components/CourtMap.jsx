@@ -76,8 +76,8 @@ export default function CourtMap({ shots, title, isOffense, activeOrigin, onPosi
                   fillOpacity={isActive ? 0.3 : 0.6} />
                 <text x={px} y={py} textAnchor="middle" dominantBaseline="middle"
                   fill="#6b7280" fontSize={10}>0</text>
-                <text x={px} y={CY + CH + 16} textAnchor="middle"
-                  fill="#6b7280" fontSize={11}>{pos}</text>
+                <text x={px} y={isOffense ? CY - 14 : CY + CH + 16} textAnchor="middle"
+                  fill="#6b7280" fontSize={11}>Pos {pos}</text>
               </g>
             )
           }
@@ -117,7 +117,7 @@ export default function CourtMap({ shots, title, isOffense, activeOrigin, onPosi
               </text>
 
               {/* Position label */}
-              <text x={px} y={CY + CH + 16} textAnchor="middle"
+              <text x={px} y={isOffense ? CY - 14 : CY + CH + 16} textAnchor="middle"
                 fill={isActive ? '#f59e0b' : '#9ca3af'} fontSize={11} fontWeight={isActive ? 700 : 500}>Pos {pos}</text>
             </g>
           )
