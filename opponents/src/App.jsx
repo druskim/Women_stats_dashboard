@@ -212,7 +212,9 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
     ? `${playerDisplayName(selectedPlayer)} — ${label}`
     : `${teamName} — ${label}`
 
+  const [goalsOnly, setGoalsOnly] = useState(false)
   const goalShots = useMemo(() => mapShots.filter(r => r.shotOutcome === 'Goal'), [mapShots])
+  const courtShots = goalsOnly ? goalShots : mapShots
 
   return (
     <div>
@@ -230,17 +232,26 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
 
       <ShotFlowMap shots={mapShots} title={mapTitle('Shot Flow — Origin to Landing')} />
 
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
+        <button
+          className={`ms-btn${goalsOnly ? ' ms-btn--active' : ''}`}
+          onClick={() => setGoalsOnly(v => !v)}
+        >
+          {goalsOnly ? 'Goals only' : 'All shots'}
+        </button>
+      </div>
+
       <div className="grid-2">
         <CourtMap
-          shots={goalShots}
-          title={mapTitle('Goal Origin Map')}
+          shots={courtShots}
+          title={mapTitle(goalsOnly ? 'Goal Origin Map' : 'Shot Origin Map')}
           teamName={teamName}
           activeOrigin={activeOrigin}
           onPositionClick={onPositionClick}
         />
         <GoalFaceMap
-          shots={goalShots}
-          title={mapTitle('Goal Location Map')}
+          shots={courtShots}
+          title={mapTitle(goalsOnly ? 'Goal Location Map' : 'Shot Location Map')}
           activeLocation={activeLocation}
           onLocationClick={onLocationClick}
         />
