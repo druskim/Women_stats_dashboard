@@ -5,6 +5,7 @@ import {
 } from './utils.js'
 import CourtMap from './components/CourtMap.jsx'
 import GoalFaceMap from './components/GoalFaceMap.jsx'
+import ShotFlowMap from './components/ShotFlowMap.jsx'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Legend,
@@ -240,6 +241,8 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
           onLocationClick={onLocationClick}
         />
       </div>
+
+      <ShotFlowMap shots={mapShots} title={mapTitle('Shot Flow — Origin to Landing')} />
 
       <TrendChart shots={teamRows.filter(r => !r.isPenalty)} teamName={teamName} />
 
