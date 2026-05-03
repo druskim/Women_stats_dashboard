@@ -15,7 +15,7 @@ export default function App() {
   const [rawRows, setRawRows]           = useState([])
   const [loading, setLoading]           = useState(true)
   const [selectedTeam, setSelectedTeam] = useState('')
-  const [viewMode, setViewMode]         = useState('team')
+  const [viewMode, setViewMode]         = useState('offence')
   const [selectedPlayer, setSelectedPlayer] = useState('')
   const [filters, setFilters]           = useState({ tournament: [], game: [] })
   const [activeOrigin, setActiveOrigin] = useState('All')
@@ -58,13 +58,7 @@ export default function App() {
   // Reset dependent state on team change
   useEffect(() => { setSelectedPlayer(''); setActiveOrigin('All'); setActiveLocation('All') }, [selectedTeam])
 
-  const playerShots = useMemo(() =>
-    selectedPlayer ? shots.filter(r => r.attackingPlayer === selectedPlayer) : [],
-    [shots, selectedPlayer]
-  )
-
-  const teamStats   = useMemo(() => computeStats(shots), [shots])
-  const playerStats = useMemo(() => computeStats(playerShots), [playerShots])
+  const teamStats = useMemo(() => computeStats(shots), [shots])
 
   // Shots fired against the selected team (they are defending)
   const defRows = useMemo(() => {
@@ -158,10 +152,10 @@ export default function App() {
           {/* View toggle */}
           <div className="tab-nav">
             <button
-              className={`tab-btn ${viewMode === 'team' ? 'active' : ''}`}
-              onClick={() => setViewMode('team')}
+              className={`tab-btn ${viewMode === 'offence' ? 'active' : ''}`}
+              onClick={() => setViewMode('offence')}
             >
-              Team View
+              Offence
             </button>
             <button
               className={`tab-btn ${viewMode === 'defense' ? 'active' : ''}`}
@@ -170,14 +164,40 @@ export default function App() {
               Defense
             </button>
             <button
-              className={`tab-btn ${viewMode === 'player' ? 'active' : ''}`}
-              onClick={() => setViewMode('player')}
+              className={`tab-btn ${viewMode === 'penalties' ? 'active' : ''}`}
+              onClick={() => setViewMode('penalties')}
             >
-              Player View
+              Penalties
+            </button>
+            <button
+              className={`tab-btn ${viewMode === 'teamoverview' ? 'active' : ''}`}
+              onClick={() => setViewMode('teamoverview')}
+            >
+              Team View
             </button>
           </div>
 
-          {viewMode === 'defense' ? (
+          {viewMode === 'offence' ? (
+            shots.length === 0 ? (
+              <div className="card" style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
+                No shot data found for <strong style={{ color: '#f1f5f9' }}>{selectedTeam}</strong> with the current filters.
+              </div>
+            ) : (
+              <TeamView
+                shots={shots}
+                stats={teamStats}
+                teamName={selectedTeam}
+                players={players}
+                teamRows={teamRows}
+                activeOrigin={activeOrigin}
+                onPositionClick={pos => setActiveOrigin(o => o === pos ? 'All' : pos)}
+                activeLocation={activeLocation}
+                onLocationClick={loc => setActiveLocation(l => l === loc ? 'All' : loc)}
+                selectedPlayer={selectedPlayer}
+                onSelectPlayer={p => { setSelectedPlayer(p); setActiveOrigin('All'); setActiveLocation('All') }}
+              />
+            )
+          ) : viewMode === 'defense' ? (
             defRows.length === 0 ? (
               <div className="card" style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
                 No defensive data found for <strong style={{ color: '#f1f5f9' }}>{selectedTeam}</strong> with the current filters.
@@ -185,39 +205,10 @@ export default function App() {
             ) : (
               <DefenseView shots={defRows} stats={defStats} teamName={selectedTeam} />
             )
-          ) : shots.length === 0 ? (
-            <div className="card" style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
-              No shot data found for <strong style={{ color: '#f1f5f9' }}>{selectedTeam}</strong> with the current filters.
-            </div>
-          ) : viewMode === 'team' ? (
-            <TeamView
-              shots={shots}
-              penalties={penalties}
-              stats={teamStats}
-              teamName={selectedTeam}
-              players={players}
-              teamRows={teamRows}
-              activeOrigin={activeOrigin}
-              onPositionClick={pos => setActiveOrigin(o => o === pos ? 'All' : pos)}
-              activeLocation={activeLocation}
-              onLocationClick={loc => setActiveLocation(l => l === loc ? 'All' : loc)}
-              selectedPlayer={selectedPlayer}
-              onSelectPlayer={p => { setSelectedPlayer(p); setActiveOrigin('All'); setActiveLocation('All') }}
-            />
+          ) : viewMode === 'penalties' ? (
+            <PenaltiesView penalties={penalties} teamName={selectedTeam} />
           ) : (
-            <PlayerView
-              shots={shots}
-              teamName={selectedTeam}
-              players={players}
-              selectedPlayer={selectedPlayer}
-              onSelectPlayer={p => { setSelectedPlayer(p); setActiveOrigin('All'); setActiveLocation('All') }}
-              playerShots={playerShots}
-              playerStats={playerStats}
-              activeOrigin={activeOrigin}
-              onPositionClick={pos => setActiveOrigin(o => o === pos ? 'All' : pos)}
-              activeLocation={activeLocation}
-              onLocationClick={loc => setActiveLocation(l => l === loc ? 'All' : loc)}
-            />
+            <TeamOverviewView teamRows={teamRows} defRows={defRows} teamName={selectedTeam} />
           )}
         </>
       )}
@@ -225,9 +216,9 @@ export default function App() {
   )
 }
 
-// ── Team View ─────────────────────────────────────────────────────────────────
+// ── Offence View ──────────────────────────────────────────────────────────────
 
-function TeamView({ shots, penalties, stats, teamName, players, teamRows, activeOrigin, onPositionClick, activeLocation, onLocationClick, selectedPlayer, onSelectPlayer }) {
+function TeamView({ shots, stats, teamName, players, teamRows, activeOrigin, onPositionClick, activeLocation, onLocationClick, selectedPlayer, onSelectPlayer }) {
   const mapShots    = useMemo(() =>
     selectedPlayer ? shots.filter(r => r.attackingPlayer === selectedPlayer) : shots,
     [shots, selectedPlayer]
@@ -294,81 +285,86 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
         onSelectPlayer={onSelectPlayer}
       />
 
-      {penalties.length > 0 && (
-        <PenaltySection penalties={penalties} teamName={teamName} />
-      )}
     </div>
   )
 }
 
-// ── Player View ───────────────────────────────────────────────────────────────
+// ── Penalties View ────────────────────────────────────────────────────────────
 
-function PlayerView({ shots, teamName, players, selectedPlayer, onSelectPlayer, playerShots, playerStats, activeOrigin, onPositionClick, activeLocation, onLocationClick }) {
-  const prefOrigin = useMemo(() => preferredOrigin(playerShots), [playerShots])
+function PenaltiesView({ penalties, teamName }) {
+  const stats        = useMemo(() => computeStats(penalties), [penalties])
+  const [goalsOnly, setGoalsOnly] = useState(false)
+  const goalPenalties  = useMemo(() => penalties.filter(r => r.shotOutcome === 'Goal'), [penalties])
+  const displayShots = goalsOnly ? goalPenalties : penalties
+
+  if (penalties.length === 0) return (
+    <div className="card" style={{ textAlign: 'center', padding: '48px 24px', color: '#6b7280' }}>
+      No penalty shot data for <strong style={{ color: '#f1f5f9' }}>{teamName}</strong> with the current filters.
+    </div>
+  )
 
   return (
     <div>
-      {/* Player selector */}
-      <div className="card" style={{ marginBottom: 16 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-          <div className="filter-group">
-            <span className="filter-label">Player</span>
-            <select
-              className="ms-btn"
-              value={selectedPlayer}
-              onChange={e => onSelectPlayer(e.target.value)}
-              style={{ minWidth: 200 }}
-            >
-              <option value="">Select a player…</option>
-              {players.map(p => (
-                <option key={p} value={p}>{playerDisplayName(p)}</option>
-              ))}
-            </select>
-          </div>
-          {selectedPlayer && (
-            <div style={{ color: '#9ca3af', fontSize: 13 }}>
-              {playerDisplayName(selectedPlayer)} · {teamName}
-            </div>
-          )}
-        </div>
+      <StatGrid cards={[
+        { label: 'Penalty Shots', value: stats.total,                    color: '#3b82f6', sub: 'total taken' },
+        { label: 'Goals',         value: stats.goals,                    color: '#22c55e', sub: `${stats.goalRate}% conversion` },
+        { label: 'Stopped',       value: stats.saves + stats.bcSaves,   color: '#ef4444', sub: 'saves + ball control' },
+        { label: 'Goal Rate',     value: `${stats.goalRate}%`,           color: '#22c55e', sub: `${stats.goals} of ${stats.total}` },
+      ]} />
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
+        <button
+          className={`ms-btn${goalsOnly ? ' ms-btn--active' : ''}`}
+          onClick={() => setGoalsOnly(v => !v)}
+        >
+          {goalsOnly ? 'Goals only' : 'All penalties'}
+        </button>
       </div>
 
-      {!selectedPlayer ? (
-        <div style={{ color: '#6b7280', textAlign: 'center', padding: '48px 24px' }}>
-          Select a player above to see their shooting profile.
-        </div>
-      ) : playerShots.length === 0 ? (
-        <div style={{ color: '#6b7280', textAlign: 'center', padding: '48px 24px' }}>
-          No shot data found for {playerDisplayName(selectedPlayer)} with current filters.
-        </div>
-      ) : (
-        <>
-          <StatGrid cards={[
-            { label: 'Shots',          value: playerStats.total,             color: '#3b82f6', sub: `${teamName}` },
-            { label: 'Goals',          value: playerStats.goals,             color: '#22c55e', sub: `${playerStats.goalRate}% rate` },
-            { label: 'Goal Rate',      value: `${playerStats.goalRate}%`,    color: '#22c55e', sub: `${playerStats.goals} goals` },
-            { label: 'Preferred Pos',  value: prefOrigin ?? '—',             color: '#f59e0b', sub: 'most used origin' },
-          ]} />
+      <ShotFlowMap shots={displayShots} title={`${teamName} — Penalty Shot Flow`} />
 
-          <div className="grid-2">
-            <CourtMap
-              shots={playerShots}
-              title={`${playerDisplayName(selectedPlayer)} — Shot Origins`}
-              teamName={teamName}
-              activeOrigin={activeOrigin}
-              onPositionClick={onPositionClick}
-            />
-            <GoalFaceMap
-              shots={playerShots}
-              title={`${playerDisplayName(selectedPlayer)} — Shot Locations`}
-              activeLocation={activeLocation}
-              onLocationClick={onLocationClick}
-            />
-          </div>
+      <div className="grid-2">
+        <CourtMap
+          shots={displayShots}
+          title={`${teamName} — Penalty Shot Origin`}
+          teamName={teamName}
+          activeOrigin="All"
+          onPositionClick={null}
+        />
+        <GoalFaceMap
+          shots={displayShots}
+          title={`${teamName} — Penalty Shot Location`}
+          activeLocation="All"
+          onLocationClick={null}
+        />
+      </div>
 
-          <PlayerGameTable player={selectedPlayer} shots={shots} />
-        </>
-      )}
+      <div className="card">
+        <h3 className="card-title">{teamName} — Penalty Shot Details</h3>
+        <div className="table-wrapper">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Time</th><th>Attacker</th><th>Defender</th>
+                <th>Origin</th><th>Location</th><th>Outcome</th><th>Game</th>
+              </tr>
+            </thead>
+            <tbody>
+              {penalties.map((shot, i) => (
+                <tr key={i}>
+                  <td className="cell-muted">{shot.start || '—'}</td>
+                  <td className="player-name">{playerDisplayName(shot.attackingPlayer) || '—'}</td>
+                  <td className="player-name">{playerDisplayName(shot.defendingPlayer) || '—'}</td>
+                  <td>{shot.shotOrigin ?? '—'}</td>
+                  <td>{shot.shotLocation ?? '—'}</td>
+                  <td style={{ color: outcomeColor(shot.shotOutcome) }}>{shot.shotOutcome || '—'}</td>
+                  <td className="cell-muted">{shot.tournament || shot.game}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   )
 }
@@ -419,6 +415,147 @@ function DefenseView({ shots, stats, teamName }) {
       </div>
 
       <TrendChart shots={shots} teamName={teamName} />
+
+      <DefensivePlayerTable shots={shots} teamName={teamName} />
+    </div>
+  )
+}
+
+function DefensivePlayerTable({ shots, teamName }) {
+  const rows = useMemo(() => {
+    const byPlayer = {}
+    for (const shot of shots) {
+      if (!shot.defendingPlayer) continue
+      if (!byPlayer[shot.defendingPlayer]) byPlayer[shot.defendingPlayer] = []
+      byPlayer[shot.defendingPlayer].push(shot)
+    }
+    return Object.entries(byPlayer)
+      .map(([player, ps]) => ({ player, stats: computeStats(ps) }))
+      .sort((a, b) => b.stats.total - a.stats.total)
+  }, [shots])
+
+  if (rows.length === 0) return null
+
+  return (
+    <div className="card">
+      <h3 className="card-title">{teamName} — Defensive Player Breakdown</h3>
+      <div className="table-wrapper">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Shots Faced</th>
+              <th>Goals Against</th>
+              <th>Saves</th>
+              <th>Stop Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ player, stats }) => (
+              <tr key={player}>
+                <td className="player-name">{playerDisplayName(player)}</td>
+                <td>{stats.total}</td>
+                <td style={{ color: '#ef4444' }}>{stats.goals}</td>
+                <td style={{ color: '#22c55e' }}>{stats.saves + stats.bcSaves}</td>
+                <td style={{ color: stats.saveRate > 80 ? '#22c55e' : stats.saveRate > 60 ? '#f59e0b' : '#ef4444' }}>
+                  {stats.saveRate}%
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+// ── Team Overview View ────────────────────────────────────────────────────────
+
+function TeamOverviewView({ teamRows, defRows, teamName }) {
+  const [selectedPlayer, setSelectedPlayer] = useState(null)
+
+  const offShots = useMemo(() => teamRows.filter(r => !r.isPenalty), [teamRows])
+
+  const allPlayers = useMemo(() => {
+    const ps = new Set()
+    offShots.forEach(r => { if (r.attackingPlayer) ps.add(r.attackingPlayer) })
+    defRows.forEach(r => { if (r.defendingPlayer) ps.add(r.defendingPlayer) })
+    return [...ps].sort((a, b) => playerDisplayName(a).localeCompare(playerDisplayName(b)))
+  }, [offShots, defRows])
+
+  if (selectedPlayer) {
+    const playerOffShots = offShots.filter(r => r.attackingPlayer === selectedPlayer)
+    const playerDefShots = defRows.filter(r => r.defendingPlayer === selectedPlayer)
+    const offStats = computeStats(playerOffShots)
+    const defStats = computeStats(playerDefShots)
+
+    return (
+      <div>
+        <button
+          className="ms-btn"
+          onClick={() => setSelectedPlayer(null)}
+          style={{ marginBottom: 16 }}
+        >
+          ← Back to team
+        </button>
+
+        <div className="card" style={{ marginBottom: 16 }}>
+          <h3 className="card-title">{playerDisplayName(selectedPlayer)} — {teamName}</h3>
+        </div>
+
+        <StatGrid cards={[
+          { label: 'Off. Shots',     value: offStats.total,          color: '#3b82f6', sub: 'shots taken' },
+          { label: 'Off. Goals',     value: offStats.goals,          color: '#22c55e', sub: `${offStats.goalRate}% rate` },
+          { label: 'Def. Shots',     value: defStats.total,          color: '#3b82f6', sub: 'shots faced' },
+          { label: 'Goals Against',  value: defStats.goals,          color: '#ef4444', sub: `${defStats.saveRate}% stop rate` },
+        ]} />
+
+        <ShotFlowMap
+          shots={playerOffShots}
+          title={`${playerDisplayName(selectedPlayer)} — Offensive Shot Flow`}
+        />
+        <ShotFlowMap
+          shots={playerDefShots}
+          title={`${playerDisplayName(selectedPlayer)} — Defensive Shot Flow`}
+        />
+      </div>
+    )
+  }
+
+  return (
+    <div className="card">
+      <h3 className="card-title">{teamName} — Player Overview (click a player for details)</h3>
+      <div className="table-wrapper">
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Off. Shots</th><th>Off. Goals</th><th>Off. Rate</th>
+              <th>Def. Shots</th><th>Goals Against</th><th>Stop Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allPlayers.map(player => {
+              const os = computeStats(offShots.filter(r => r.attackingPlayer === player))
+              const ds = computeStats(defRows.filter(r => r.defendingPlayer === player))
+              return (
+                <tr key={player} onClick={() => setSelectedPlayer(player)}
+                  style={{ cursor: 'pointer' }}>
+                  <td className="player-name">{playerDisplayName(player)}</td>
+                  <td>{os.total || '—'}</td>
+                  <td style={{ color: '#22c55e' }}>{os.total > 0 ? os.goals : '—'}</td>
+                  <td>{os.total > 0 ? `${os.goalRate}%` : '—'}</td>
+                  <td>{ds.total || '—'}</td>
+                  <td style={{ color: '#ef4444' }}>{ds.total > 0 ? ds.goals : '—'}</td>
+                  <td style={{ color: ds.total > 0 ? (ds.saveRate > 80 ? '#22c55e' : ds.saveRate > 60 ? '#f59e0b' : '#ef4444') : '#6b7280' }}>
+                    {ds.total > 0 ? `${ds.saveRate}%` : '—'}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
@@ -538,61 +675,6 @@ function PlayerSummaryTable({ players, shots, teamName, selectedPlayer, onSelect
                 </tr>
               )
             })}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  )
-}
-
-// ── Player Game Table (Player View) ──────────────────────────────────────────
-
-function PlayerGameTable({ player, shots }) {
-  const rows = useMemo(() => {
-    const byGame = {}
-    const ps = shots.filter(s => s.attackingPlayer === player)
-    for (const shot of ps) {
-      const key = shot.tournament || shot.game || 'Unknown'
-      if (!byGame[key]) byGame[key] = { game: shot.game, tournament: shot.tournament || key, shots: [] }
-      byGame[key].shots.push(shot)
-    }
-    return Object.values(byGame)
-      .sort((a, b) => a.tournament.localeCompare(b.tournament))
-      .map(g => ({ ...g, stats: computeStats(g.shots) }))
-  }, [player, shots])
-
-  if (rows.length === 0) return null
-
-  return (
-    <div className="card">
-      <h3 className="card-title">{playerDisplayName(player)} — Game History</h3>
-      <div className="table-wrapper">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Game</th>
-              <th>Tournament</th>
-              <th>Shots</th>
-              <th>Goals</th>
-              <th>Goal %</th>
-              <th>Saves vs</th>
-              <th>BC Saves vs</th>
-              <th>Out</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={i}>
-                <td className="cell-muted">{r.game}</td>
-                <td className="cell-muted">{r.tournament}</td>
-                <td>{r.stats.total}</td>
-                <td style={{ color: '#22c55e' }}>{r.stats.goals}</td>
-                <td style={{ color: r.stats.goals > 0 ? '#22c55e' : '#9ca3af' }}>{r.stats.goalRate}%</td>
-                <td style={{ color: '#60a5fa' }}>{r.stats.saves}</td>
-                <td style={{ color: '#3b82f6' }}>{r.stats.bcSaves}</td>
-                <td className="cell-muted">{r.stats.out}</td>
-              </tr>
-            ))}
           </tbody>
         </table>
       </div>
