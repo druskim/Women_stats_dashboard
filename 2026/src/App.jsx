@@ -84,6 +84,7 @@ export default function App() {
   const defenseShots = useMemo(() => filtered.filter(r => !r.isCanadaAttack && !r.isPenalty && !r.isOwnGoal), [filtered])
   const offensePenalties = useMemo(() => filtered.filter(r => r.isCanadaAttack && r.isPenalty), [filtered])
   const defensePenalties = useMemo(() => filtered.filter(r => !r.isCanadaAttack && r.isPenalty), [filtered])
+  const offenseShotsAll = useMemo(() => filtered.filter(r => r.isCanadaAttack), [filtered])
 
   const offenseStats = useMemo(() => computeOffensiveStats(offenseShots), [offenseShots])
   const defenseStats = useMemo(() => computeDefensiveStats(defenseShots), [defenseShots])
@@ -186,7 +187,7 @@ export default function App() {
           <ByPeriodTab allRows={filteredNoPeriod} />
         )}
         {activeTab === 'Accuracy' && (
-          <AccuracyTab shots={offenseShots} />
+          <AccuracyTab shots={offenseShotsAll} />
         )}
       </main>
     </div>
@@ -412,8 +413,8 @@ function GoalLocationChart({ shots, isOffense }) {
 }
 
 function ByPeriodTab({ allRows }) {
-  const offenseShots = allRows.filter(r => r.isCanadaAttack && !r.isPenalty)
-  const defenseShots = allRows.filter(r => !r.isCanadaAttack && !r.isPenalty)
+  const offenseShots = allRows.filter(r => r.isCanadaAttack)
+  const defenseShots = allRows.filter(r => !r.isCanadaAttack && !r.isOwnGoal)
 
   const p1Off = offenseShots.filter(r => r.period === 1)
   const p2Off = offenseShots.filter(r => r.period === 2)
