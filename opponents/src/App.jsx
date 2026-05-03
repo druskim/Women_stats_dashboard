@@ -248,8 +248,6 @@ function TeamView({ shots, stats, teamName, players, teamRows, activeOrigin, onP
         { label: 'Def. Efficiency',     value: `${stats.saveRate}%`, color: '#3b82f6', sub: `Canada save rate` },
       ]} />
 
-      <ShotFlowMap shots={courtShots} title={mapTitle(goalsOnly ? 'Shot Flow — Goals Only' : 'Shot Flow — Origin to Landing')} />
-
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
         <button
           className={`ms-btn${goalsOnly ? ' ms-btn--active' : ''}`}
@@ -258,6 +256,8 @@ function TeamView({ shots, stats, teamName, players, teamRows, activeOrigin, onP
           {goalsOnly ? 'Goals only' : 'All shots'}
         </button>
       </div>
+
+      <ShotFlowMap shots={courtShots} title={mapTitle(goalsOnly ? 'Shot Flow — Goals Only' : 'Shot Flow — Origin to Landing')} />
 
       <div className="grid-2">
         <CourtMap
