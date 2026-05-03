@@ -212,6 +212,8 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
     ? `${playerDisplayName(selectedPlayer)} — ${label}`
     : `${teamName} — ${label}`
 
+  const goalShots = useMemo(() => mapShots.filter(r => r.shotOutcome === 'Goal'), [mapShots])
+
   return (
     <div>
       <StatGrid cards={selectedPlayer ? [
@@ -226,23 +228,23 @@ function TeamView({ shots, penalties, stats, teamName, players, teamRows, active
         { label: 'Def. Efficiency',     value: `${stats.saveRate}%`, color: '#3b82f6', sub: `Canada save rate` },
       ]} />
 
+      <ShotFlowMap shots={mapShots} title={mapTitle('Shot Flow — Origin to Landing')} />
+
       <div className="grid-2">
         <CourtMap
-          shots={mapShots}
-          title={mapTitle('Shot Origin Map')}
+          shots={goalShots}
+          title={mapTitle('Goal Origin Map')}
           teamName={teamName}
           activeOrigin={activeOrigin}
           onPositionClick={onPositionClick}
         />
         <GoalFaceMap
-          shots={mapShots}
-          title={mapTitle('Shot Location Map')}
+          shots={goalShots}
+          title={mapTitle('Goal Location Map')}
           activeLocation={activeLocation}
           onLocationClick={onLocationClick}
         />
       </div>
-
-      <ShotFlowMap shots={mapShots} title={mapTitle('Shot Flow — Origin to Landing')} />
 
       <TrendChart shots={teamRows.filter(r => !r.isPenalty)} teamName={teamName} />
 
