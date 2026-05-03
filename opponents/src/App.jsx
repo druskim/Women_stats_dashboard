@@ -412,8 +412,6 @@ function DefenseView({ shots, stats, teamName }) {
         />
       </div>
 
-      <TrendChart shots={shots} teamName={teamName} />
-
       <DefensivePlayerTable shots={shots} teamName={teamName} />
     </div>
   )
