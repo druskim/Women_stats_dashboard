@@ -109,8 +109,21 @@ export function preferredOrigin(shots) {
   return parseInt(entries.sort((a, b) => b[1] - a[1])[0][0])
 }
 
+const STAGE_ORDER = { PL: 1, QF: 2, SF: 3, BMG: 4, GMG: 5 }
+
+function tournamentSortKey(t) {
+  if (!t) return 0
+  for (const word of t.split(' ')) {
+    const u = word.toUpperCase()
+    if (u in STAGE_ORDER) return STAGE_ORDER[u]
+    if (/^G\d+$/i.test(word)) return 0
+  }
+  return 0
+}
+
 export function getUniqueValues(rows, field) {
-  return [...new Set(rows.map(r => r[field]).filter(Boolean))].sort()
+  return [...new Set(rows.map(r => r[field]).filter(Boolean))]
+    .sort((a, b) => tournamentSortKey(a) - tournamentSortKey(b) || a.localeCompare(b))
 }
 
 export function groupByField(rows, field) {

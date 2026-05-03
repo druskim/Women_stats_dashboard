@@ -3,6 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie, Legend
 } from 'recharts'
+import { tournamentSortKey } from '../utils.js'
 import { CANADA_PLAYERS, computeOffensiveStats, computeDefensiveStats, groupByField } from '../utils.js'
 
 export function PlayerOffenseChart({ shots }) {
@@ -169,7 +170,11 @@ export function GameScoreTable({ allRows }) {
     }
   }
 
-  const rows = Object.values(games).sort((a, b) => a.tournament.localeCompare(b.tournament) || a.opponent.localeCompare(b.opponent))
+  const rows = Object.values(games).sort((a, b) =>
+    tournamentSortKey(a.tournament) - tournamentSortKey(b.tournament) ||
+    a.tournament.localeCompare(b.tournament) ||
+    a.opponent.localeCompare(b.opponent)
+  )
 
   return (
     <div className="card">

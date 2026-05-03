@@ -138,6 +138,19 @@ export function groupByField(rows, field) {
   return map
 }
 
+const STAGE_ORDER = { PL: 1, QF: 2, SF: 3, BMG: 4, GMG: 5 }
+
+export function tournamentSortKey(t) {
+  if (!t) return 0
+  for (const word of t.split(' ')) {
+    const u = word.toUpperCase()
+    if (u in STAGE_ORDER) return STAGE_ORDER[u]
+    if (/^G\d+$/i.test(word)) return 0
+  }
+  return 0
+}
+
 export function getUniqueValues(rows, field) {
-  return [...new Set(rows.map(r => r[field]).filter(Boolean))].sort()
+  return [...new Set(rows.map(r => r[field]).filter(Boolean))]
+    .sort((a, b) => tournamentSortKey(a) - tournamentSortKey(b) || a.localeCompare(b))
 }

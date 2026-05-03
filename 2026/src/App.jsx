@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { parseRows, computeOffensiveStats, computeDefensiveStats, getUniqueValues, CANADA_PLAYERS } from './utils.js'
+import { parseRows, computeOffensiveStats, computeDefensiveStats, getUniqueValues, tournamentSortKey, CANADA_PLAYERS } from './utils.js'
 import FilterBar from './components/FilterBar.jsx'
 import StatCards from './components/StatCards.jsx'
 import GoalFaceMap from './components/GoalFaceMap.jsx'
@@ -445,7 +445,9 @@ function ByPeriodTab({ allRows }) {
     }
   }
   const gameList = Object.values(gamesMap).sort((a, b) =>
-    a.tournament.localeCompare(b.tournament) || a.opponent.localeCompare(b.opponent)
+    tournamentSortKey(a.tournament) - tournamentSortKey(b.tournament) ||
+    a.tournament.localeCompare(b.tournament) ||
+    a.opponent.localeCompare(b.opponent)
   )
 
   return (
