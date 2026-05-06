@@ -221,7 +221,8 @@ function OverviewTab({ offenseShots, defenseShots, allRows }) {
 function OffenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLocationClick }) {
   const offStats = computeOffensiveStats(shots)
   const accS = accStats(shots, 1)
-  const goalShots = shots.filter(s => s.shotOutcome === 'Goal Canada')
+  const [goalsOnly, setGoalsOnly] = useState(false)
+  const displayShots = goalsOnly ? shots.filter(s => s.shotOutcome === 'Goal Canada') : shots
 
   return (
     <div>
@@ -237,14 +238,18 @@ function OffenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLo
           <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{accS.accurate} accurate / {accS.total} located</div>
         </div>
       </div>
-      <ShotFlowMap shots={shots} title="Shot Flow — Canada Attack (Origin → Landing)" goalOutcome="Goal Canada" />
-      <div className="grid-2">
-        <CourtMap shots={shots} title="Shot Origin Map (Canada Attack)" isOffense={true} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
-        <GoalFaceMap shots={shots} title="Shot Location Map (Canada Shots)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
+        <button
+          className={`ms-btn${goalsOnly ? ' ms-btn--active' : ''}`}
+          onClick={() => setGoalsOnly(v => !v)}
+        >
+          {goalsOnly ? 'Goals only' : 'All shots'}
+        </button>
       </div>
+      <ShotFlowMap shots={displayShots} title={goalsOnly ? 'Shot Flow — Canada Goals (Origin → Landing)' : 'Shot Flow — Canada Attack (Origin → Landing)'} goalOutcome="Goal Canada" />
       <div className="grid-2">
-        <CourtMap shots={goalShots} title="Goal Origin Map (Canada Goals)" isOffense={true} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
-        <GoalFaceMap shots={goalShots} title="Goal Shot Location Map (Canada Goals)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
+        <CourtMap shots={displayShots} title={goalsOnly ? 'Goal Origin Map (Canada Goals)' : 'Shot Origin Map (Canada Attack)'} isOffense={true} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
+        <GoalFaceMap shots={displayShots} title={goalsOnly ? 'Goal Location Map (Canada Goals)' : 'Shot Location Map (Canada Shots)'} activeLocation={activeLocation} onLocationClick={onLocationClick} />
       </div>
     </div>
   )
@@ -252,7 +257,8 @@ function OffenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLo
 
 function DefenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLocationClick }) {
   const defStats = computeDefensiveStats(shots)
-  const goalShots = shots.filter(s => s.shotOutcome === 'Goal Opponent')
+  const [goalsOnly, setGoalsOnly] = useState(false)
+  const displayShots = goalsOnly ? shots.filter(s => s.shotOutcome === 'Goal Opponent') : shots
 
   return (
     <div>
@@ -268,14 +274,18 @@ function DefenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLo
           <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{defStats.ballControlSaves} BC saves / {defStats.saves} saves</div>
         </div>
       </div>
-      <ShotFlowMap shots={shots} title="Shot Flow — Shots Against (Origin → Landing)" goalOutcome="Goal Opponent" />
-      <div className="grid-2">
-        <CourtMap shots={shots} title="Opponent Shot Origin Map" isOffense={false} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
-        <GoalFaceMap shots={shots} title="Shot Location Map (Shots Faced)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
+        <button
+          className={`ms-btn${goalsOnly ? ' ms-btn--active' : ''}`}
+          onClick={() => setGoalsOnly(v => !v)}
+        >
+          {goalsOnly ? 'Goals only' : 'All shots'}
+        </button>
       </div>
+      <ShotFlowMap shots={displayShots} title={goalsOnly ? 'Shot Flow — Goals Against (Origin → Landing)' : 'Shot Flow — Shots Against (Origin → Landing)'} goalOutcome="Goal Opponent" />
       <div className="grid-2">
-        <CourtMap shots={goalShots} title="Goal Origin Map (Goals Against)" isOffense={false} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
-        <GoalFaceMap shots={goalShots} title="Goal Shot Location Map (Goals Against)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
+        <CourtMap shots={displayShots} title={goalsOnly ? 'Goal Origin Map (Goals Against)' : 'Opponent Shot Origin Map'} isOffense={false} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
+        <GoalFaceMap shots={displayShots} title={goalsOnly ? 'Goal Location Map (Goals Against)' : 'Shot Location Map (Shots Faced)'} activeLocation={activeLocation} onLocationClick={onLocationClick} />
       </div>
     </div>
   )
