@@ -8,6 +8,7 @@ import {
   PlayerOffenseChart, PlayerDefenseChart,
   OriginEfficiencyChart, GameScoreTable
 } from './components/Charts.jsx'
+import ShotFlowMap from './components/ShotFlowMap.jsx'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
   PieChart, Pie, Cell,
@@ -236,6 +237,7 @@ function OffenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLo
           <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{accS.accurate} accurate / {accS.total} located</div>
         </div>
       </div>
+      <ShotFlowMap shots={shots} title="Shot Flow — Canada Attack (Origin → Landing)" goalOutcome="Goal Canada" />
       <div className="grid-2">
         <CourtMap shots={shots} title="Shot Origin Map (Canada Attack)" isOffense={true} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
         <GoalFaceMap shots={shots} title="Shot Location Map (Canada Shots)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
@@ -266,6 +268,7 @@ function DefenseTab({ shots, activeOrigin, onPositionClick, activeLocation, onLo
           <div style={{ fontSize: 12, color: '#6b7280', marginTop: 6 }}>{defStats.ballControlSaves} BC saves / {defStats.saves} saves</div>
         </div>
       </div>
+      <ShotFlowMap shots={shots} title="Shot Flow — Shots Against (Origin → Landing)" goalOutcome="Goal Opponent" />
       <div className="grid-2">
         <CourtMap shots={shots} title="Opponent Shot Origin Map" isOffense={false} activeOrigin={activeOrigin} onPositionClick={onPositionClick} />
         <GoalFaceMap shots={shots} title="Shot Location Map (Shots Faced)" activeLocation={activeLocation} onLocationClick={onLocationClick} />
