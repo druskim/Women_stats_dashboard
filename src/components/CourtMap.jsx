@@ -33,9 +33,10 @@ export default function CourtMap({ shots, title, isOffense, activeOrigin, onPosi
     <div className="card">
       <h3 className="card-title">
         {title}
-        {activeOrigin !== 'All' && (
+        {activeOrigin.length > 0 && (
           <span style={{ marginLeft: 8, fontSize: 12, color: '#f59e0b', fontWeight: 400 }}>
-            — Pos {activeOrigin} selected (click again to clear)
+            — Pos {activeOrigin.slice().sort((a, b) => a - b).join(', ')} selected
+            {activeOrigin.length === 1 ? ' (click again to clear)' : ' (Ctrl+click to add/remove)'}
           </span>
         )}
       </h3>
@@ -61,14 +62,14 @@ export default function CourtMap({ shots, title, isOffense, activeOrigin, onPosi
         {POSITIONS.map(pos => {
           const posShots = byOrigin[pos] || []
           const total = posShots.length
-          const isActive = activeOrigin === pos
+          const isActive = activeOrigin.includes(pos)
           const px = posToX(pos)
           const py = CY + CH * 0.65
 
           if (total === 0) {
             return (
               <g key={pos} style={{ cursor: onPositionClick ? 'pointer' : 'default' }}
-                onClick={() => onPositionClick && onPositionClick(pos)}>
+                onClick={(e) => onPositionClick && onPositionClick(pos, e.ctrlKey)}>
                 <circle cx={px} cy={py} r={12}
                   fill={isActive ? '#f59e0b' : '#1f2937'}
                   stroke={isActive ? '#f59e0b' : '#374151'}
@@ -99,7 +100,7 @@ export default function CourtMap({ shots, title, isOffense, activeOrigin, onPosi
           return (
             <g key={pos}
               style={{ cursor: onPositionClick ? 'pointer' : 'default' }}
-              onClick={() => onPositionClick && onPositionClick(pos)}
+              onClick={(e) => onPositionClick && onPositionClick(pos, e.ctrlKey)}
               onMouseEnter={e => setTooltip({ x: e.clientX, y: e.clientY, pos, posShots, stats, isOffense })}
               onMouseLeave={() => setTooltip(null)}>
               <circle cx={px} cy={py} r={radius}
@@ -141,7 +142,7 @@ export default function CourtMap({ shots, title, isOffense, activeOrigin, onPosi
       </svg>
 
       <div className="court-legend">
-        <span className="court-legend-item">Bubble size = shot volume · Click a position to filter all data</span>
+        <span className="court-legend-item">Bubble size = shot volume · Click to filter · Ctrl+click to multi-select</span>
         <span className="court-legend-item">
           Color = {isOffense ? 'conversion rate' : 'stop rate'}
           {' '}<span style={{ color: '#22c55e' }}>■</span> High

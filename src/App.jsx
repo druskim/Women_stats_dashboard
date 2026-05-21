@@ -20,7 +20,7 @@ const DEFAULT_FILTERS = {
   player: [],
   period: [],
   outcome: [],
-  shotOrigin: 'All',
+  shotOrigin: [],
   shotLocation: 'All',
 }
 
@@ -57,7 +57,7 @@ export default function App() {
         if (!involved) return false
       }
       if (filters.outcome.length > 0 && !filters.outcome.includes(row.shotOutcome)) return false
-      if (filters.shotOrigin !== 'All' && row.shotOrigin !== filters.shotOrigin) return false
+      if (filters.shotOrigin.length > 0 && !filters.shotOrigin.includes(row.shotOrigin)) return false
       if (filters.shotLocation !== 'All' && row.shotLocation !== filters.shotLocation) return false
       return true
     })
@@ -77,11 +77,18 @@ export default function App() {
     filters.player.length > 0 ||
     filters.period.length > 0 ||
     filters.outcome.length > 0 ||
-    filters.shotOrigin !== 'All' ||
+    filters.shotOrigin.length > 0 ||
     filters.shotLocation !== 'All'
 
-  function handlePositionClick(pos) {
-    setFilters(f => ({ ...f, shotOrigin: f.shotOrigin === pos ? 'All' : pos }))
+  function handlePositionClick(pos, ctrlKey) {
+    setFilters(f => {
+      const current = f.shotOrigin
+      if (ctrlKey) {
+        const next = current.includes(pos) ? current.filter(p => p !== pos) : [...current, pos]
+        return { ...f, shotOrigin: next }
+      }
+      return { ...f, shotOrigin: current.length === 1 && current[0] === pos ? [] : [pos] }
+    })
   }
 
   function handleLocationClick(loc) {
