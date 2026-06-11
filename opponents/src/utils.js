@@ -111,6 +111,8 @@ export function preferredOrigin(shots) {
 
 const STAGE_ORDER = { PL: 1, QF: 2, SF: 3, BMG: 4, GMG: 5 }
 
+const STAGE_LABELS = { QF: 'QF', SF: 'SF', BMG: 'Bronze', GMG: 'Final' }
+
 function tournamentSortKey(t) {
   if (!t) return 0
   for (const word of t.split(' ')) {
@@ -124,6 +126,59 @@ function tournamentSortKey(t) {
 export function getUniqueValues(rows, field) {
   return [...new Set(rows.map(r => r[field]).filter(Boolean))]
     .sort((a, b) => tournamentSortKey(a) - tournamentSortKey(b) || a.localeCompare(b))
+}
+
+// Extracts just the event name from a tournament string, stripping stage codes and year.
+// "Malmo QF 2026" → "Malmo",  "Scrimmage G1 2026" → "Scrimmage"
+export function getTournamentName(t) {
+  if (!t) return ''
+  const words = t.split(' ')
+  const nameWords = []
+  for (const word of words) {
+    if (/^(G\d+|QF|SF|BMG|GMG|PL|\d{4})$/i.test(word)) break
+    nameWords.push(word)
+  }
+  return nameWords.join(' ') || t
+}
+
+// Returns display label for knockout stage (QF/SF/BMG/GMG), or null for regular games.
+export function getStageLabel(t) {
+  if (!t) return null
+  for (const word of t.split(' ')) {
+    const u = word.toUpperCase()
+    if (u in STAGE_LABELS) return STAGE_LABELS[u]
+  }
+  return null
+}
+
+// Unique normalized tournament names (e.g. "Malmo", "Worlds").
+export function getUniqueTournamentNames(rows) {
+  return [...new Set(rows.map(r => getTournamentName(r.tournament)).filter(Boolean))].sort()
+}
+
+// Returns { value, label } game options for MultiSelect, filtered to games involving team.
+// value is "game|tournament" composite key; label appends stage for knockout rounds.
+export function getGameOptionsForTeam(rows, team) {
+  const seen = new Set()
+  const opts = []
+  for (const row of rows) {
+    if (team) {
+      const participants = row.game.split(' vs ').map(s => s.trim())
+      if (!participants.includes(team)) continue
+    }
+    const key = `${row.game}|${row.tournament}`
+    if (!seen.has(key)) {
+      seen.add(key)
+      const stage = getStageLabel(row.tournament)
+      opts.push({
+        value: key,
+        label: stage ? `${row.game} (${stage})` : row.game,
+        sortKey: tournamentSortKey(row.tournament),
+        gameName: row.game,
+      })
+    }
+  }
+  return opts.sort((a, b) => a.sortKey - b.sortKey || a.gameName.localeCompare(b.gameName))
 }
 
 export function groupByField(rows, field) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react'
 import {
   parseRows, computeStats, getUniqueTeams, getTeamPlayers,
   getUniqueValues, preferredOrigin, playerDisplayName,
+  getTournamentName, getUniqueTournamentNames, getGameOptionsForTeam,
 } from './utils.js'
 import CourtMap from './components/CourtMap.jsx'
 import GoalFaceMap from './components/GoalFaceMap.jsx'
@@ -29,16 +30,19 @@ export default function App() {
   }, [])
 
   const allTeams       = useMemo(() => getUniqueTeams(rawRows), [rawRows])
-  const allTournaments = useMemo(() => getUniqueValues(rawRows, 'tournament'), [rawRows])
-  const allGames       = useMemo(() => getUniqueValues(rawRows, 'game'), [rawRows])
+  const allTournaments = useMemo(() => getUniqueTournamentNames(rawRows), [rawRows])
+  const allGameOptions = useMemo(() =>
+    selectedTeam ? getGameOptionsForTeam(rawRows, selectedTeam) : [],
+    [rawRows, selectedTeam]
+  )
 
   // Rows for the selected team, with secondary filters applied
   const teamRows = useMemo(() => {
     if (!selectedTeam) return []
     return rawRows.filter(row => {
       if (row.team !== selectedTeam) return false
-      if (filters.tournament.length > 0 && !filters.tournament.includes(row.tournament)) return false
-      if (filters.game.length > 0 && !filters.game.includes(row.game)) return false
+      if (filters.tournament.length > 0 && !filters.tournament.includes(getTournamentName(row.tournament))) return false
+      if (filters.game.length > 0 && !filters.game.includes(`${row.game}|${row.tournament}`)) return false
       return true
     })
   }, [rawRows, selectedTeam, filters])
@@ -56,7 +60,10 @@ export default function App() {
   const players = useMemo(() => getTeamPlayers(teamRows, selectedTeam), [teamRows, selectedTeam])
 
   // Reset dependent state on team change
-  useEffect(() => { setSelectedPlayer(''); setActiveOrigin('All'); setActiveLocation('All') }, [selectedTeam])
+  useEffect(() => {
+    setSelectedPlayer(''); setActiveOrigin('All'); setActiveLocation('All')
+    setFilters(f => ({ ...f, game: [] }))
+  }, [selectedTeam])
 
   const teamStats = useMemo(() => computeStats(shots), [shots])
 
@@ -66,8 +73,8 @@ export default function App() {
     return rawRows.filter(r => {
       if (r.team === selectedTeam) return false
       if (r.isPenalty) return false
-      if (filters.tournament.length > 0 && !filters.tournament.includes(r.tournament)) return false
-      if (filters.game.length > 0 && !filters.game.includes(r.game)) return false
+      if (filters.tournament.length > 0 && !filters.tournament.includes(getTournamentName(r.tournament))) return false
+      if (filters.game.length > 0 && !filters.game.includes(`${r.game}|${r.tournament}`)) return false
       return r.game.split(' vs ').includes(selectedTeam)
     })
   }, [rawRows, selectedTeam, filters])
@@ -134,7 +141,7 @@ export default function App() {
 
           <MultiSelect
             label="Game"
-            options={allGames}
+            options={allGameOptions}
             value={filters.game}
             onChange={v => setFilters(f => ({ ...f, game: v }))}
           />
@@ -782,25 +789,31 @@ function MultiSelect({ label, options, value, onChange }) {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
-  const allSelected    = value.length === options.length && options.length > 0
-  const someSelected   = value.length > 0 && !allSelected
-  const isActive       = value.length > 0
+  // Normalize options to { value, label } objects
+  const normOpts = useMemo(() =>
+    options.map(opt => typeof opt === 'string' ? { value: opt, label: opt } : opt),
+    [options]
+  )
 
-  function toggle(opt) {
-    onChange(value.includes(opt) ? value.filter(v => v !== opt) : [...value, opt])
+  const allSelected  = value.length === normOpts.length && normOpts.length > 0
+  const someSelected = value.length > 0 && !allSelected
+  const isActive     = value.length > 0
+
+  function toggle(v) {
+    onChange(value.includes(v) ? value.filter(x => x !== v) : [...value, v])
   }
 
   function toggleAll() {
-    onChange(allSelected ? [] : [...options])
+    onChange(allSelected ? [] : normOpts.map(o => o.value))
   }
 
   const btnLabel = value.length === 0
     ? `All ${label}s`
     : value.length === 1
-      ? value[0]
+      ? (normOpts.find(o => o.value === value[0])?.label ?? value[0])
       : `${value.length} ${label}s`
 
-  if (options.length === 0) return null
+  if (normOpts.length === 0) return null
 
   return (
     <div className="filter-group">
@@ -834,15 +847,15 @@ function MultiSelect({ label, options, value, onChange }) {
             </div>
             <div className="ms-divider" />
             <div className="ms-options">
-              {options.map(opt => (
-                <label key={opt} className={`ms-option ${value.includes(opt) ? 'ms-option--checked' : ''}`}>
+              {normOpts.map(opt => (
+                <label key={opt.value} className={`ms-option ${value.includes(opt.value) ? 'ms-option--checked' : ''}`}>
                   <input
                     type="checkbox"
                     className="ms-checkbox"
-                    checked={value.includes(opt)}
-                    onChange={() => toggle(opt)}
+                    checked={value.includes(opt.value)}
+                    onChange={() => toggle(opt.value)}
                   />
-                  {opt}
+                  {opt.label}
                 </label>
               ))}
             </div>

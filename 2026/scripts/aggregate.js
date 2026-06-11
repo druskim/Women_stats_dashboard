@@ -43,18 +43,32 @@ const OUTPUT_FIELDS = [
 ]
 
 // Extract opponent and tournament label from filename.
-// Standard format: Canada_OPPONENT_G#_TOURNAMENT_YEAR.xlsx
-// e.g. Canada_Korea_G1_IBSA_Americas_2026.xlsx
-//   → opponent: Korea, tournament: IBSA Americas G1 2026
+// Format: TeamA_TeamB_[GameType_Tournament | Tournament_GameType]_Year[_M/W].xlsx
+// Canada can be in either position; game type and tournament are order-independent;
+// gender suffix (M/W/Men/Women) is ignored.
+// e.g. Canada_Korea_QF_Malmo_2026.xlsx     → opponent: Korea, tournament: Malmo QF 2026
+// e.g. Canada_Korea_Malmo_QF_2026_M.xlsx   → opponent: Korea, tournament: Malmo QF 2026
+// e.g. CAN_UKR_Preliminary_Worlds_2026_W.xlsx → opponent: UKR, tournament: Worlds Preliminary 2026
+const CANADA_CODES = new Set(['canada', 'can'])
+const GAME_TYPE_RE = /^(G\d+|QF|SF|GMG|BMG|PL|Preliminary|Final|Semifinal|Quarterfinal)$/i
+
 function extractGameInfo(filename) {
   const base = filename.replace(/\.(xlsx|xls)$/i, '').replace(/^~\$/, '')
   const parts = base.split('_')
 
-  if (parts.length >= 4 && parts[0].toLowerCase() === 'canada') {
-    const opponent = parts[1]
-    const gameNum = parts[2]                          // e.g. G1, G2
-    const year = parts[parts.length - 1]             // last segment
-    const tournamentParts = parts.slice(3, parts.length - 1)
+  const hasGender = /^[MW]$/i.test(parts[parts.length - 1]) || /^(men|women)$/i.test(parts[parts.length - 1])
+  const yearIndex = hasGender ? parts.length - 2 : parts.length - 1
+  const canadaIndex = CANADA_CODES.has(parts[0]?.toLowerCase()) ? 0
+                    : CANADA_CODES.has(parts[1]?.toLowerCase()) ? 1
+                    : -1
+
+  if (parts.length >= 4 && canadaIndex !== -1) {
+    const opponent = parts[canadaIndex === 0 ? 1 : 0]
+    const year = parts[yearIndex]
+    const middleParts = parts.slice(2, yearIndex)
+    const gameTypeIdx = middleParts.findIndex(p => GAME_TYPE_RE.test(p))
+    const gameNum = gameTypeIdx !== -1 ? middleParts[gameTypeIdx] : middleParts[0]
+    const tournamentParts = middleParts.filter((_, i) => i !== gameTypeIdx)
     const tournament = [...tournamentParts, gameNum, year].join(' ')
     return { opponent, tournament }
   }
