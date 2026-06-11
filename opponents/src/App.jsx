@@ -252,7 +252,6 @@ function TeamView({ shots, stats, teamName, players, teamRows, activeOrigin, onP
         { label: 'Total Shots',         value: stats.total,          color: '#3b82f6', sub: 'regular play' },
         { label: 'Goals',               value: stats.goals,          color: '#22c55e', sub: `${stats.goalRate}% conversion` },
         { label: 'Off. Efficiency',     value: `${stats.goalRate}%`, color: '#22c55e', sub: `${stats.goals} of ${stats.total}` },
-        { label: 'Def. Efficiency',     value: `${stats.saveRate}%`, color: '#3b82f6', sub: `Canada save rate` },
       ]} />
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
