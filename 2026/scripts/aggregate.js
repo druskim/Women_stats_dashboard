@@ -50,7 +50,7 @@ const OUTPUT_FIELDS = [
 // e.g. Canada_Korea_Malmo_QF_2026_M.xlsx   → opponent: Korea, tournament: Malmo QF 2026
 // e.g. CAN_UKR_Preliminary_Worlds_2026_W.xlsx → opponent: UKR, tournament: Worlds Preliminary 2026
 const CANADA_CODES = new Set(['canada', 'can'])
-const GAME_TYPE_RE = /^(G\d+|QF|SF|GMG|BMG|PL|Preliminary|Final|Semifinal|Quarterfinal)$/i
+const GAME_TYPE_RE = /^(G\d+|QF|SF|GMG|BMG|PL|Preliminary|Classification|Final|Semifinal|Quarterfinal)$/i
 
 function extractGameInfo(filename) {
   const base = filename.replace(/\.(xlsx|xls)$/i, '').replace(/^~\$/, '')
@@ -67,9 +67,11 @@ function extractGameInfo(filename) {
     const year = parts[yearIndex]
     const middleParts = parts.slice(2, yearIndex)
     const gameTypeIdx = middleParts.findIndex(p => GAME_TYPE_RE.test(p))
-    const gameNum = gameTypeIdx !== -1 ? middleParts[gameTypeIdx] : middleParts[0]
+    const gameNum = gameTypeIdx !== -1 ? middleParts[gameTypeIdx] : null
     const tournamentParts = middleParts.filter((_, i) => i !== gameTypeIdx)
-    const tournament = [...tournamentParts, gameNum, year].join(' ')
+    const tournament = gameNum !== null
+      ? [...tournamentParts, gameNum, year].join(' ')
+      : [...middleParts, year].join(' ')
     return { opponent, tournament }
   }
 

@@ -1,5 +1,36 @@
 export const CANADA_PLAYERS = ['Amy', 'Emma', 'Meghan', 'Maryam', 'Gen', 'Cassandra', 'Elena', 'Florinda']
 
+export const STAGE_DISPLAY = {
+  'Preliminary':     'Preliminary',
+  'QF':              'Quarter Final',
+  'SF':              'Semi Final',
+  'BMG':             'Bronze Medal Game',
+  'GMG':             'Gold Medal Game',
+  'PL':              'Placement',
+}
+
+export const STAGE_ORDER_LIST = ['Preliminary', 'QF', 'SF', 'BMG', 'GMG', 'PL']
+
+const STAGE_ALIASES = {
+  'preliminary':  'Preliminary',
+  'qf':           'QF',   'quarterfinal':  'QF',
+  'sf':           'SF',   'semifinal':     'SF',
+  'gmg':          'GMG',  'final':         'GMG',
+  'bmg':          'BMG',
+  'pl':           'PL',   'classification':'PL',
+}
+
+function parseTournamentParts(tournament) {
+  if (!tournament) return { event: '', stage: null }
+  const parts = tournament.split(' ')
+  const yearIdx = parts.findIndex(p => /^\d{4}$/.test(p))
+  const nonYear = yearIdx !== -1 ? parts.slice(0, yearIdx) : parts
+  const stageIdx = nonYear.findIndex(p => Object.prototype.hasOwnProperty.call(STAGE_ALIASES, p.toLowerCase()))
+  const stage = stageIdx !== -1 ? STAGE_ALIASES[nonYear[stageIdx].toLowerCase()] : null
+  const event = nonYear.filter((_, i) => i !== stageIdx).join(' ') || tournament
+  return { event, stage }
+}
+
 export const OUTCOME_GROUPS = {
   CANADA_GOAL: ['Goal Canada'],
   OPPONENT_GOAL: ['Goal Opponent'],
@@ -74,11 +105,14 @@ export function parseRows(text) {
       outcome = isCanadaAttack ? 'Opponent Save' : 'Canada Save'
     }
 
+    const { event, stage } = parseTournamentParts(tournament)
     rows.push({
       opponent,
       category,
       start,
       tournament,
+      event,
+      stage,
       attackingPlayer,
       shotOrigin,
       shotOutcome: outcome,

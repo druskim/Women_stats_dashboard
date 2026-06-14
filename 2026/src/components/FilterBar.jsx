@@ -1,13 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { STAGE_DISPLAY } from '../utils.js'
 
 export default function FilterBar({ filters, onChange, options }) {
   return (
     <div className="filter-bar">
       <MultiSelect
         label="Tournament"
-        value={filters.tournament}
-        options={options.tournaments}
-        onChange={v => onChange({ ...filters, tournament: v })}
+        value={filters.event}
+        options={options.events}
+        onChange={v => onChange({ ...filters, event: v })}
+      />
+      <MultiSelect
+        label="Stage"
+        value={filters.stage}
+        options={options.stages}
+        onChange={v => onChange({ ...filters, stage: v })}
+        labelMap={STAGE_DISPLAY}
       />
       <MultiSelect
         label="Opponent"
@@ -37,7 +45,7 @@ export default function FilterBar({ filters, onChange, options }) {
   )
 }
 
-function MultiSelect({ label, value, options, onChange }) {
+function MultiSelect({ label, value, options, onChange, labelMap }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -68,10 +76,12 @@ function MultiSelect({ label, value, options, onChange }) {
     }
   }
 
+  const displayName = v => (labelMap ? (labelMap[v] ?? v) : v)
+
   const buttonLabel =
     value.length === 0 ? 'All' :
     allSelected ? 'All (selected)' :
-    value.length === 1 ? value[0] :
+    value.length === 1 ? displayName(value[0]) :
     `${value.length} selected`
 
   const hasSelection = value.length > 0
@@ -120,7 +130,7 @@ function MultiSelect({ label, value, options, onChange }) {
                     onChange={() => toggle(opt)}
                     className="ms-checkbox"
                   />
-                  <span>{opt}</span>
+                  <span>{displayName(opt)}</span>
                 </label>
               )
             })}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { parseRows, computeOffensiveStats, computeDefensiveStats, getUniqueValues, tournamentSortKey, CANADA_PLAYERS } from './utils.js'
+import { parseRows, computeOffensiveStats, computeDefensiveStats, getUniqueValues, tournamentSortKey, CANADA_PLAYERS, STAGE_ORDER_LIST } from './utils.js'
 import FilterBar from './components/FilterBar.jsx'
 import StatCards from './components/StatCards.jsx'
 import GoalFaceMap from './components/GoalFaceMap.jsx'
@@ -17,7 +17,8 @@ import {
 const TABS = ['Overview', 'Offense', 'Defense', 'Penalties', 'Players', 'By Period', 'Accuracy']
 
 const DEFAULT_FILTERS = {
-  tournament: [],
+  event: [],
+  stage: [],
   opponent: [],
   player: [],
   period: [],
@@ -43,7 +44,8 @@ export default function App() {
   }, [])
 
   const options = useMemo(() => ({
-    tournaments: getUniqueValues(rawRows, 'tournament'),
+    events: [...new Set(rawRows.map(r => r.event).filter(Boolean))].sort(),
+    stages: STAGE_ORDER_LIST.filter(s => rawRows.some(r => r.stage === s)),
     opponents: getUniqueValues(rawRows, 'opponent'),
     players: CANADA_PLAYERS,
     outcomes: getUniqueValues(rawRows, 'shotOutcome'),
@@ -51,7 +53,8 @@ export default function App() {
 
   const filtered = useMemo(() => {
     return rawRows.filter(row => {
-      if (filters.tournament.length > 0 && !filters.tournament.includes(row.tournament)) return false
+      if (filters.event.length > 0 && !filters.event.includes(row.event)) return false
+      if (filters.stage.length > 0 && !filters.stage.includes(row.stage)) return false
       if (filters.opponent.length > 0 && !filters.opponent.includes(row.opponent)) return false
       if (filters.period.length > 0 && !filters.period.includes(String(row.period))) return false
       if (filters.player.length > 0) {
@@ -68,7 +71,8 @@ export default function App() {
   // Period-filter-free rows for the By Period tab so both halves always show
   const filteredNoPeriod = useMemo(() => {
     return rawRows.filter(row => {
-      if (filters.tournament.length > 0 && !filters.tournament.includes(row.tournament)) return false
+      if (filters.event.length > 0 && !filters.event.includes(row.event)) return false
+      if (filters.stage.length > 0 && !filters.stage.includes(row.stage)) return false
       if (filters.opponent.length > 0 && !filters.opponent.includes(row.opponent)) return false
       if (filters.player.length > 0) {
         const involved = filters.player.some(p => row.attackingPlayer === p || row.defendingPlayer === p)
@@ -91,7 +95,8 @@ export default function App() {
   const defenseStats = useMemo(() => computeDefensiveStats(defenseShots), [defenseShots])
 
   const hasActiveFilters =
-    filters.tournament.length > 0 ||
+    filters.event.length > 0 ||
+    filters.stage.length > 0 ||
     filters.opponent.length > 0 ||
     filters.player.length > 0 ||
     filters.period.length > 0 ||
